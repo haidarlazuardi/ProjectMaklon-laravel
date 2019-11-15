@@ -5,35 +5,71 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\MaklonPkp;
 use \App\Maklon;
+use \App\maklonProject;
+use \App\legalitas;
 use DB;
 use Carbon;
 use Session;
+use Auth;
 class ProjectController extends Controller
 {
     public function index(Request $request)
     {
+        // $maklon_project = \App\maklonProject::all();
         $data_project = DB::table('project')->get();
-        
-
         $file = DB::table('file')
         ->join('project','file.project_id','=','project.id')->get();
-        $data_maklon_pkp = Maklon::all();
+        $data_maklon_pkp = maklon::all();
         $data_file =DB::table('file')->get();
         $maklons = DB::table('maklon_project')->get();
+        $mou = DB::table('file')
+        ->where('jenis_file','mou')
+        ->get();
+// dd($data_project);
+
+
+        return view('Project.index',['maklons' => $maklons,'data_project' => $data_project,'file' => $file,'data_maklon_pkp' => $data_maklon_pkp, 'data_file' => $data_file ]);
+    }
+
+    public function details($id)
+    {
+        $project = \App\Project::find($id);
+        return view('Project.view',['project' => $project]);
+    }
+
+    public function idpkp (Request $request)
+    {
+        $data_project = DB::table('project')->get();
+        $file = DB::table('file')
+        ->join('project','file.project_id','=','project.id')->get();
+        $data_maklon_pkp = maklon::all();
+        $data_file =DB::table('file')->get();
+        $maklons = DB::table('maklon_project')->get();
+        $mou = DB::table('file')
+        ->where('jenis_file','mou')
+        ->get();
+
+
         return view('Project.index',['maklons' => $maklons,'data_project' => $data_project,'file' => $file, 'data_maklon_pkp' => $data_maklon_pkp, 'data_file' => $data_file ]);
     }
+    public function show($id)
+{
+    $project = $id ;
+    return view('Project.index',compact('project'));
+}
 
     // Data Maklon
     public function showMaklon($id)
-    {
-        $maklonProject = DB::table('maklon_project')->where('project_id', $id)->get();
-        $maklon = \App\Maklon::all();
-        return [$maklonProject, $maklon];
+{
+    //     $maklonProject = DB::table('maklon_project')->where('project_id', $id)->get();
+        $maklons = DB::table('maklon')->where('id', $id)->get();
+        $maklons = \App\Maklon::all();
+        return [$maklonProject, $maklons];
     }
 
     public function saveMaklon(Request $request)
     {
-        
+
 
     //    $maklon = DB::table('maklon')->whereIn('nama_maklon', $request->maklon)->get();
     //    Session::put('maklon', $request->maklon);
@@ -50,7 +86,9 @@ class ProjectController extends Controller
     public function create(Request $request)
     {
         $data_project = DB::table('project')->get();
-        return view('Project.insert',compact('data_project'));
+        $maklon = DB::table('Maklon')->get();
+        return view('Project.insert',compact('data_project','maklon'));
+
     }
 
 
@@ -67,20 +105,21 @@ class ProjectController extends Controller
             'umur_simpan' => 'required',
             'gambaran_proses' =>'required',
             'urgensi_project' =>'required',
+
         ]);
          $projek = \App\Project::create([
             "nama_project" => $request->nama_project,
-            "kategori_project" => $request->kategori_project,
-            "forecast" => $request->forecast,
-            "pricelist" => $request->pricelist,
-            "nama_brand" => $request->nama_brand,
+            "category" => $request->kategori_project,
+            "sales_forecast" => $request->forecast,
+            "selling_price" => $request->pricelist,
+            "brand" => $request->nama_brand,
             "gramasi" => $request->gramasi,
-            "satuan" => $request->satuan,
-            "konfigurasi_kemas" => $request->konfigurasi_kemas,
+            "UOM" => $request->satuan,
+            "configuration" => $request->konfigurasi_kemas,
             "umur_simpan" => $request->umur_simpan,
             "gambaran_proses" => $request->gambaran_proses,
-            "urgensi_project" => $request->urgensi_project,
-            "timeline" => $request->file,
+            "priority_project" => $request->urgensi_project,
+            "timeline" => $request->timeline,
             ]);
             if($request->hasFile('timeline')){
                 $request->file('timeline')->move('images/',$request->file('timeline')->getClientOriginalName());
@@ -96,8 +135,8 @@ class ProjectController extends Controller
         $mou = DB::table('file')
                 ->where('jenis_file','mou')
                 ->get();
-                
-        $project = DB::table('project')->where('id',$id)->get();
+
+        $project = $id;
         $project1 = DB::table('project')->where('id',$id)->first();
 
         return view('Project.wizard.info',compact('mou','project1','project'));
@@ -105,24 +144,139 @@ class ProjectController extends Controller
 
     public function info_maklon($id)
     {
-        
-        $data_maklon = DB::table('maklon')->get();
-        $project = DB::table('project')->where('id',$id)->get();
-        $maklon_sementara = DB::table('table_sementara')
-        ->join('maklon','table_sementara.maklon_id','=','maklon.id')->where('project_id',$id)
-        ->get();
-        return view('Project.wizard.info2',compact('data_maklon', 'project','maklon_sementara'));
-    }
+
+                $data_maklon = DB::table('maklon')->get();
+                $project = $id;
+                $maklon_sementara = $maklon_id;
+                return view('Project.wizard.info2',compact('data_maklon', 'project','maklon_sementara'));
+      }
 
     public function info_releted($id,$maklon_id)
+        {
+
+            $project = $id;
+            $maklon = $maklon_id;
+            $maklon_sementara = $maklon_id;
+            $maklons = \App\maklonProject::all();
+            $maklon_project = DB::table('maklon_project')->where([
+                ['project_id', $id],
+                ['maklon_id', $maklon_id]
+            ])->get();
+            $maklon_project_id = DB::table('maklon_project')->where([
+                ['project_id', $id],
+                ['maklon_id', $maklon_id]
+            ])->first();
+            // $filed = DB::table('file')
+            // ->join('maklon_project','file.project_id','=','maklon_project.id')
+            // ->join('maklon','maklon_project.maklon_id','=','maklon.id')->where('maklon.id',$maklon_id)
+            // ->join('project','maklon_project.project_id','=','project.id')->where('project.id',$id)
+            // ->get();
+            // $file = DB::table('file')->where('jenis_file','cpm')
+            // ->get();
+            // $file2 = DB::table('file')->where('project_id',$maklon_id)->where('jenis_file','penawaran')
+            // ->get();
+            // $file3 = DB::table('file')->where('project_id',$maklon_id)->where('jenis_file','ppt_penjajakan')
+            // // ->get();
+
+
+        return view('Project.wizard.info3',compact('project','maklon_sementara', 'maklon','maklons','maklon_project','maklon_project_id'));
+    }
+
+    public function updateReleted(Request $request, $id) {
+        $maklon_project_id = \App\maklonProject::findOrFail($id)->latest();
+
+        $maklon_project->update([
+            "konsep_kerjasama"=>$request->konsep_kerjasama,
+            "cpm"=>$request->cpm,
+            "alur_proses"=>$request->alur_proses,
+            "ppt_penjajakan"=>$request->ppt_penjajakan,
+        ]);
+            // if($request->hasFile('penawaran')){
+            //     $request->file('penawaran')->move('images/',$request->file('penawaran')->getClientOriginalName());
+            //     $legalitas->penawaran = $request->file('penawaran')->getClientOriginalName();
+            //     $legalitas->save();
+            // } if($request->hasFile('cpm')){
+            //     $request->file('cpm')->move('images/',$request->file('cpm')->getClientOriginalName());
+            //     $legalitas->cpm = $request->file('cpm')->getClientOriginalName();
+            //     $legalitas->save();
+            // } if($request->hasFile('ppt_penjajakan')){
+            //     $request->file('ppt_penjajakan')->move('images/',$request->file('ppt_penjajakan')->getClientOriginalName());
+            //     $legalitas->ppt_penjajakan = $request->file('ppt_penjajakan')->getClientOriginalName();
+            //     $legalitas->save();
+            // }
+
+        return redirect()->back()->with('sukses', 'Data Berhasil di Update');
+    }
+
+    public function penawaran(Request $request ,$id) {
+
+        // $project= $id;
+        // $maklon = $maklon_id;
+        $maklon_project = \App\maklonProject::find($id);
+
+        $maklon_project->update([
+            "penawaran"=>$request->file,
+        ]);
+            if($request->hasFile('penawaran')){
+                $request->file('penawaran')->move('file/',$request->file('penawaran')->getClientOriginalName());
+                $maklon_project->penawaran = $request->file('penawaran')->getClientOriginalName();
+                $maklon_project->save();
+
+            // } if($request->hasFile('cpm')){
+            //     $request->file('cpm')->move('images/',$request->file('cpm')->getClientOriginalName());
+            //     $legalitas->cpm = $request->file('cpm')->getClientOriginalName();
+            //     $legalitas->save();
+            // } if($request->hasFile('ppt_penjajakan')){
+            //     $request->file('ppt_penjajakan')->move('images/',$request->file('ppt_penjajakan')->getClientOriginalName());
+            //     $legalitas->ppt_penjajakan = $request->file('ppt_penjajakan')->getClientOriginalName();
+            //     $legalitas->save();
+            }
+
+
+
+        return redirect()->back()->with('sukses', 'Data Berhasil di Update');
+    }
+
+
+
+            public function review(Request $request ,$id,$maklon_id){
+
+                $legalitas = \App\legalitas::findOrfail($id)->where([
+                    ['project_id', $id],
+                    ['maklon_id', $maklon_id]
+                    ]);
+
+                 $legalitas->update([
+                    "review"=>$request->review,
+                    ]);
+
+                return redirect()->back()->with('Sukses','Message review telah terkirim');
+                }
+
+
+
+        public function info_penawaran($id, $maklon_id)
     {
-       
-        $project = DB::table('project')->where('id',$id)->get();
-        $maklon = DB::table('table_sementara')->where('maklon_id',$maklon_id)->where('project_id',$id)->get();
-        $maklon_sementara = DB::table('table_sementara')
-        ->join('maklon','table_sementara.maklon_id','=','maklon.id')->where('maklon_id',$maklon_id)
-        ->get();
-        $maklon_project = DB::table('maklon_project')->where('project_id',$id)->where('maklon_id',$maklon_id)->get();
+        $project = $id;
+        $maklon = $maklon_id;
+        $maklon_sementara = $maklon_id;
+        // $maklon_project=[];
+        $maklon_project = DB::table('maklon_project')->select('id')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+            ])->first();
+
+            $maklons = \App\maklonProject::all();
+
+      $maklon_project_id = DB::table('maklon_project')->where([
+        ['project_id', $id],
+        ['maklon_id', $maklon_id]
+        ])->get();
+
+
+        // dd($maklon_project_id);
+            // $maklons = maklonProject::all();
+        // dd($maklon_project);
         // $filed = DB::table('file')
         // ->join('maklon_project','file.project_id','=','maklon_project.id')
         // ->join('maklon','maklon_project.maklon_id','=','maklon.id')->where('maklon.id',$maklon_id)
@@ -133,79 +287,135 @@ class ProjectController extends Controller
         // $file2 = DB::table('file')->where('project_id',$maklon_id)->where('jenis_file','penawaran')
         // ->get();
         // $file3 = DB::table('file')->where('project_id',$maklon_id)->where('jenis_file','ppt_penjajakan')
-        // ->get();
-        return view('Project.wizard.info3',compact('project','maklon_sementara', 'maklon','maklon_project'));
-    }
-
-    public function info_legalitas($id , $maklon_id)
-    {
-        $project = DB::table('project')->where('id',$id)->get();
-        $maklon_sementara = DB::table('table_sementara')
-        ->join('maklon','table_sementara.maklon_id','=','maklon.id')->where('maklon_id',$maklon_id)
-        ->get();
-
-        $legal = DB::table('file')->where('jenis_file','legalitas')
-        ->join('maklon_project','file.project_id','=','maklon_project.id')
-        ->join('maklon','maklon_project.maklon_id','=','maklon.id')->where('maklon.id',$maklon_id)
-        ->join('project','maklon_project.project_id','=','project.id')->where('project.id',$id)
-        ->get();
-
-        return view('Project.wizard.info4',compact('project', 'legal', 'maklon_sementara'));
-    }
-
+        // // ->get();
+        // dd ([$maklon_project]);
+        // return $maklon_project;
+    return view('Project.wizard.infopenawaran',compact('project','maklon_sementara', 'maklon','maklons','maklon_project','maklon_project_id'));
+}
     public function info_mou($id, $maklon_id)
     {
-        $project = DB::table('project')->where('id', $id)->get();
-        $maklon_sementara = DB::table('table_sementara')
-        ->join('maklon','table_sementara.maklon_id','=','maklon.id')->where('maklon_id',$maklon_id)
-        ->get();
+        $project = $id;
+        $maklon_sementara = $maklon_id;
+        $maklons = \App\maklonProject::all();
+        $mou =DB::table('file')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+            ])->get();
+        // $maklons = \App\maklonProject::findOrFail($id)->get();
+        // ->join('maklon_P','maklon_project.project_id','=','project.id')->where('project.id',$id)
 
-        $mou = DB::table('file')->where('jenis_file','mou')
-        ->join('maklon_project','file.project_id','=','maklon_project.id')
-        ->join('maklon','maklon_project.maklon_id','=','maklon.id')->where('maklon.id',$maklon_id)
-        ->join('project','maklon_project.project_id','=','project.id')->where('project.id',$id)
-        ->get();
+        $maklon_project = DB::table('maklon_project')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+            ])->first();
 
-        return view('Project.wizard.info5', compact('project', 'mou', 'maklon_sementara'));
+            $maklon_project_id = DB::table('maklon_project')->where([
+                ['project_id', $id],
+                ['maklon_id', $maklon_id]
+                ])->get();
+
+
+            // $maklons = maklonProject::all();
+
+
+
+        return view('Project.wizard.info5', compact('project', 'mou', 'maklon_sementara','maklons','maklon_project','maklon_project_id'));
     }
 
     public function info_trial($id, $maklon_id)
     {
-        
-        $project = DB::table('project')->where('id', $id)->get();
-        $maklon_sementara = DB::table('table_sementara')
-        ->join('maklon','table_sementara.maklon_id','=','maklon.id')->where('maklon_id',$maklon_id)
-        ->get();
-        return view('Project.wizard.info6', compact('project', 'maklon_sementara'));
+        $project = $id;
+        $maklon_sementara = $maklon_id;
+        $trial = DB::table('trials')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+        ])->get();
+
+        // $maklons = \App\maklonProject::findOrFail($id)->get();
+        $maklons = \App\maklonProject::all();
+        $maklon_project = DB::table('maklon_project')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+        ])->get();
+        return view('Project.wizard.info6', compact('project', 'maklon_sementara','maklons', 'maklon_project', 'trial'));
     }
 
     public function info_pendukung($id, $maklon_id)
     {
-        $project = DB::table('project')->where('id', $id)->get();
-        $maklon_sementara = DB::table('table_sementara')
-        ->join('maklon','table_sementara.maklon_id','=','maklon.id')->where('maklon_id',$maklon_id)
-        ->get();
+        $project = $id;
+        $maklon_sementara = $maklon_id;
+        // $cas = DB::table('file')->where('jenis_file','cas') ->join('maklon_project','file.project_id','=','maklon_project.id')
+        // ->join('Maklon','maklon_project.maklon_id','=','Maklon.id')->where('Maklon.id',$maklon_id)
+        // ->join('project','maklon_project.project_id','=','project.id')->where('project.id',$id)
+        // ->first();
 
-        $cas = DB::table('file')->where('jenis_file','cas') ->join('maklon_project','file.project_id','=','maklon_project.id')
-        ->join('maklon','maklon_project.maklon_id','=','maklon.id')->where('maklon.id',$maklon_id)
-        ->join('project','maklon_project.project_id','=','project.id')->where('project.id',$id)
-        ->get();
-        $sertifikat = DB::table('file')->where('jenis_file','sertifikat')
-        ->join('maklon_project','file.project_id','=','maklon_project.id')
-        ->join('maklon','maklon_project.maklon_id','=','maklon.id')->where('maklon.id',$maklon_id)
-        ->join('project','maklon_project.project_id','=','project.id')->where('project.id',$id)
-        ->get();
-        $kontrak_kerjasama = DB::table('file')->where('jenis_file','kontrak_kerjasama')
-        ->join('maklon_project','file.project_id','=','maklon_project.id')
-        ->join('maklon','maklon_project.maklon_id','=','maklon.id')->where('maklon.id',$maklon_id)
-        ->join('project','maklon_project.project_id','=','project.id')->where('project.id',$id)
-        ->get();
-        return view('Project.wizard.info7', compact('project', 'sertifikat', 'kontrak_kerjasama', 'cas', 'maklon_sementara'));
+        $foodsafety = DB::table('food_safety')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+        ])->get();
+        $maklon_project = DB::table('maklon_project')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+        ])->first();
+
+        $maklons = \App\maklonProject::all();
+        // dd($cas);
+        // $kontrak_kerjasama = DB::table('file')->where('jenis_file','kontrak_kerjasama')
+        // ->join('maklon_project','file.project_id','=','maklon_project.id')
+        // ->join('maklon','maklon_project.maklon_id','=','maklon.id')->where('maklon.id',$maklon_id)
+        // ->join('project','maklon_project.project_id','=','project.id')->where('project.id',$id)
+        // ->get();
+        return view('Project.wizard.info7', compact('project', 'foodsafety', 'kontrak_kerjasama', 'cas','maklons', 'maklon_sementara','maklon_project'));
     }
 
+    public function info_approval ($id, $maklon_id)
+    {
+        $maklon_sementara = $maklon_id;
+        $project = $id;
+        // $maklon_project = \App\maklonProject::findOrFail($id)->get();
+        $maklon_project = DB::table('maklon_project')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+        ])->first();
+        $maklon_project_id = DB::table('maklon_project')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+        ])->get();
+        $maklons = \App\maklonProject::all();
+        // $maklons = maklonProject::all();
+        return view('Project.wizard.infoapproval', compact('project','maklons', 'maklon_sementara','maklon_project','maklon_project_id'));
+    }
+
+    public function info_kontrak ($id, $maklon_id)
+    {
+        $maklon_sementara = $maklon_id;
+        $kontrak = DB::table('file')
+            // ->where('jenis_file','kontrak_kerjasama')
+            ->where([
+                ['project_id', $id],
+                ['maklon_id', $maklon_id]
+            ])->get();
+
+        $project = $id;
+        $maklon_project = DB::table('maklon_project')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+        ])->first();
+        $maklon_project_id = DB::table('maklon_project')->where([
+            ['project_id', $id],
+            ['maklon_id', $maklon_id]
+        ])->get();
+        $maklons = \App\maklonProject::all();
+        $maklon_id = $maklon_id;
+        $project_id = $id;
+
+        // dd($kontrak);
+
+        return view('Project.wizard.infokontrak', compact('project','kontrak','maklons', 'maklon_sementara','maklon_project','maklon_project_id', 'maklon_id', 'project_id'));
+    }
     public function info_lainnya($id)
     {
-        
+
         $project = DB::table('project')->where('id', $id)->get();
         return view('Project.wizard.lainnya', compact('project'));
     }
@@ -215,61 +425,69 @@ class ProjectController extends Controller
         $mou = DB::table('file')
                 ->where('jenis_file','mou')
                 ->get();
-                
-        $project = DB::table('project')->where('id',$id)->get();
+
+        $project = $id;
         $project1 = DB::table('project')->where('id',$id)->first();
 
-        return view('Project.detail',compact('mou','project1','project'));
+        return view('Project.index',compact('mou','project1','project'));
     }
 
     public function createReleted(Request $request)
     {
-            $legalitas = \App\MaklonPkp::create([
+            $legalitas = \App\maklonProject::create([
             "user_id" => $request->user_id,
             "maklon_id"=> $request->maklon_id,
             "project_id"=> $request->project_id,
-            "cpm"=>$request->cpm,
-            "penawaran"=>$request->penawaran,
+            // "cpm"=>$request->cpm,
+            // "penawaran"=>$request->penawaran,
             "konsep_kerjasama" => $request->konsep_kerjasama,
             "alur_proses" => $request->alur_proses,
-            "ppt_penjajakan"=>$request->ppt_penjajakan
+            "ppt_penjajakan"=>$request->ppt_penjajakan,
+            "cpm" => $request->cpm,
+            "status_maklon"=> "2",
             ]);
-            if($request->hasFile('penawaran')){
-                $request->file('penawaran')->move('images/',$request->file('penawaran')->getClientOriginalName());
-                $legalitas->penawaran = $request->file('penawaran')->getClientOriginalName();
-                $legalitas->save();
-            } if($request->hasFile('cpm')){
-                $request->file('cpm')->move('images/',$request->file('cpm')->getClientOriginalName());
-                $legalitas->cpm = $request->file('cpm')->getClientOriginalName();
-                $legalitas->save();
-            } if($request->hasFile('ppt_penjajakan')){
-                $request->file('ppt_penjajakan')->move('images/',$request->file('ppt_penjajakan')->getClientOriginalName());
-                $legalitas->ppt_penjajakan = $request->file('ppt_penjajakan')->getClientOriginalName();
-                $legalitas->save();
-            }
-            
+            // if($request->hasFile('penawaran')){
+            //     $request->file('penawaran')->move('images/',$request->file('penawaran')->getClientOriginalName());
+            //     $legalitas->penawaran = $request->file('penawaran')->getClientOriginalName();
+            //     $legalitas->save();
+            // } if($request->hasFile('cpm')){
+            //     $request->file('cpm')->move('images/',$request->file('cpm')->getClientOriginalName());
+            //     $legalitas->cpm = $request->file('cpm')->getClientOriginalName();
+            //     $legalitas->save();
+            // } if($request->hasFile('ppt_penjajakan')){
+            //     $request->file('ppt_penjajakan')->move('images/',$request->file('ppt_penjajakan')->getClientOriginalName());
+            //     $legalitas->ppt_penjajakan = $request->file('ppt_penjajakan')->getClientOriginalName();
+            //     $legalitas->save();
+            // }
+
+
             return redirect()->back()->with('sukses', 'Data Berhasil di Input');
     }
 
-    public function createinfo(Request $request)    
+
+
+    public function createinfo(Request $request)
     {
         $hitung = count($request->user_id);
-        $maklon_project = db::table('maklon_project')->where('id',\DB::raw("(select max('id') from maklon_project)"))->get();
-        for ($i=0; $i < $hitung; $i++) { 
+        $maklon_project = DB::table('maklon_project')->where('id',\DB::raw("(select max('id') from maklon_project)"))->get();
+        for ($i=0; $i < $hitung; $i++) {
             DB::table('maklon_project')->insert([
                 "user_id" => $request->user_id[$i],
                 "maklon_id"=> $request->maklon_id,
                 "project_id"=> $request->project_id,
                 "konsep_kerjasama" => $request->konsep_kerjasama[$i],
                 "alur_proses" => $request->alur_proses[$i],
+
+            // "cpm"=>$request->cpm,
+
                 ]);
-    
+
                 $project = DB::table('maklon_project')->latest()->first();
-               
+
                 DB::table('file')->insert([
                     "project_id" => $project->id,
-                    "cpm"=>$request->cpm[$i],  
-                    "penawaran"=>$request->penawaran[$i],
+                //     "cpm"=>$request->cpm[$i],
+                //     "penawaran"=>$request->penawaran[$i],
                     "ppt_penjajakan"=>$request->ppt_penjajakan[$i],
                 ]);
                 // $project = DB::table('maklon_project')->latest()->first();
@@ -306,81 +524,192 @@ class ProjectController extends Controller
         return redirect('/project/{id}/info')->with('sukses', 'Data Berhasil di Input');
     }
 
-    public function legalitas(Request $request)
+
+
+
+    // public function pendukung(Request $request)
+    // {
+    //     $project = DB::table('maklon_project')->latest()->first();
+    //     // $cas =  \App\File::create([
+    //     //     "project_id"=> $project->id,
+    //     //     "file"=>$request->cas,
+    //     //     "jenis_file"=> "cas",
+    //     // ]);
+    //     // if($request->hasFile('file')){
+    //     //     $request->file('file')->move('images/',$request->file('file')->getClientOriginalName());
+    //     //     $cas->file = $request->file('file')->getClientOriginalName();
+    //     //     $cas->save();
+    //     // }
+
+    //     $project = DB::table('maklon_project')->latest()->first();
+    //     $sertifikat = \App\File::create([
+    //         "project_id"=> $project->id,
+    //         "file"=>$request->sertifikat,
+    //         "jenis_file"=> "sertifikat",
+    //         ]);
+    //         if($request->hasFile('file')){
+    //             $request->file('file')->move('images/',$request->file('file')->getClientOriginalName());
+    //             $sertifikat->file = $request->file('file')->getClientOriginalName();
+    //             $sertifikat->save();
+    //         }
+
+    //         $project = DB::table('maklon_project')->latest()->first();
+    //         // $kontrak = \App\file::create([
+    //         //     "project_id"=> $project->id,
+    //         //     "file"=>$request->kontrak_kerjasama,
+    //         //     "jenis_file"=> "kontrak_kerjasama",
+    //         //     ]);
+    //         //     if($request->hasFile('file')){
+    //         //         $request->file('file')->move('images/',$request->file('file')->getClientOriginalName());
+    //         //         $kontrak->file = $request->file('file')->getClientOriginalName();
+    //         //         $kontrak->save();
+    //         //     }
+    //             return redirect()->back()->with('sukses', 'Data Berhasil di Input');
+    // }
+
+    public function trial (Request $request )
     {
-        
-        $project = DB::table('maklon_project')->latest()->first();
-        $legalitas = \App\File::create([
-            "project_id" => $project->id,
-            "file"=>$request->file,
-            "jenis_file"=>"legalitas"
-        ]);
-        if($request->hasFile('file')){
-            $request->file('file')->move('images/',$request->file('file')->getClientOriginalName());
-            $legalitas->file = $request->file('file')->getClientOriginalName();
-            $legalitas->save();
+            if($request->hasFile('file')){
+                $summ = $request->file('file')->getClientOriginalName();
+            }
+            $trial = \App\trial::create([
+                    "trial_id" => $request->trial_id,
+                "user_id" => auth::user()->id,
+                "project_id"=>$request->project_id,
+                "maklon_id"=> $request->maklon_id,
+                "tanggal"=> $request->tanggal,
+                "kategori" => $request->kategori,
+                "summary" => $request->summary,
+                "status"=> $request->status,
+
+            ]);
+
+            if($request->hasFile('summary')){
+                $request->file('summary')->move('images/',$request->file('summary')->getClientOriginalName());
+                $trial->summary = $request->file('summary')->getClientOriginalName();
+                $trial->save();
+
+
+            return redirect()->back()->with('sukses', 'Data Berhasil di Input');
         }
-        return redirect()->back();
     }
 
-    public function mou(Request $request)
-    {
-        $project = DB::table('maklon_project')->latest()->first();
-        $mou = \App\File::create([
-            "project_id" => $project->id,
-            "file"=>$request->file,
-            "jenis_file"=>"mou"
-        ]);
-        if($request->hasFile('file')){
-            $request->file('file')->move('images/',$request->file('file')->getClientOriginalName());
-            $mou->file = $request->file('file')->getClientOriginalName();
-            $mou->save();
+        public function foodsafety (Request $request)
+
+        {
+
+                // $project = DB::table('food_safety')->latest()->first();
+                $foodsafety = \App\food_safety::create([
+                "maklon_id" => $request->maklon_id,
+                "project_id" => $request->project_id,
+                "kategori"=>$request->kategori,
+                "file"=>$request->file,
+                "status"=>$request->status,
+                ]);
+                if($request->hasFile('file')){
+                        $request->file('file')->move('file/',$request->file('file')->getClientOriginalName());
+                        $foodsafety->file = $request->file('file')->getClientOriginalName();
+                        $foodsafety->save();
+            }
+
+            return redirect()->back();
+
         }
 
-        return redirect()->back();
-    }
- 
-    public function pendukung(Request $request)
-    {   
-        $project = DB::table('maklon_project')->latest()->first();
-        $cas =  \App\File::create([
-            "project_id"=> $project->id,
-            "file"=>$request->cas,
-            "jenis_file"=> "cas",
-        ]);
-        if($request->hasFile('file')){
-            $request->file('file')->move('images/',$request->file('file')->getClientOriginalName());
-            $cas->file = $request->file('file')->getClientOriginalName();
-            $cas->save();
-        }
+        // public function info_foodsafety ($id ,$maklon_id)
+        // {
+        //     $project = $id;
+        //     $maklon_sementara = $maklon_id;
+        //     $maklons = \App\maklonProject::where([
+        //         ['project_id', $id],
+        //         ['maklon_id', $maklon_id]
+        //     ])->first();
 
-        $project = DB::table('maklon_project')->latest()->first();
-        $sertifikat = \App\File::create([
-            "project_id"=> $project->id,
-            "file"=>$request->sertifikat,
-            "jenis_file"=> "sertifikat",
-        ]);
-        if($request->hasFile('file')){
-            $request->file('file')->move('images/',$request->file('file')->getClientOriginalName());
-            $sertifikat->file = $request->file('file')->getClientOriginalName();
-            $sertifikat->save();
-        }
+        //     $foodsafety = DB::table('food_safety')->get();
+        //     $maklon_project = DB::table('maklon_project')->where([
+        //         ['project_id', $id],
+        //         ['maklon_id', $maklon_id]
+        //     ])->get();
 
-        $project = DB::table('maklon_project')->latest()->first();
-        $kontrak = \App\File::create([
-            "project_id"=> $project->id,
-            "file"=>$request->kontrak_kerjasama,
-            "jenis_file"=> "kontrak_kerjasama",
-        ]);
-        if($request->hasFile('file')){
-            $request->file('file')->move('images/',$request->file('file')->getClientOriginalName());
-            $kontrak->file = $request->file('file')->getClientOriginalName();
-            $kontrak->save();
-        }
-        return redirect()->back()->with('sukses', 'Data Berhasil di Input');
-    }
 
-    public function edit($id)
+        //     return view('Project.wizard.info7', compact('project', 'maklon_sementara', 'maklon_project', 'maklons','foodsafety'));
+        // }
+
+        // public function fhs (Request $request)
+
+        // // {
+
+        // //     $project = DB::table('audit_fhs')->latest()->first();
+        // //     $fhs = \App\audit_fhs::create([
+
+        // //     "ketidaksesuain"=>$request->ketidaksesuaian,
+        // //     "kategori"=>$request->kategori,
+        // //     ]);
+        // //     return redirect()->back();
+
+        // // }
+
+        public function info_audit (Request $request)
+
+        {
+
+        $project = DB::table('info_audit')->latest()->first();
+        $aud = \App\info_audit::create([
+            "no_audit"=>$request->no_audit,
+            "nama_supplier"=>$request->nama_supplier,
+            "nama_bb"=>$request->nama_bb,
+            "tanggal_audit"=>$request->tanggal_audit,
+            "auditor"=>$request->auditor,
+            "auditee"=>$request->auditee,
+            "status"=>$request->status,
+            ]);
+            return redirect()->back();
+
+        }
+       public function kontrak_kerjasama (Request $request,$maklon_id, $project_id)
+        {
+            $project = DB::table('maklon_project')->latest()->first();
+
+            $kontrak = \App\file::create([
+                "maklon_id"=>$maklon_id,
+                "project_id"=> $project_id,
+                "file"=>$request->kontrak_kerjasama,
+                "jenis_file"=> "kontrak_kerjasama",
+                ]);
+
+                if($request->hasFile('file')){
+                    $request->file('file')->move('images/',$request->file('file')->getClientOriginalName());
+                    $kontrak->file = $request->file('file')->getClientOriginalName();
+                    $kontrak->save();
+                }
+                return redirect()->back()->with('sukses', 'Data Berhasil di Input');
+
+            }
+            public function mou(Request $request)
+            {
+
+
+                $project = DB::table('maklon_project')->latest()->first();
+                $mou = \App\file::create([
+                    "project_id" => $project->project_id,
+                    "maklon_id" => $project->maklon_id,
+                    "file"=>$request->file,
+                    "jenis_file"=>"mou"
+                ]);
+
+
+                // maklonProject::findOrFail($id)->update([
+                //     'status_mou' => 2,
+                //     ]);
+                if($request->hasFile('file')){
+                    $request->file('file')->move('images/',$request->file('file')->getClientOriginalName());
+                    $mou->file = $request->file('file')->getClientOriginalName();
+                    $mou->save();
+                }
+
+                return redirect()->back();
+            }
+            public function edit($id)
     {
         $project = \App\Project::find($id);
         return view('Project.edit',['project' => $project]);
@@ -416,16 +745,34 @@ class ProjectController extends Controller
         return redirect('/project');
     }
 
+    // public function destroy_pendukung ($id) {
+    //     $concert = concert::findOrFail($id);
+
+    //     $concert-> update(
+    //         $request->all()
+    //     );
+
+    //     return redirect()->route('concert.index');
+    // }
+
+
+
     public function deleteMaklon($id,$id2)
     {
         $maklon = DB::table('table_sementara')->where('maklon_id',$id2)->where('project_id',$id)->delete();
         return redirect()->back()->with('alert','Berhasil dihapus');
     }
 
-    public function deleteLegalitas($id,$id2)
+    public function deletelegal($id)
     {
-        $maklon = DB::table('table_sementara')->where('maklon_id',$id2)->where('project_id',$id)->delete();
+        $legal= DB::table('file')->where('id',$id)->where('jenis_file','legalitas')->delete();
+        return redirect()->back()->with('alert','Berhasil dihapus');
+
+    }
+    public function delete_mou($id)
+    {
+        $mou = DB::table('file')->where('id',$id)->delete();
         return redirect()->back()->with('alert','Berhasil dihapus');
     }
-    
+
 }

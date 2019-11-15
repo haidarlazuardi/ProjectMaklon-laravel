@@ -11,23 +11,23 @@
                   <div class="col-md-3">
                   <h2>DATA USER</h2>
                 </div>
-                  <div class="panel_toolbox">
-                  <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
-                  </div>
-                  </div>
-                
-                  <br>
-								<div class="panel-body">
+            </div>
+        <div class="panel-body">
+                    <div class="panel_toolbox">
+                    <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
+                    </div>
+                    <br>
+                    <br>
                     <table class="table table-striped jambo_table bulk_action" >
-										<thead>
-											<tr>
+                <thead>
+					<tr>
                         <th>NAME</th>
                         <th>EMAIL</th>
-                        <th>DEPARTEMEN</th>   
+                        <th>ROLE</th>
                         <th>AKSI</th>
-											</tr>
-										</thead>
-										<tbody>
+					</tr>
+				</thead>
+					<tbody>
                       @foreach($data_user as $user)
                       <tr>
                           <td>{{$user->name}}</a></td>
@@ -36,7 +36,7 @@
                           <td>
                               <!-- <a href="/user/{{$user->id}}/edit" class="btn btn-warning btn-sm">Edit</a> -->
                               <a href="/user/{{$user->id}}/edit" class="btn btn-warning btn-sm"><i class="lnr lnr-pencil"></i></a>
-                              <a href="/user/{{$user->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Mau di Hapus')"><i class="lnr lnr-trash"></i></a>    
+                              <a href="/user/{{$user->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Mau di Hapus')"><i class="lnr lnr-trash"></i></a>
                           </td>
                       </tr>
                       @endforeach
@@ -60,20 +60,20 @@
         </button>
       </div>
       <div class="modal-body">
-        
+
         <form action="/user/create" method="post">
         {{csrf_field()}}
         <div class="form-group">
             <label for="exampleInputEmail1">Name</label>
-            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Name">            
+            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Name">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
-            <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">            
+            <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Password</label>
-            <input name="password" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Password">            
+            <input name="password" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Password">
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Level</label>
@@ -84,8 +84,10 @@
             <option value="RND">RND</option>
             <option value="Legal">Legal</option>
             <option value="GP">GP</option>
+            <option value="NR">NR</option>
             <option value="QA">QA</option>
-            </select>
+            <option value="PRO">PRO</option>
+        </select>
         </div>
       </div>
       <div class="modal-footer">

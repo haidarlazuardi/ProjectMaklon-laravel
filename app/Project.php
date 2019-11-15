@@ -4,14 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class project extends Model
 {
     protected $table = 'project';
-    protected $fillable = ['nama_project','kategori_project','forecast','pricelist','nama_brand','gramasi','konfigurasi_kemas', 'umur_simpan', 'gambaran_proses', 'urgensi_project', 'satuan','timeline'];
+    protected $fillable = ['nama_project','category','sales_forecast','selling_price','brand','gramasi','UOM','configuration', 'umur_simpan', 'gambaran_proses', 'priority_project','timeline','status_project'];
 
     public function maklon()
     {
-        return $this->belongsToMany('App\Maklon');
+        return $this->hasManyThrough('App\Maklon', 'App\maklonProject');
     }
-
 }

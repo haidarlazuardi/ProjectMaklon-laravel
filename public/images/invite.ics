@@ -1,0 +1,78 @@
+BEGIN:VCALENDAR
+METHOD:REQUEST
+PRODID:Microsoft Exchange Server 2010
+VERSION:2.0
+BEGIN:VTIMEZONE
+TZID:SE Asia Standard Time
+BEGIN:STANDARD
+DTSTART:16010101T000000
+TZOFFSETFROM:+0700
+TZOFFSETTO:+0700
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:16010101T000000
+TZOFFSETFROM:+0700
+TZOFFSETTO:+0700
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+ORGANIZER;CN=Nia Tania;SENT-BY="MAILTO:tya.rachmawati@nutrifood.co.id":MAILTO
+ :nia.tania@nutrifood.co.id
+ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=lazuardi72
+ 3@gmail.com:MAILTO:lazuardi723@gmail.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE;CN=Asep Wahyu
+ din:MAILTO:asep.wahyudin@nutrifood.co.id
+DESCRIPTION;LANGUAGE=en-US:Dear Acil\,\nBoleh titip haidar ya cil\, soalnya
+  pas bgt sys m khalid harus penjajakan ke makon baru jam yg sama di Tanger
+ ang. Mksh byk y cil 😊\nFyi haidar\n\n-----Original Appointment-----\nFr
+ om: Nia Tania <nia.tania@nutrifood.co.id>\nSent: 31 July 2019 16:58\nTo: N
+ ia Tania\; Benediktus Aditya CTS\; Nasrul Gunawan\; Agam Setiawan\; Asep W
+ ahyudin\; Rina Dwi Oktavia\; QC Reference Sampel\; Mustofa Latif\; Teguh P
+ rasetia Teja\; Maria Fransisca Njoman\; M. Khalid\; Tya Rachmawati\; Fahmi
+  Nasrullah\; Gladys Datu Tangkeallo\; Admin PPIC\; Victor Mahan\; Jordy He
+ rlambang Putra\; Tahmid Hidayat\; Erlan Herlambang\; Alfiah Nur Hadist\; T
+ iara Fitria\; Bagas Muhammad Kartiko\; Ranilia Lestari Putri Purba\; Eko A
+ di Nugroho\; Fajrina Atikah\nSubject: 1st Forum Diskusi Aplikasi Mandiri\n
+ When: 13 August 2019 14:00-16:00 (UTC+07:00) Bangkok\, Hanoi\, Jakarta.\nW
+ here: Ruang Meeting Cibitung Kakaban ( V-Con )\; Ruang Meeting Ciawi L-2-1
+  ( V-Con )\n\nDear all tim\,\nSaya invite ke forum untuk diskusi pengemban
+ gan aplikasi mandiri.\nMohon bantuan untuk forward ke rekan-rekannya yang 
+ belum diinvite\, plus silahkan diajak anak PKL masing2 biar diskusinya bis
+ a langsung terkait kesulitan mereka di lapangan.\n\nTerima kasih\,\nNia\n
+UID:040000008200E00074C5B7101A82E0080000000010B92BA4B147D501000000000000000
+ 0100000000160F3B457D59646976A0217D0824925
+SUMMARY;LANGUAGE=en-US:FW: 1st Forum Diskusi Aplikasi Mandiri
+DTSTART;TZID=SE Asia Standard Time:20190813T140000
+DTEND;TZID=SE Asia Standard Time:20190813T160000
+CLASS:PUBLIC
+PRIORITY:5
+DTSTAMP:20190731T095732Z
+TRANSP:OPAQUE
+STATUS:CONFIRMED
+SEQUENCE:0
+LOCATION;LANGUAGE=en-US:Ruang Meeting Cibitung Kakaban ( V-Con )\; Ruang Me
+ eting Ciawi L-2-1 ( V-Con )
+X-MICROSOFT-CDO-APPT-SEQUENCE:0
+X-MICROSOFT-CDO-OWNERAPPTID:-1489012765
+X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-LOCATIONS:[{"DisplayName":"Ruang Meeting Cibitung Kakaban ( V-C
+ on )"\,"LocationAnnotation":""\,"LocationSource":5\,"LocationUri":"rkakaba
+ n@nutrifood.co.id"\,"LocationStreet":""\,"LocationCity":""\,"LocationState
+ ":""\,"LocationCountry":""\,"LocationPostalCode":""\,"LocationFullAddress"
+ :""}\,{"DisplayName":"Ruang Meeting Ciawi L-2-1 ( V-Con )"\,"LocationAnnot
+ ation":""\,"LocationSource":5\,"LocationUri":"CMeetingL-2-1@nutrifood.co.i
+ d"\,"LocationStreet":""\,"LocationCity":""\,"LocationState":""\,"LocationC
+ ountry":""\,"LocationPostalCode":""\,"LocationFullAddress":""}]
+BEGIN:VALARM
+DESCRIPTION:REMINDER
+TRIGGER;RELATED=START:-PT15M
+ACTION:DISPLAY
+END:VALARM
+END:VEVENT
+END:VCALENDAR

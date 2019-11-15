@@ -45,8 +45,8 @@
             </div>
             <div id="navbar-menu">
               <ul class="nav navbar-nav navbar-right">
-              
-                
+
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('admin/assets/img/download.png')}}" class="img-circle" alt="Avatar"> <span>{{auth()->user()->name}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                   <ul class="dropdown-menu">
@@ -69,27 +69,27 @@
               <nav>
                 <ul class="nav">
                   <li><a href="/" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-                  
+
                   @if(in_array(auth()->user()->role,['Admin','PV']))
                   <li><a href="/project" class=""><i class="lnr lnr-rocket"></i> <span>Data PKP</span></a></li>
                   @endif
-      
+
                   {{-- @if(in_array(auth()->user()->role,['Admin','PV']))
                   <li><a href="/project" class=""><i class="lnr lnr-rocket"></i> <span>Biaya Transportasi</span></a></li>
                   @endif
-      
+
                   @if(in_array(auth()->user()->role,['Admin','PV']))
                   <li><a href="/project" class=""><i class="lnr lnr-rocket"></i> <span>Harga</span></a></li>
                   @endif --}}
-                  
+
                   @if(auth()->user()->role == 'Admin')
                   <li><a href="/maklon" class=""><i class ="lnr lnr-cart"></i> <span>Data Maklon</span></a></li>
-                  
+
                   <li>
                     <a href="/user" class=""><i class="lnr lnr-user"></i> <span>User</span></a>
                   </li>
                 @endif
-      
+
             @if(auth()->user()->role == 'Legal')
               <li>
                 <a href="/dokumen" class=""><i class="lnr lnr-file-empty"></i> <span>Approval Dokumen</span></a>
@@ -100,7 +100,7 @@
                 <a href="/harga" class=""><i class="fa fa-credit-card"></i> <span>Harga</span></a>
               </li>
             @endif
-             
+
             @if(auth()->user()->role == 'QA')
               <li>
                 <a href="/review" class=""><i class="lnr lnr-map"></i> <span>Review CPM</span></a>
@@ -108,7 +108,7 @@
               <li>
                 <a href="/halal" class=""><i class="lnr lnr-linearicons"></i> <span>Halal & Food Safety</span></a>
               </li>
-            @endif	
+            @endif
           </nav>
         </div>
       </div>
@@ -119,12 +119,12 @@
     <div class="main-content">
       <div class="container-fluid">
         <div class="row">
-          
+
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Project Maklon<small>Sessions</small></h2>
-                   
+
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -138,7 +138,7 @@
                             @foreach ($project as $p)
                             <a href="/project/{{$p->id}}/info">
                             @endforeach
-                          
+
                             <span class="step_no" style="background :#0095ff !important">1</span>
                             <span class="step_descr">Data PKP<br/>
                                         <small>Step 1 description</small>
@@ -159,7 +159,7 @@
 
                         <li>
                           @foreach ($project as $p)
-                            <a href="/project/{{$p->id}}/maklon" onclick="return confirm('Silahkan Pilih Maklon Terlebih Dahulu !')">    
+                            <a href="/project/{{$p->id}}/maklon" onclick="return confirm('Silahkan Pilih Maklon Terlebih Dahulu !')">
                           @endforeach
                             <span class="step_no">3</span>
                             <span class="step_descr">Data Tambahan<br />
@@ -168,7 +168,7 @@
                           </a>
                         </li>
 
-                        
+
 
                         <li>
                           <a href="/project/{{$p->id}}/maklon" onclick="return confirm('Silahkan Pilih Maklon Terlebih Dahulu !')">
@@ -206,14 +206,14 @@
                           </a>
                         </li>
                       </ul>
-                      
+
                       <div id="step-1">
                         <form class="form-horizontal form-label-left">
                             <table class="table table-striped jambo_table bulk_action">
                                 <tbody>
                                   {{-- @foreach ($project as $p) --}}
 
-                                  
+
                                   <br>
                                   <thead>
                                   <tr>
@@ -264,7 +264,7 @@
                                       <tr>
                                           <td>Timeline Launch :</td>
                                           <td id="year-val"><a class="btn btn-success"  href="{{URL::asset('../images/'.@$project1->timeline)}}" download="{{$project1->timeline}}"><i class="fa fa-download"></i> {{@$project1->timeline}}</a></td>
-                                          
+
                                         </td>
                                         </tr>
                                   {{-- @endforeach --}}
@@ -275,7 +275,7 @@
                               <div class="form-group">
                                   <div class="col-md-3 col-sm-4 col-xs-12 col-md-offset-9">
                                     <button type="button" class="btn btn-primary" disabled>Previous</button>
-                                    
+
                                     @foreach($project as $p)
                                       <a href="/project/{{$p->id}}/maklon">
                                   @endforeach
@@ -286,8 +286,8 @@
                         </form>
 
                       </div>
-                      
-                      
+
+
 
                     </div>
                     <!-- End SmartWizard Content -->
@@ -299,12 +299,12 @@
                   </div>
                 </div>
               </div>
-        
+
         </div>
       </div>
     </div>
   </div>
-  
+
         {{-- End Content --}}
 
         <div class="clearfix"></div>
@@ -313,7 +313,7 @@
 				<p class="copyright">&copy; 2019 <a href="https://www.nutrifood.co.id" target="_blank">Nutrifood</a>. All Rights Reserved.</p>
 			</div>
 		</footer>--}}
-	</div> 
+	</div>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -324,13 +324,13 @@
         </button>
       </div>
       <div class="modal-body">
-        
-        
+
+
         <form action="/maklon/createInPkp" method="post">
         {{csrf_field()}}
         {{-- <div class="form-group">
             <label for="exampleOptionProject">Nama Project</label>
-            <select name="project_id" class="form-control" id="exampleOptionProject">   
+            <select name="project_id" class="form-control" id="exampleOptionProject">
               @foreach($data_project as $project)
                   <option value="{{$project->id}}">{{$project->nama_project}}</option>
                 @endforeach
@@ -338,23 +338,23 @@
         </div>   --}}
         <div class="form-group">
             <label for="exampleInputEmail1">Nama Maklon</label>
-            <input name="nama_maklon" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Maklon">            
+            <input name="nama_maklon" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Maklon">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Nama PIC</label>
-            <input name="nama_pic" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama PIC">            
+            <input name="nama_pic" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama PIC">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Alamat</label>
-          <input name="alamat" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat">            
+          <input name="alamat" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat">
         </div>
-        <div class="form-group"> 
+        <div class="form-group">
           <label for="exampleInputEmail1">Contact</label>
-          <input name="kontak"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contact">            
+          <input name="kontak"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contact">
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email</label>
-        <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">            
+        <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Fasilitas Produksi</label>
@@ -374,7 +374,7 @@
             <option value="PT">PT</option>
             <option value="Perorangan">Perorangan</option>
             </select>
-        </div>        
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -383,15 +383,15 @@
       </div>
     </div>
   </div>
-  
+
   <script src="{{asset('admin/assets/vendor/jquery/jquery.min.js')}}"></script>
 	{{-- <script src="{{asset('admin/assets/vendor/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script> --}}
 	{{-- <script src="{{asset('admin/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> --}}
 	{{-- <script src="{{asset('admin/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script> --}}
 	<script src="{{asset('admin/assets/scripts/klorofil-common.js')}}"></script>
-      
 
-      
+
+
     {{-- wizard --}}
 	<!-- jQuery(INI) -->
   {{-- <script src="{{asset('admin/assets/vendors/jquery/dist/jquery.min.js')}}"></script> --}}
@@ -405,7 +405,7 @@
   <!-- jQuery Smart Wizard(INI) -->
   {{-- <script src="{{asset('admin/assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script> --}}
 
-  
+
   <!-- Custom Theme Scripts(INI) -->
 {{-- <script src="{{asset('admin/assets/build/js/custom.min.js')}}"></script> --}}
 
@@ -437,7 +437,7 @@
     var skalaKategori = $('#maklon').find(':selected').data('skala');
     var berbadanHukum = $('#maklon').find(':selected').data('hukum');
     var id = $('#maklon').find(':selected').data('id');
-    
+
 
     $('#idMaklon').val(id);
     $('#maklonId').val(id);

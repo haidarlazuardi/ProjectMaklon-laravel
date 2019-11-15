@@ -6,19 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Maklon extends Model
 {
-    protected $table = 'maklon';
-    protected $fillable = ['nama_maklon','nama_pic','alamat','kontak','email','fasilitas_produksi','skala_kategori','berbadan_hukum','keterangan'];
+    protected $table = 'Maklon';
+    protected $fillable = ['nama_maklon','nama_pic','status','alamat','kontak','email','fasilitas_produksi','kategori','skala_kategori','berbadan_hukum','keterangan','website','product_exist'];
 
     public function project()
     {
         return $this->belongsToMany('App\Project');
     }
-    
-    public function maklonProject(){
-        return $this->hasOne('App\MaklonPkp', 'maklon_id');
+
+    public function projects()
+    {
+        return $this->hasManyThrough('App\Project', 'App\maklonProject');
     }
-    // public function allMaklonProject(){
-    //     return $this->hasMany('App\MaklonPkp', 'maklon_id');
-    // }
+
+    public function maklonProject(){
+        return $this->hasOne('App\Maklon', 'maklon_id');
+    }
+
+    public function allMaklonProject(){
+        return $this->hasMany('App\maklonProject');
+    }
 
 }

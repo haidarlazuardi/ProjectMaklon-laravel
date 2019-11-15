@@ -41,14 +41,14 @@
 									</div>
 									<div class="text-center"><a href="#" class="btn btn-primary">Edit Profile</a></div>
 								</div>
-								
+
 								</div>
 								<!-- END PROFILE DETAIL -->
 							</div>
 							<!-- END LEFT COLUMN -->
 							<!-- RIGHT COLUMN -->
 							<div class="profile-right">
-								
+
 								<!-- TABBED CONTENT -->
 								<div class="custom-tabs-line tabs-line-bottom left-aligned">
 									<ul class="nav" role="tablist">
@@ -77,7 +77,7 @@
 										</ul>
 										<div class="margin-top-30 text-center"><a href="#" class="btn btn-default">See all activity</a></div>
 									</div>
-									
+
 								</div>
 								<!-- END TABBED CONTENT -->
 							</div>

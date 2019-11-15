@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(Request $request)
-    {   
+    {
         if($request->has('cari')){
             $data_user = \App\User::where('name','LIKE','%'.$request->cari.'%')->get();
         }else {
             $data_user = \App\User::all();
         }
-        
+
         return view('User.index',['data_user'=>$data_user]);
     }
 
-    public function create(Request $request)   
+    public function create(Request $request)
     {
         $user = \App\User::create([
             'name' => $request['name'],
@@ -31,7 +31,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = \App\User::find($id);
-        return view('User/edit',['user'=>$user]);        
+        return view('User/edit',['user'=>$user]);
     }
 
     public function update(Request $request, $id)
@@ -51,13 +51,13 @@ class UserController extends Controller
     public function profile($id)
     {
         $profile= \App\User::find($id);
-        return view('siswa.profile',compact('profile'));
+        return view('Siswa.profile',compact('profile'));
     }
 
     public function ganti_password(Request $request)
     {
         $user = DB::table('users')->where('id',$request->id)->get();
-            
+
         foreach($user as $u)
         {
             if (Hash::check($request->password_lama,$u->password )) {
@@ -71,9 +71,9 @@ class UserController extends Controller
                 return redirect()
                 ->back()->with('alert','Maaf password gagal diubah, password yang Anda masukkan salah');
             }
-         
+
         }
-       
-            
+
+
     }
 }

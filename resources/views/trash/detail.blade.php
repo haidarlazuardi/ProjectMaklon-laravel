@@ -2,32 +2,33 @@
 
 @section('content')
 
+
 <div class="main">
         <div class="main-content">
           <div class="container-fluid">
             <div class="row">
-              
+
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                       <div class="x_title">
                         <h2>Detail Project<small>Sessions</small></h2>
-                       
+
                         <div class="clearfix"></div>
                       </div>
                       <div class="x_content">
-    
-    
+
+
                         <!-- Smart Wizard -->
                         {{-- <p>This is a basic form wizard example that inherits the colors from the selected scheme.</p> --}}
-                          
-                          
+
+
                           <div id="step-1">
                             <form class="form-horizontal form-label-left">
                                 <table class="table">
                                     <tbody>
                                       {{-- @foreach ($project as $p) --}}
-    
-                                      
+
+
                                       <br>
                                       <tr>
                                         <td>Nama Projek :</td>
@@ -77,22 +78,22 @@
                                     </tbody>
                                   </table>
                             </form>
-    
+
                           </div>
-                          
-                          
-    
+
+
+
                         </div>
                         <!-- End SmartWizard Content -->
-    
-    
-    
-    
+
+
+
+
                         <!-- End SmartWizard Content -->
                       </div>
                     </div>
                   </div>
-            
+
             </div>
           </div>
         </div>

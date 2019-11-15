@@ -15,35 +15,35 @@
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama Project</label>
-                        <input name="nama_project" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Project" value="{{$project->nama_project}}">            
+                        <input name="nama_project" type="text" class="form-control" required id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Project" value="{{$project->nama_project}}">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Pilih Kategori</label>
                         <select name="kategori_project" class="form-control" id="exampleFormControlSelect1">
                         <option value="Makanan" @if($project->kategori_project == 'Makanan') selected @endif >Makanan</option>
                         <option value="Minuman" @if($project->kategori_project == 'Minuman') selected @endif >Minuman</option>
-                        <option value="Specialty" @if($project->kategori_project == 'Specialtya') selected @endif >Specialty</option>
+                        <option value="Specialty" @if($project->kategori_project == 'Specialty') selected @endif >Specialty</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Forecast</label>
-                        <input name="forecast"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Forecast" value="{{ $project->forecast }}">            
+                        <input name="forecast"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Forecast" value="{{ $project->forecast }}">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Pricelist</label>
-                        <input name="pricelist" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Pricelist" value="{{ $project->pricelist }}">            
+                        <input name="pricelist" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Pricelist" value="{{ $project->pricelist }}">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama Brand</label>
-                        <input name="nama_brand" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Brand" value="{{ $project->nama_brand }}">            
+                        <input name="nama_brand" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Brand" value="{{ $project->nama_brand }}">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Gramasi</label>
-                        <input name="gramasi"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Gramasi" value="{{ $project->gramasi}}">            
+                        <input name="gramasi"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Gramasi" value="{{ $project->gramasi}}">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Konfigurasi Kemas</label>
-                        <input name="konfigurasi_kemas" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Konfigurasi Kemas" value="{{ $project->konfigurasi_kemas }}">            
+                        <input name="konfigurasi_kemas" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Konfigurasi Kemas" value="{{ $project->konfigurasi_kemas }}">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Umur Simpan</label>
@@ -67,13 +67,13 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Timeline Lauch</label>
-                        <input name="timeline" type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Timeline Lauch" value="{{ $project->timeline }}">            
+                        <input name="timeline" type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Timeline Lauch" value="{{ $project->timeline }}">
                     </div>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                        </form>
 				</div>
 			</div>
           </div>

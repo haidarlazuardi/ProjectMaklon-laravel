@@ -16,11 +16,11 @@
         {{csrf_field()}}
         <div class="form-group">
             <label for="exampleInputEmail1">Name</label>
-            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Name" value="{{$user->name}}">            
+            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Name" value="{{$user->name}}">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
-            <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" value="{{$user->email}}">            
+            <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" value="{{$user->email}}">
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Pilih Jenis Role</label>
@@ -30,6 +30,9 @@
             <option value="Legal" @if($user->role == 'Legal') selected @endif >Legal</option>
             <option value="GP" @if($user->role == 'GP') selected @endif >GP</option>
             <option value="QA" @if($user->role == 'QA') selected @endif >QA</option>
+            <option value="NR" @if($user->role == 'NR') selected @endif >NR</option>
+            <option value="RND" @if($user->role == 'GP') selected @endif >RND</option>
+            <option value="PRO" @if($user->role == 'PRO') selected @endif >PRO</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
@@ -57,11 +60,11 @@
         {{csrf_field()}}
         <div class="form-group">
             <label for="exampleInputEmail1">Name</label>
-            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Name" value="{{$user->name}}">            
+            <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Name" value="{{$user->name}}">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
-            <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" value="{{$user->email}}">            
+            <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" value="{{$user->email}}">
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Pilih Jenis ROLE</label>

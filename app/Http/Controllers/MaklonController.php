@@ -13,29 +13,33 @@ class MaklonController extends Controller
         $data_maklon = \App\Maklon::orderBy('created_at', 'DESC')
         ->paginate(30);
         return view('Maklon.index',['data_maklon' => $data_maklon,'data_project' => $data_project]);
-        
+
     }
 
     public function create(Request $request)
     {
         return view('Maklon.insert');
     }
-    
+
     public function store(Request $request)
     {
         $maklon = \App\Maklon::create([
             // 'project_id' => $request->project_id,
             'nama_maklon'=> $request->nama_maklon,
             'nama_pic'=> $request->nama_pic,
+            'status'=> $request->status,
             'alamat'=> $request->alamat,
             'kontak'=>$request->kontak,
             'email'=>$request->email,
             'fasilitas_produksi'=>$request->fasilitas_produksi,
+            'kategori'=>$request->kategori,
             'skala_kategori'=>$request->skala_kategori,
             'berbadan_hukum' =>$request->berbadan_hukum,
+            'website'=> $request->website,
+            'product_exist'=> $request ->product_exist,
             'keterangan' => $request->keterangan,
-            
-        ]);        
+
+        ]);
         if($request->hasFile('fasilitas_produksi')){
             $request->file('fasilitas_produksi')->move('images/',$request->file('fasilitas_produksi')->getClientOriginalName());
             $maklon->fasilitas_produksi = $request->file('fasilitas_produksi')->getClientOriginalName();
@@ -43,28 +47,28 @@ class MaklonController extends Controller
         }
         return redirect('/maklon')->with('sukses', 'Data Berhasil di Input');
     }
-    public function createInPkp(Request $request)
-    {
-        $maklon = \App\Maklon::create([
-            // 'project_id' => $request->project_id,
-            'nama_maklon'=> $request->nama_maklon,
-            'nama_pic'=> $request->nama_pic,
-            'alamat'=> $request->alamat,
-            'kontak'=>$request->kontak,
-            'email'=>$request->email,
-            'fasilitas_produksi'=>$request->fasilitas_produksi,
-            'skala_kategori'=>$request->skala_kategori,
-            'berbadan_hukum' =>$request->berbadan_hukum,
-            'keterangan' => $request->keterangan,
-            
-        ]);        
-        if($request->hasFile('fasilitas_produksi')){
-            $request->file('fasilitas_produksi')->move('images/',$request->file('fasilitas_produksi')->getClientOriginalName());
-            $maklon->fasilitas_produksi = $request->file('fasilitas_produksi')->getClientOriginalName();
-            $maklon->save();
-        }
-        return back()->with('sukses', 'Data Berhasil di Input');
-    }
+    // public function createInPkp(Request $request)
+    // {
+    //     $maklon = \App\Maklon::create([
+    //         // 'project_id' => $request->project_id,
+    //         'nama_maklon'=> $request->nama_maklon,
+    //         'nama_pic'=> $request->nama_pic,
+    //         'alamat'=> $request->alamat,
+    //         'kontak'=>$request->kontak,
+    //         'email'=>$request->email,
+    //         'fasilitas_produksi'=>$request->fasilitas_produksi,
+    //         'skala_kategori'=>$request->skala_kategori,
+    //         'berbadan_hukum' =>$request->berbadan_hukum,
+    //         'keterangan' => $request->keterangan,
+
+    //     ]);
+    //     if($request->hasFile('fasilitas_produksi')){
+    //         $request->file('fasilitas_produksi')->move('images/',$request->file('fasilitas_produksi')->getClientOriginalName());
+    //         $maklon->fasilitas_produksi = $request->file('fasilitas_produksi')->getClientOriginalName();
+    //         $maklon->save();
+    //     }
+    //     return back()->with('sukses', 'Data Berhasil di Input');
+    // }
 
     public function delete($id)
     {
@@ -73,7 +77,7 @@ class MaklonController extends Controller
         return redirect('/maklon');
     }
 
-    public function lihat($id)  
+    public function lihat($id)
     {
         $maklon = \App\Maklon::find($id);
         return view('Maklon.lihat',['maklon' => $maklon]);
@@ -105,7 +109,7 @@ class MaklonController extends Controller
 
     public function dokumen()
     {
-        $maklon = \App\Maklon::all(); 
+        $maklon = \App\Maklon::all();
         $project = \App\Project::all();
         return view('Pages.dokumen',['maklon' => $maklon,'project'=>$project]);
     }
@@ -145,5 +149,5 @@ class MaklonController extends Controller
         return view('Pages.kontak');
     }
 
-    
+
 }

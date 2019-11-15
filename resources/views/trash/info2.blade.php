@@ -46,8 +46,8 @@
             </div>
             <div id="navbar-menu">
               <ul class="nav navbar-nav navbar-right">
-              
-                
+
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('admin/assets/img/download.png')}}" class="img-circle" alt="Avatar"> <span>{{auth()->user()->name}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                   <ul class="dropdown-menu">
@@ -70,23 +70,23 @@
               <nav>
                 <ul class="nav">
                   <li><a href="/" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-                  
+
                   @if(in_array(auth()->user()->role,['Admin','PV']))
                   <li><a href="/project" class=""><i class="lnr lnr-rocket"></i> <span>Data PKP</span></a></li>
                   @endif
-      
+
                   {{-- @if(in_array(auth()->user()->role,['Admin','PV']))
                   <li><a href="/project" class=""><i class="lnr lnr-rocket"></i> <span>Biaya Transportasi</span></a></li>
                   @endif
-      
+
                   @if(in_array(auth()->user()->role,['Admin','PV']))
                   <li><a href="/project" class=""><i class="lnr lnr-rocket"></i> <span>Harga</span></a></li>
                   @endif --}}
-                  
+
                   @if(auth()->user()->role == 'Admin')
                   <li><a href="/maklon" class=""><i class ="lnr lnr-cart"></i> <span>Data Maklon</span></a></li>
                   @endif
-      
+
                   @if(auth()->user()->role == 'Admin')
                   <li>
                     <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -109,14 +109,14 @@
                       <ul class="nav">
                         <li><a href="/kontak" class="">Kontak Kerja Sama</a></li>
                       </ul>
-                      
+
                     </div>
                   </li>
                   <li>
                     <a href="/user" class=""><i class="lnr lnr-user"></i> <span>User</span></a>
                   </li>
                 @endif
-      
+
             @if(auth()->user()->role == 'Legal')
               <li>
                 <a href="/dokumen" class=""><i class="lnr lnr-file-empty"></i> <span>Approval Dokumen</span></a>
@@ -127,7 +127,7 @@
                 <a href="/harga" class=""><i class="fa fa-credit-card"></i> <span>Harga</span></a>
               </li>
             @endif
-             
+
             @if(auth()->user()->role == 'QA')
               <li>
                 <a href="/review" class=""><i class="lnr lnr-map"></i> <span>Review CPM</span></a>
@@ -135,7 +135,7 @@
               <li>
                 <a href="/halal" class=""><i class="lnr lnr-linearicons"></i> <span>Halal & Food Safety</span></a>
               </li>
-            @endif	
+            @endif
           </nav>
         </div>
       </div>
@@ -149,7 +149,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Project Maklon<small>Sessions</small></h2> 
+              <h2>Project Maklon<small>Sessions</small></h2>
               <div class="clearfix"></div>
             </div>
                 <div class="x_content">
@@ -182,7 +182,7 @@
 
                         <li>
                             @foreach ($project as $p)
-                              <a href="/project/{{$p->id}}/maklon" onclick="return confirm('Silahkan Pilih Maklon Terlebih Dahulu !')">    
+                              <a href="/project/{{$p->id}}/maklon" onclick="return confirm('Silahkan Pilih Maklon Terlebih Dahulu !')">
                             @endforeach
                               <span class="step_no">3</span>
                               <span class="step_descr">Data Tambahan<br />
@@ -190,18 +190,20 @@
                               </span>
                             </a>
                           </li>
-  
-                          
-  
+
+
+
                           <li>
+                                @foreach ($project as $p)
                             <a href="/project/{{$p->id}}/maklon" onclick="return confirm('Silahkan Pilih Maklon Terlebih Dahulu !')">
-                              <span class="step_no">4</span>
+                              @endforeach
+                                <span class="step_no">4</span>
                               <span class="step_descr">Dokumen Legalitas<br />
                                                 <small>Step 4 description</small>
                               </span>
                             </a>
                           </li>
-  
+
                           <li>
                             <a href="/project/{{$p->id}}/maklon" onclick="return confirm('Silahkan Pilih Maklon Terlebih Dahulu !')">
                               <span class="step_no">5</span>
@@ -210,7 +212,7 @@
                               </span>
                             </a>
                           </li>
-  
+
                           <li>
                               <a href="/project/{{$p->id}}/maklon" onclick="return confirm('Silahkan Pilih Maklon Terlebih Dahulu !')">
                               <span class="step_no">6</span>
@@ -219,7 +221,7 @@
                               </span>
                             </a>
                           </li>
-  
+
                           <li>
                               <a href="/project/{{$p->id}}/maklon" onclick="return confirm('Silahkan Pilih Maklon Terlebih Dahulu !')">
                               <span class="step_no">7</span>
@@ -260,13 +262,13 @@
                             <div class="col-md-3">
                                 <button class="btn btn-primary">Save</button>
                                 <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="lnr lnr-plus-circle"></i></button>
-                            </div>  
+                            </div>
                         </div>
                       </form>
-                      
+
                       <br>
                       {{-- <input type="hidden" name="idMaklon" value="" id="idMaklon"> --}}
-                      
+
                       <br>
 <br>
 <div class="row">
@@ -275,9 +277,9 @@
         <table class="table table-striped jambo_table bulk_action text-center">
             <thead>
               <tr class="headings">
-                <th class="column-title" style="display: table-cell;">Nama Maklon </th>                          
+                <th class="column-title" style="display: table-cell;">Nama Maklon </th>
                 <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Action</span></th>
-                
+
               </tr>
             </thead>
             <tbody>
@@ -290,24 +292,24 @@
         <table class="table table-striped jambo_table bulk_action">
             <thead>
               <tr class="headings">
-                <th class="column-title" style="display: table-cell;">Nama Maklon </th>                          
+                <th class="column-title" style="display: table-cell;">Nama Maklon </th>
                 <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Action</span></th>
-                
+
               </tr>
             </thead>
             <tbody>
               @foreach ($maklon_sementara as $maklon)
               <tr>
-    
+
               <td>{{$maklon->nama_maklon}}</td>
               {{-- @foreach ($maklon as $m) --}}
-                  @foreach ($project as $p)                
+                  @foreach ($project as $p)
                   <td><a href="/project/{{$p->id}}/{{$maklon->maklon_id}}/releted"><button class="btn btn-primary">Next</button></a>
-                    <a href="/project/{{$p->id}}/{{$maklon->id}}/deleteMaklon" onclick="return confirm('Apakah anda yakin Delete ?')"><button class="btn btn-danger">Delete</button></a></td>        
+                    <a href="/project/{{$p->id}}/{{$maklon->id}}/deleteMaklon" onclick="return confirm('Apakah anda yakin Delete ?')"><button class="btn btn-danger">Delete</button></a></td>
                   @endforeach
-                  
+
               {{-- @endforeach --}}
-              
+
               </tr>
               @endforeach
             </tbody>
@@ -315,7 +317,7 @@
           @endif
     </div>
 </div>
-                      
+
                         <br>
                         {{-- foother --}}
                         <div class="ln_solid"></div>
@@ -330,21 +332,21 @@
                          <button type="button" class="btn btn-success" disabled>Next</button>
                           </a>
                       </div>
-                      
+
                   </div>
                   {{-- end foother --}}
 
                   </div>
                   {{-- end content --}}
-              
+
                 </div>
-                  
-                  </div>  
-                        
-                  
-                        
-                      
-                      
+
+                  </div>
+
+
+
+
+
 
                     </div>
                     <!-- End SmartWizard Content -->
@@ -356,13 +358,13 @@
                   </div>
                 </div>
               </div>
-        
+
         </div>
 
 
 
         <div class="clearfix"></div>
-	</div> 
+	</div>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -373,33 +375,33 @@
         </button>
       </div>
       <div class="modal-body">
-        
-        
+
+
         <form action="/maklon/createInPkp" method="post">
           {{csrf_field()}}
           <div class="form-group">
               <label for="exampleInputEmail1">Nama Maklon</label>
-              <input name="nama_maklon" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Maklon">            
+              <input name="nama_maklon" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Maklon">
           </div>
           <div class="form-group">
               <label for="exampleInputEmail1">Nama PIC</label>
-              <input name="nama_pic" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama PIC">            
+              <input name="nama_pic" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama PIC">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Alamat</label>
-            <input name="alamat" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat">            
+            <input name="alamat" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Contact</label>
-            <input name="kontak"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contact">            
+            <input name="kontak"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contact">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Email</label>
-          <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">            
+          <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Fasilitas Produksi</label>
-        <input name="fasilitas_produksi"  type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Fasilitas Produksi">            
+        <input name="fasilitas_produksi"  type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Fasilitas Produksi">
       </div>
           <div class="form-group">
               <label for="exampleFormControlSelect1">Pilih Skala Perusahaan</label>
@@ -415,11 +417,11 @@
               <option value="PT">PT</option>
               <option value="Perorangan">Perorangan</option>
               </select>
-          </div> 
+          </div>
           <div class="form-group">
               <label for="exampleInputEmail1">Keterangan</label>
-              <input name="keterangan" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Keterangan">            
-            </div>       
+              <input name="keterangan" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Keterangan">
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -429,17 +431,17 @@
     </div>
   </div>
   </div>
-  
+
 
   <script src="{{asset('admin/assets/vendor/jquery/jquery.min.js')}}"></script>
 	<script src="{{asset('admin/assets/vendor/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
 	<script src="{{asset('admin/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('admin/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 	<script src="{{asset('admin/assets/scripts/klorofil-common.js')}}"></script>
-	
-      
 
-      
+
+
+
 
 
 <script type="text/javascript">
@@ -460,7 +462,7 @@
 //     }
 //   });
 
-  
+
   $('#tambah-maklon').click(function () {
     var kloning = $('.step-2').clone();
     $('#step-2').after(kloning);
@@ -474,7 +476,7 @@
 
   function maklon(id) {
 
-  
+
 
     var maklon = $('#maklon').find(':selected').data('maklon');
     var pic = $('#maklon').find(':selected').data('pic');
@@ -485,7 +487,7 @@
     var skalaKategori = $('#maklon').find(':selected').data('skala');
     var berbadanHukum = $('#maklon').find(':selected').data('hukum');
     var id = $('#maklon').find(':selected').data('id');
-    
+
 
     $('#idMaklon').val(id);
     $('#maklonId').val(id);

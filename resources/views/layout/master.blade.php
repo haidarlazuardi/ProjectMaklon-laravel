@@ -31,12 +31,13 @@
 	<link rel="stylesheet" href="{{asset('admin/assets/vendor/linearicons/style.css')}}">
 	<link rel="stylesheet" href="{{asset('admin/assets/vendor/jQuery-Smart-Wizard/styles/smart_wizard.css')}}">
 	<link rel="stylesheet" href="{{asset('admin/assets/vendor/jQuery-Smart-Wizard/styles/demo_style.css')}}">
-	<link rel="stylesheet" href="{{asset('admin/assets/vendor/jQuery-Smart-Wizard/styles/smart_wizard_vertical.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/vendor/jQuery-Smart-Wizard/styles/smart_wizard_vertical.css')}}">
+
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="{{asset('admin/assets/css/main.css')}}">
-	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-	<link rel="stylesheet" href="{{asset('admin/assets/css/demo.css')}}">
-	<!-- GOOGLE FONTS -->
+
+    <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
+    <!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('admin/assets/img/images.png')}}">
@@ -50,8 +51,8 @@
   <link href="{{asset('admin/assets/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
   <!-- Custom Theme Style -->
   {{-- <link href="{{asset('admin/assets/build/css/custom.min.css')}}" rel="stylesheet"> --}}
-	
-	
+
+
 </head>
 
 <body>
@@ -60,7 +61,8 @@
 		<!-- NAVBAR -->
 		@include('layout.include._navbar')
 		<!-- END NAVBAR -->
-		<!-- LEFT SIEBAR -->
+        <!-- LEFT SIEBAR -->
+        <br><br><br><br>
       @include('layout.include._sidebar')
 		<!-- END LEFT SIDEBAR -->
 		<!-- MAIN -->
@@ -81,13 +83,19 @@
 	<script src="{{asset('admin/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('admin/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 	<script src="{{asset('admin/assets/scripts/klorofil-common.js')}}"></script>
-	
-	
-	
-	
-	
-	
-	
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+
+
+
+    <script>
+            $(document).ready( function () {
+              $('#datatable').DataTable();
+            });
+        </script>
+
+
+
+
 </body>
 
 </html>

@@ -30,8 +30,8 @@
 											<li>Departemen<span>{{$profile->role}}</span></li>
 											<li>Website <span><a href="https://www.nutrifood.co.id">www.nutrifood.co.id</a></span></li>
 										</ul>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"  id="simpan">Ubah kata sandi ?</button>
 									</div>
-									<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"  id="simpan">Ubah kata sandi ?</button>        
 									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
@@ -42,21 +42,21 @@
 													</button>
 												</div>
 												<div class="modal-body">
-											  
+
 												<form method="POST" action="/ganti/password" onsubmit="return cekStok()">
 												{{csrf_field()}}
 												<input type="hidden" name="id_user" value="{{Auth::user()->id}}" class="form-control">
-													 
+
 													<label for="password_lama"> Password </label>
 														  <input type="password" id="password_lama" name="password_lama" class="form-control" required>
-													
-													<label for="password"> New Password </label> 
+
+													<label for="password"> New Password </label>
 														  <input type="password" id="password" name="password" class="form-control" required>
-													
-													
+
+
 													<label for="password_confirm"> Confirm Password </label>
 														  <input type="password" id="password_confirm" name="password_confirmation" class="form-control" required>
-														 
+
 												</div>
 												<div class="modal-footer">
 														<button class=" mt-2 btn btn-primary xs">Submit</button>
@@ -72,7 +72,7 @@
 							<!-- END LEFT COLUMN -->
 							<!-- RIGHT COLUMN -->
 							<div class="profile-right">
-								
+
 								<!-- TABBED CONTENT -->
 								<div class="custom-tabs-line tabs-line-bottom left-aligned">
 									<ul class="nav" role="tablist">
@@ -101,7 +101,7 @@
 										</ul>
 										<div class="margin-top-30 text-center"><a href="#" class="btn btn-default">See all activity</a></div>
 									</div>
-									
+
 								</div>
 								<!-- END TABBED CONTENT -->
 							</div>

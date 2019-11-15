@@ -14,7 +14,7 @@
                                     {{csrf_field()}}
                                     {{-- <div class="form-group">
                                         <label for="exampleOptionProject">Nama Project</label>
-                                        <select name="project_id" class="form-control" id="exampleOptionProject">   
+                                        <select name="project_id" class="form-control" id="exampleOptionProject">
                                           @foreach($data_project as $project)
                                               <option value="{{$project->id}}">{{$project->nama_project}}</option>
                                             @endforeach
@@ -22,27 +22,45 @@
                                     </div>   --}}
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nama Maklon</label>
-                                        <input name="nama_maklon" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Maklon">            
+                                        <input name="nama_maklon" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Maklon">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nama PIC</label>
-                                        <input name="nama_pic" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama PIC">            
+                                        <input name="nama_pic" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama PIC">
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Status Maklon</label>
+                                        <select name="status" class="form-control" id="exampleFormControlSelect1">
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                        <option value="new">New</option>
+                                        </select>
+                                    </div>
+
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Alamat</label>
-                                      <input name="alamat" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat">            
+                                      <input name="alamat" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat">
                                     </div>
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Contact</label>
-                                      <input name="kontak"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contact">            
+                                      <input name="kontak"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contact">
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputEmail1">Email</label>
-                                    <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">            
+                                    <input name="email"  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Fasilitas Produksi</label>
-                                  <input name="fasilitas_produksi"  type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Fasilitas Produksi">            
+                                  <input name="fasilitas_produksi"  type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Fasilitas Produksi">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Kategori</label>
+                                    <select name="kategori" class="form-control" id="exampleFormControlSelect1">
+                                    <option value="makanan">makanan</option>
+                                    <option value="minuman">minuman</option>
+                                    <option value="makan&minuman">makanan & minuman</option>
+                                    </select>
                                 </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Pilih Skala Perusahaan</label>
@@ -58,11 +76,20 @@
                                         <option value="PT">PT</option>
                                         <option value="Perorangan">Perorangan</option>
                                         </select>
-                                    </div> 
+                                    </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Keterangan</label>
-                                        <input name="keterangan" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Keterangan">            
-                                      </div>       
+                                        <label for="exampleInputEmail1">website</label>
+                                        <input name="website" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Keterangan">
+                                      </div>
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Product/Brand exist </label>
+                                    <input name="product_exist" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Keterangan">
+                                  </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Product form</label>
+                                        <input name="keterangan" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Keterangan">
+                                      </div>
                                   </div>
                                   <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Submit</button>

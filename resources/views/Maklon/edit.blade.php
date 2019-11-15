@@ -14,23 +14,41 @@
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama Perusahaan</label>
-                            <input name="nama_maklon" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Maklon" value="{{$maklon->nama_maklon}}">            
+                            <input name="nama_maklon" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Maklon" value="{{$maklon->nama_maklon}}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama PIC</label>
-                            <input name="nama_pic" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Dokumen Legalitas" value="{{$maklon->nama_pic}}">            
+                            <input name="nama_pic" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Dokumen Legalitas" value="{{$maklon->nama_pic}}">
+                        </div>
+
+
+                        <div class="form-group">
+                                <label for="exampleFormControlSelect1">Kategori</label>
+                                <select name="kategori" class="form-control" id="exampleFormControlSelect1">
+                                <option value="makanan" @if($maklon->kategori == 'makanan') selected @endif>makanan</option>
+                                <option value="minuman"@if($maklon->kategori == 'minuman') selected @endif>minuman</option>
+                                <option value="makan&minuman" @if($maklon->kategori == 'makanan&aminuman') selected @endif>makanan & minuman</option>
+                                </select>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Status Maklon</label>
+                            <select name="status" class="form-control" id="exampleFormControlSelect1">
+                            <option value="active" @if($maklon->status == 'active') selected @endif >Active</option>
+                            <option value="inactive"  @if($maklon->status == 'inactive') selected @endif >Inactive</option>
+                            <option value="new"  @if($maklon->status == 'new') selected @endif >New</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Alamat</label>
                             <textarea name="alamat" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$maklon->alamat}}</textarea>
-                        </div> 
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Kontak</label>
-                            <input name="kontak" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Dokumen Legalitas" value="{{$maklon->kontak}}">            
+                            <input name="kontak" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Dokumen Legalitas" value="{{$maklon->kontak}}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Fasilitas Produksi</label>
-                            <input name="fasilitas_produksi" type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Fasilitas Produksi" value="{{$maklon->fasilitas_produksi}}">            
+                            <input name="fasilitas_produksi" type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Fasilitas Produksi" value="{{$maklon->fasilitas_produksi}}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Skala Perusahaan</label>
@@ -47,13 +65,22 @@
                                 <option value="Perorangan" @if($maklon->berbadan_hukum == 'Perorangan') selected @endif >Perorangan</option>
                                 </select>
                             </div>
-                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">website</label>
+                            <textarea name="website" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$maklon->website}}</textarea>
+                              </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Product exist </label>
+                            <textarea name="product_exist" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$maklon->product_exist}}</textarea>
+                          </div>
+
+                          <div class="form-group">
                             <label for="exampleFormControlTextarea1">Keterangan</label>
                             <textarea name="keterangan" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$maklon->keterangan}}</textarea>
-                        </div>        
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
-                        
+
                         </form>
                         </div>
                 </div>
