@@ -126,7 +126,7 @@
                                     <td>{{$t->status}}</td>
                                     <td>
 
-                                        @if (in_array(auth()->user()->role,['RND']))
+                                        @if (in_array(auth()->user()->role,['RND','Admin']))
                                         @if($t->status == 'good')
                                         <label class="switch">
                                             <input type="checkbox" checked="true">
@@ -147,7 +147,7 @@
                                 <tfoot>
                                     <tr>
                                         <td class="text-right" colspan="6">
-                                            <button class="btn btn-success">Final</button>
+                                        <button class="btn btn-success" onclick="window.location.href='/finaltrial/{{$trials->id}}'">Final</button>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -218,7 +218,7 @@
                         </select>
                     </div>
 
-                    @if (in_array(auth()->user()->role,['RND']))
+                    @if (in_array(auth()->user()->role,['RND','Admin']))
                     <button type="submit" class="btn btn-primary" style="float:right; display:block;">Submit
                     </button>
                     @else

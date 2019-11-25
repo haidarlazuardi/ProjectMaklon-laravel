@@ -20,7 +20,7 @@ class CreateFoodSafetyTable extends Migration
             $table->string('file');
             $table->string('kategori');
             $table->string('status');
-
+            $table->timestamp('food_approve')->nullable();
 
             $table->timestamps();
         });

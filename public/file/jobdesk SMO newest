@@ -1,0 +1,21 @@
+dashboard 
+
+-penyelesaian waktu per activity
+-pilihan maklon sesuai maklon yang pernah diisi per project nya
+
+PKP on progress
+-tambah maklon redirect ke halaman releted
+-bug maklon_id saat memilih maklon
+
+step wizard 
+1.-notifikasi email 
+  -get data saat update 
+
+2.file penawaran replace ,seharusnya file beruntut history 
+
+3.modal lihat review bug 
+  -update dokumen get data bug
+  -review bug
+   -tombol final legalitas
+
+

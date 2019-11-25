@@ -246,20 +246,25 @@
                                     <tbody>
                                         @foreach ($maklon_project as $m)
                                         <tr>
-                                            <td>{{ $m->mamaklon->nama_maklon}}
+                                            @if ($maklon_project)
+
+                                            <td>{{$m->mamaklon->nama_maklon}}
+                                            @else
+                                            <td></td>
+                                            @endif
                                                 <br>
                                             </td>
                                           <td></td>
                                             <td>
-                                                <a href="/dashboard/{{$m->project->id}}/{{$m->id}}/detail">
+                                                <a href="/dashboard/{{$m->project->id}}/{{$m->maklon_id}}/detail">
                                                     <button class="btn btn-primary">
                                                         <i class="lnr lnr-rocket">
                                                         </i>
                                                     </button>
                                                 </a>
                                             </td>
-                                            @endforeach
                                         </tr>
+                                        @endforeach
                                         <br>
 
                                     </tbody>

@@ -57,40 +57,129 @@
                                     <th>Aktifitas</th>
                                     <th>Departemen</th>
                                     <th>Status</th>
-                                    <th>Penyelesaian</th>
+                                    <th>Realisasi
+                                    </th>
                                     <th>LT</th>
                                     <th>Aksi</th>
                                 </thead>
                                 <tbody>
 
                                         <tr>
+                                    @foreach ($maklons as $m)
 
                                             <th>Pencarian Maklon</th>
                                             <td>PRO</td>
+                                            @if ($maklon_project)
+
                                             @if($maklon_project->status_maklon == 2)
                                             <td>done</td>
                                             @else
                                             <td>on progress</td>
                                             @endif
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                           <a href="/project/{{ $project }}/{{ $maklon_sementara}}/releted" type="button" class="btn btn-info"><i class="lnr lnr-rocket"></i></a>
-                                           </td>
+                                            @php
+                                            $datetime1 = new DateTime($m->project->created_at);
 
+                                            $datetime2 = new DateTime($maklon_project->created_at);
 
-                                        </tr>
+                                            $interval = $datetime1->diff($datetime2);
+                                            $woweekends = 0;
+                                            for($i=0; $i<=$interval->d; $i++){
+                                                $datetime1->modify('+1 day');
+                                                $weekday = $datetime1->format('w');
 
-                                        <tr>
+                                                if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                    $woweekends++;
+                                                }
 
-                                                <th>Approval margin</th>
-                                                <td>GP</td>
-                                                @if($maklon_project->status_harga == 2)
-                                            <td>done</td>
+                                            }
+                                            @endphp
+
                                             @else
                                             <td>on progress</td>
+
+
+                                            @php
+                                            $datetime1 = new DateTime();
+
+                                            $datetime2 = new DateTime();
+
+                                            $interval = $datetime1->diff($datetime2);
+                                            $woweekends = 0;
+                                            for($i=0; $i<=$interval->d; $i++){
+                                                $datetime1->modify('+1 day');
+                                                $weekday = $datetime1->format('w');
+
+                                                if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                    $woweekends++;
+                                                }
+
+                                            }
+                                            @endphp
                                             @endif
-                                                <td></td>
+
+                                        <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}</td>
+                                        <td></td>
+                                            <td>
+                                                <a href="/project/{{ $project }}/{{ $maklon_sementara}}/releted" type="button" class="btn btn-info"><i class="lnr lnr-rocket"></i></a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                            <tr>
+                                                @if ($maklon_project)
+                                                <th>Approval Penawaran</th>
+                                                <td>GP</td>
+                                                @if ($maklon_project)
+
+                                                @if($maklon_project->status_harga == 2)
+                                                <td>done</td>
+                                                @else
+                                                <td>on progress</td>
+                                                @endif
+
+                                                @else
+                                                <td>on progress</td>
+
+                                                @endif
+                                                @php
+
+                                                $datetime3 = new DateTime($maklon_project->penawaran_upload);
+                                                $datetime4 = new DateTime($maklon_project->penawaran_approve);
+                                                $interval = $datetime3->diff($datetime4);
+                                                $woweekends = 0;
+                                                for($i=0; $i<=$interval->d; $i++){
+                                                $datetime1->modify('+1 day');
+                                                $weekday = $datetime3->format('w');
+
+                                                if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                    $woweekends++;
+                                                }
+
+                                                }
+                                                @endphp
+
+                                                @else
+                                                <th>Approval margin</th>
+                                                <td>GP</td>
+                                                <td>on progress</td>
+                                                @php
+                                                $datetime3 = new DateTime();
+                                                $datetime4 = new DateTime();
+                                                $interval = $datetime3->diff($datetime4);
+                                                $woweekends = 0;
+                                                for($i=0; $i<=$interval->d; $i++){
+                                                $datetime1->modify('+1 day');
+                                                $weekday = $datetime3->format('w');
+
+                                                if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                    $woweekends++;
+                                                }
+
+                                                }
+                                                @endphp
+
+                                                @endif
+
+                                                <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}</td>
                                                 <td></td>
                                                 <td>
                                                 <a href="/project/{{ $project }}/{{ $maklon_sementara}}/penawaran" type="button" class="btn btn-info"><i class="lnr lnr-rocket"></i></a>
@@ -100,14 +189,54 @@
                                             </tr>
 
                                         <tr>
-
                                                 <th>Dokumen Legalitas</th>
                                                 <td>LEGAL</td>
+                                                @if ($maklon_project)
                                                 @if($maklon_project->status_dokumen == 2)
                                                 <td>done</td>
                                                 @else
                                                 <td>on progress</td>
                                                 @endif
+                                                @else
+
+                                                <td>on progress</td>
+                                                @endif
+                                            @if($mou)
+                                               @php
+                                                $datetime5 = new DateTime($m->project->created_at);
+                                                $datetime6 = new DateTime($mou->file_upload);
+                                                //
+                                                $interval = $datetime5->diff($datetime6);
+                                                $woweekends = 0;
+                                                for($i=0; $i<=$interval->d; $i++){
+                                                    $datetime1->modify('+1 day');
+                                                    $weekday = $datetime5->format('w');
+
+                                                    if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                        $woweekends++;
+                                                    }
+
+                                                }
+                                                @endphp
+                                            @else
+                                            @php
+                                            $datetime5 = new DateTime();
+                                            $datetime6 = new DateTime();
+                                            // $mou->file_upload
+                                            $interval = $datetime5->diff($datetime6);
+                                            $woweekends = 0;
+                                            for($i=0; $i<=$interval->d; $i++){
+                                                $datetime1->modify('+1 day');
+                                                $weekday = $datetime5->format('w');
+
+                                                if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                    $woweekends++;
+                                                }
+
+                                            }
+                                            @endphp
+                                            @endif
+
                                                 <td></td>
                                                 <td></td>
                                                 <td><a href="/project/{{ $project }}/{{ $maklon_sementara}}/legalitas" type="button" class="btn btn-info"><i class="lnr lnr-rocket"></i></a></td>
@@ -115,57 +244,165 @@
                                             </tr>
 
                                             <tr>
-
                                                     <th>MOU</th>
                                                     <td>LEGAL</td>
+                                                    @if ($maklon_project)
                                                     @if($maklon_project->status_mou == 2)
                                                     <td>done</td>
                                                     @else
                                                     <td>on progress</td>
                                                     @endif
-                                                    <td></td>
+                                                    @else
+                                                        <td>on Progress</td>
+                                                    @endif
+                                               @if($mou)
+                                                     @php
+                                                    $datetime7 = new DateTime($m->project->created_at);
+                                                    $datetime8 = new DateTime($mou->file_upload);
+                                                    //
+                                                    $interval = $datetime7->diff($datetime8);
+                                                    $woweekends = 0;
+                                                    for($i=0; $i<=$interval->d; $i++){
+                                                        $datetime7->modify('+1 day');
+                                                        $weekday = $datetime8->format('w');
+
+                                                        if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                            $woweekends++;
+                                                        }
+                                                    }
+                                                    @endphp
+                                                    @else
+                                                                        @php
+                                                    $datetime9 = new DateTime();
+                                                    $datetime10 = new DateTime();
+                                                    //
+                                                    $interval = $datetime9->diff($datetime10);
+                                                    $woweekends = 0;
+                                                    for($i=0; $i<=$interval->d; $i++){
+                                                        $datetime9->modify('+1 day');
+                                                        $weekday = $datetime10->format('w');
+
+                                                        if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                            $woweekends++;
+                                                        }
+                                                    }
+                                                    @endphp
+                                                @endif
+                                                    <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}</td>
                                                     <td></td>
                                                     <td><a href="/project/{{ $project }}/{{ $maklon_sementara}}/mou" type="button" class="btn btn-info"><i class="lnr lnr-rocket"></i></a></td>
-
                                                 </tr>
-
                                                 <tr>
-
                                                     <th>APPROVAL PROJECT</th>
                                                     <td>PV</td>
+                                                    @if ($maklon_project)
                                                     @if($maklon_project->status_approval == 2)
                                                     <td>done</td>
                                                     @else
                                                     <td>on progress</td>
                                                     @endif
-                                                    <td></td>
+                                                    @else
+
+                                                    <td>on progress</td>
+                                                    @endif
+                                                   @php
+                                                    $datetime11 = new DateTime($m->penawaran_upload);
+                                                    $datetime12 = new DateTime($m->project_approve);
+                                                    $interval = $datetime11->diff($datetime12);
+                                                    $woweekends = 0;
+                                                    for($i=0; $i<=$interval->d; $i++){
+                                                        $datetime11->modify('+1 day');
+                                                        $weekday = $datetime12->format('w');
+
+                                                        if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                            $woweekends++;
+                                                        }
+                                                    }
+                                                    @endphp
+                                                    <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}</td>
+
                                                     <td></td>
                                                     <td>
                                                     <a href="/project/{{ $project }}/{{ $maklon_sementara}}/approval" type="button" class="btn btn-info"><i class="lnr lnr-rocket"></i></a></td>
                                                     </tr>
-
                                                     <tr>
-
                                                             <th>TRIAL</th>
                                                             <td>RnD</td>
+                                                            @if ($maklon_project)
                                                             @if($maklon_project->status_trial == 2)
                                                             <td>done</td>
                                                             @else
                                                             <td>on progress</td>
                                                             @endif
-                                                            <td></td>
+                                                            @else
+                                                            <td>on progress</td>
+
+                                                            @endif
+                                                          @php
+                                                            $datetime13 = new DateTime();
+                                                            $datetime14 = new DateTime();
+                                                            $interval = $datetime13->diff($datetime14);
+                                                            $woweekends = 0;
+                                                            for($i=0; $i<=$interval->d; $i++){
+                                                                $datetime13->modify('+1 day');
+                                                                $weekday = $datetime14->format('w');
+
+                                                             if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                               $woweekends++;
+                                                        }
+                                                    }
+                                                    @endphp
+                                                    <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}</td>
+
                                                             <td></td>
                                                             <td><a href="/project/{{ $project }}/{{ $maklon_sementara}}/trial" type="button" class="btn btn-info"><i class="lnr lnr-rocket"></i></a></td>
                                                         </tr>
 
                                                     <tr>
-
                                                             <th>AUDIT FOOD SAFETY</th>
                                                             <td>QA</td>
+                                                            @if ($maklon_project)
+
                                                             @if($maklon_project->status_food == 2)
                                                             <td>done</td>
                                                             @else
                                                             <td>on progress</td>
+                                                            @endif
+
+                                                            @else
+                                                            <td>on Progress</td>
+                                                            @endif
+                                                            @if ($foodsafe)
+
+                                                            @php
+                                                            $datetime14 = new DateTime($foodsafe->created_at);
+                                                            $datetime15 = new DateTime($foodsafe->food_approve);
+                                                            $interval = $datetime14->diff($datetime15);
+                                                            $woweekends = 0;
+                                                            for($i=0; $i<=$interval->d; $i++){
+                                                                $datetime14->modify('+1 day');
+                                                                $weekday = $datetime15->format('w');
+
+                                                             if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                               $woweekends++;
+                                                        }
+                                                    }
+                                                    @endphp
+                                                            @else
+                                                            @php
+                                                            $datetime14 = new DateTime();
+                                                            $datetime15 = new DateTime();
+                                                            $interval = $datetime14->diff($datetime15);
+                                                            $woweekends = 0;
+                                                            for($i=0; $i<=$interval->d; $i++){
+                                                                $datetime14->modify('+1 day');
+                                                                $weekday = $datetime15->format('w');
+
+                                                             if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for Saturday
+                                                               $woweekends++;
+                                                        }
+                                                    }
+                                                    @endphp
                                                             @endif
                                                             <td></td>
                                                             <td></td>
@@ -173,11 +410,14 @@
                                                         </tr>
 
                                                 <tr>
-
                                                         <th>KONTRAK KERJASAMA</th>
                                                         <td>PRO</td>
+                                                        @if ($maklon_project)
                                                         @if($maklon_project->status_approval == 2)
                                                         <td>done</td>
+                                                        @else
+                                                        <td>on progress</td>
+                                                        @endif
                                                         @else
                                                         <td>on progress</td>
                                                         @endif
@@ -185,11 +425,8 @@
                                                         <td></td>
                                                         <td><a href="/project/{{ $project }}/{{ $maklon_sementara}}/kontrak" type="button" class="btn btn-info"><i class="lnr lnr-rocket"></i></a></td>
                                                     </tr>
-
                                     </tbody>
                                 </table>
-
-
                         </div>
                         </div>
                     </div>

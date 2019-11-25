@@ -124,7 +124,7 @@
         </div>
 
         @else
-        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button class="btn btn-primary" disabled data-toggle="modal" data-target="#exampleModal">
             <i class="lnr lnr-plus-circle"></i></button>
 
         <table class="table table-striped jambo_table bulk_action">
@@ -239,17 +239,17 @@
                                           <select name="konsep_kerjasama" id="konsep_kerjasama"
                                               class="form-control col-md-7 col-xs-12">
                                               <option>-- Konsep Kerjasama --</option>
-                                              <option value="Produksi">Produksi</option>
+                                              <opti on value="Produksi">Produksi</option>
                                               <option value="Jual Beli">Jual Beli</option>
-                                          </select>
-                                      </div>
-                                      {{-- <input id="middle-name"  type="text" name="middle-name"> --}}
-                                      {{-- <textarea class="form-control col-md-7 col-xs-12" name="konsep_kerjasama" cols="30" rows="4"></textarea> --}}
-                                  </div>
-                                  <div class="form-group row">
-                                      <label class="control-label col-md-4">Alur Proses</label>
-                                      <div class="col-md-4">
-                                          <textarea class="form-control" name="alur_proses" cols="30"
+                                            </select>
+                                        </div>
+                                        {{-- <input id="middle-name"  type="text" name="middle-name"> --}}
+                                        {{-- <textarea class="form-control col-md-7 col-xs-12" name="konsep_kerjasama" cols="30" rows="4"></textarea> --}}
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-4">Alur Proses</label>
+                                        <div class="col-md-4">
+                                            <textarea class="form-control" name="alur_proses" cols="30"
                                               rows="4"></textarea>
                                       </div>
                                   </div>
@@ -337,6 +337,7 @@
                                         </div>
 
                                     </div>
+
                                     <div class="form-group row">
                                         <label class="control-label col-md-4">Alur Proses</label>
                                         <div class="col-md-4">

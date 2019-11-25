@@ -94,7 +94,7 @@
                             </button>
                         </a>
 
-                        @if(in_array(auth()->user()->role,['QA']))
+                        @if(in_array(auth()->user()->role,['QA','Admin']))
              <a href="/approvefoodsafe/{{ $maklon_project->id }}">
                 <input type="hidden" name="id" value="{{$maklon_project->id}}">
                     <button type="button" class="btn btn-primary">Approve foodsafety

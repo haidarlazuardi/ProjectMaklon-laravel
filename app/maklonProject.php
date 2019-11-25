@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class maklonProject extends Model
 {
     protected $table = 'maklon_project';
-    protected $fillable = ['id','user_id','maklon_id','project_id','cpm','penawaran','konsep_kerjasama','alur_proses','ppt_penjajakan','status_maklon','status_harga','status_dokumen','status_mou','status_trial','status_food','status_approval','status_margin','status_kontrak','keterangan'];
+    protected $fillable = ['id','user_id','maklon_id','project_id','cpm','penawaran','konsep_kerjasama','alur_proses','ppt_penjajakan','status_maklon','status_harga','status_dokumen','status_mou','status_trial','status_food','status_approval','status_margin','status_kontrak','penawaran_upload','penawaran_approve','keterangan','project_approve','trial_approve'];
 
     public function maklon()
     {

@@ -73,14 +73,14 @@
 </a>
 
 
-            <div class="float-right">
+            <div style="float:right">
                 @if($maklon_project_id->isEmpty())
                 <a href="#">
                     <input type="hidden" name="id" value="#">
                         <button type="button" disabled class="btn btn-primary .float-right ">PROJECT DONE
                     </button>
                     @else
-                @if(in_array(auth()->user()->role,['PRO']))
+                @if(in_array(auth()->user()->role,['PRO','Admin']))
              <a href="/projectdone/{{ $maklon_project->id }}">
                 <input type="hidden" name="id" value="{{$maklon_project->id}}">
                     <button type="button"  class="btn btn-primary float-right">PROJECT DONE

@@ -68,7 +68,7 @@
                             <table class="table table-striped jambo_table bulk_action" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th>NAMA PROJEK
+                                        <th>NAMA PROJECT
                                         </th>
                                         <th>KATEGORI
                                         </th>
@@ -83,6 +83,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {{-- @foreach ($maklon_project as $mp) --}}
+
                                     @foreach($data_project as $project)
                                     <tr>
                                         <input type="hidden" name="project_id" value="{{$project->id}}">
@@ -92,32 +94,35 @@
                                         <td>{{ $project->category }}
                                         </td>
                                         {{-- @foreach ($data_brand as $brand)
-                      @if ($project->brand_id == $brand->id) --}}
-                                        <td>{{$project->brand}}
-                                        </td>
-                                        {{-- @endif
-                      @endforeach --}}
-                                        <td>{{$project->priority_project}}
-                                        </td>
-                                        <td>
-                                            <?php $i=0 ?>
-                                            @foreach ($maklons as $item)
-                                            @if($item->project_id == $project->id)
+                                            @if ($project->brand_id == $brand->id) --}}
+                                            <td>{{$project->brand}}
+                                                </td>
+                                                {{-- @endif
+                                                    @endforeach --}}
+                                                    <td>{{$project->priority_project}}
+                                                        </td>
+                                                        <td>
+                                                            <?php $i=0 ?>
+                                                            @foreach ($maklons as $item)
+                                                            @if($item->project_id == $project->id)
                                             <?php $i++ ?>
                                             @endif
-                                            @endforeach
+                                    @endforeach
+
+
+                                            {{-- @endforeach --}}
 
 
                                             <button class="btn btn-primary " data-toggle="modal"
-                                                data-target="#exampleModalCenter{{$project->id}}">
-                                                <i class="lnr lnr-apartment">
-                                                </i>
-                                            </button>
-                        </div>
-<td>
-                @if(in_array(auth()->user()->role,['Admin','PRO','RND']))
+                                            data-target="#exampleModalCenter{{$project->id}}">
+                                            <i class="lnr lnr-apartment">
+                                            </i>
+                                        </button>
+                                    </div>
+                                    <td>
+                                        @if(in_array(auth()->user()->role,['Admin','PRO','RND']))
 
-                       <div class="modal fade" id="exampleModalCenter{{$project->id}}" tabindex="-1" role="dialog"
+                                        <div class="modal fade" id="exampleModalCenter{{$project->id}}" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -127,10 +132,12 @@
                 </div>
 
                 <div class="modal-body">
-                    <a href="/maklon/create" class="btn btn-primary float-right"
-                        style="float:right; margin-bottom:5px display:block;">
-                        Tambah maklon
-                    </a>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#maklon">
+                    Tambah Maklon
+                    </button>
+                    <br>
+
                     <table class="table table-striped jambo_table bulk_action" id="datatable">
                         {{-- <thead> --}}
                         {{--
@@ -148,26 +155,30 @@
 
                             @if ($project->category == "Makanan")
                             @foreach($data_maklon_pkp->where('kategori', 'makanan') as $m)
+                            @foreach ($maklon_project as $item)
+
+
                             <tr>
                                 <td>{{ $m->nama_maklon }} <br></td>
                                 <td>{{$m->status}}</td>
                                 <td>
-                                    <a href="/project/{{ $project->id }}/{{ $m->id }}/releted">
+                                    <a href="/project/{{ $project->id }}/{{ $item->maklon_id }}/releted">
                                         <button class="btn btn-primary">
                                             <i class="lnr lnr-rocket">
                                             </i>
                                         </button>
                                     </a>
                                 </td>
+                                @endforeach
+                                @endforeach
                             </tr>
-                            @endforeach
                             @elseif ($project->category == "Minuman" )
                             @foreach($data_maklon_pkp->where('kategori', 'minuman') as $m)
                             <tr>
                                 <td>{{ $m->nama_maklon }} <br></td>
                                 <td>{{$m->status}}</td>
                                 <td>
-                                    <a href="/project/{{ $project->id }}/{{ $m->id }}/releted">
+                                    <a href="/project/{{ $data_project->id }}/{{ $m->id }}/releted">
                                         <button class="btn btn-primary">
                                             <i class="lnr lnr-rocket">
                                             </i>
@@ -239,6 +250,35 @@
 </div>
 </div>
 </form>
+<!-- Central Modal Small -->
+<div class="modal fade" id="maklon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-lg" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Create Data Maklon</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          @if ($data_project->isEmpty())
+
+          <div class="modal-content">
+         @include('Project.wizard.createmaklon')
+          @else
+          <div class="modal-content">
+                @include('Project.wizard.createmaklon', ['project_id' => $project->id])
+          @endif
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script type="text/javascript">
     function showMaklon(id) {

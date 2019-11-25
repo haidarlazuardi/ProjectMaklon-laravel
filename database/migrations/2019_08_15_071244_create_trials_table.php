@@ -23,6 +23,7 @@ class CreateTrialsTable extends Migration
             $table->string('kategori');
             $table->string('summary');
             $table->enum('status',['good','not good']);
+            $table->timestamp('trial_approve')->nullable();
             $table->timestamps();
         });
     }

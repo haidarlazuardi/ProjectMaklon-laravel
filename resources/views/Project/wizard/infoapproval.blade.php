@@ -26,7 +26,7 @@
 
             @else
 
-            @if(in_array(auth()->user()->role,['PV']))
+            @if(in_array(auth()->user()->role,['PV','Admin']))
             <a href="/approveproject/{{ $maklon_project->id }}">
 
                 <input type="hidden" name="id" value="{{$maklon_project->id}}">
@@ -34,7 +34,6 @@
                 <button type="submit" class="btn btn-primary"
                     style="margin-left:auto; margin-right:auto; display:block;">APPROVE</button>
             </a>
-            maklon_project
             <a href="#">
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
                     style="margin-left:auto; margin-right:auto; display:block; ">NOT APPROVE PROJECT
