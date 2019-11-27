@@ -40,6 +40,7 @@ class DashboardController extends Controller
 
     // ]) ->get();;
             $project = $id;
+            $pkp = DB::table('project')->first();
             $maklon_sementara = $maklon_id;
             $maklons = \App\maklonProject::get()->take(1);
             $trial = DB::table('trials')->where([
@@ -73,6 +74,6 @@ class DashboardController extends Controller
 
 
 
-            return view('dashboards.detail',compact('trial','legalitas','maklon_project','project','kontrak_kerjasama','foodsafe','mou','maklons','maklon_sementara','departemen'));
+            return view('dashboards.detail',compact('trial','pkp','legalitas','maklon_project','project','kontrak_kerjasama','foodsafe','mou','maklons','maklon_sementara','departemen'));
     }
 }

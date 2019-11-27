@@ -20,7 +20,7 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav" id="myDIV">
-						<li><a href="/dashboard" class="{{ Request::is('dashboard*') ? 'active' : '' }}"><i class="lnr lnr-home"></i> <span>Dashboard</span><span class="label label-success pull-right">Coming Soon</span></a></li>
+						<li><a href="/dashboard" class="{{ Request::is('dashboard*') ? 'active' : '' }}"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
 
 						@if(in_array(auth()->user()->role,['Admin','PV','RND','Legal','GP','NR','PRO','QA']))
 						<li>
@@ -62,16 +62,29 @@
 
 
 						@if(in_array(auth()->user()->role,['Admin','PV','RND','Legal','GP','NR','PRO','QA']))
-						<li><a href="/maklon" class="{{ Request::is('maklon*') ? 'active' : '' }}"><i class ="lnr lnr-cart"></i> <span>Data Maklon</span></a></li>
-						@endif
+						<li>
+
+                            <a href="#subpagesd" data-toggle="collapse" class="{{ Request::is('maklon*') ? 'active' : '' }}"><i class="lnr lnr-cart"></i> <span>Data Maklon</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                            <div id="subpagesd" class="collapse ">
+
+                                <ul class="nav">
+                                                <li><a href="/maklon" class="collapsed">Maklon</a></li>
+                                        </ul>
+                                        <ul class="nav">
+                                            <li><a href="/maklon/trash " class="collapsed">Trash Maklon </a></li>
+                                        </ul>
+                                </div>
+
+                            </li>
+                                @endif
 
 
 
                 @if(in_array(auth()->user()->role,['Admin','PRO']))
-                    <li>
+                <li>
                     <a href="/user" class="{{ Request::is('user*') ? 'active' : '' }}"><i class="lnr lnr-user"></i> <span>User</span></a>
                 </li>
-            @endif
+                @endif
 
 
 		</nav>

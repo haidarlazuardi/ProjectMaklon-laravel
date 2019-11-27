@@ -105,7 +105,7 @@
     <div class="main-content">
         <div class="container-fluid">
             <div class="row">
-                {{-- <div class="col-md-4">
+                <div class="col-md-4">
                   <div class="panel">
                       <div class="panel-heading">
                           <a role="button" class="btn btn-info" >
@@ -140,7 +140,7 @@
                 <a role="button" class="btn btn-danger">
                     <span class="lnr lnr-hourglass">
                     </span>
-                    <h3>55
+                    <h3>
                     </h3>
                 </a>
             </div>
@@ -149,7 +149,7 @@
         </div>
     </div>
 </div>
-</div> --}}
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -167,9 +167,9 @@
                             </th>
                             <th>Maklon
                             </th>
-                            <th>
+                            {{-- <th>
                                 Freeze
-                            </th>
+                            </th> --}}
                             <th>Drop</th>
                         </thead>
                         <tbody>
@@ -195,14 +195,14 @@
                                         </a>
                                     </a>
                                 </td>
-                                <td>
+                                {{-- <td>
 
                                     <label class="switch">
                                         <input type="checkbox"
                                             onchange="window.location.href='/holdproject/{{ $p->id }}'">
                                         <span class="slider round"></span>
                                     </label>
-                                </td>
+                                </td> --}}
                                 <td>
 
                                     <label class="switch">

@@ -50,10 +50,8 @@
                 <div class="col-md-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>DATA MAKLON</h2>
+                            <h2>DATA MAKLON TERHAPUS</h2>
                             <div class="panel_toolbox">
-                                <a href="maklon/create"><button type="button" class="btn btn-primary">Tambah
-                                        Maklon</button></a>
 
                             </div>
 
@@ -66,7 +64,7 @@
                                 <table class="table table-striped jambo_table bulk_action" id="datatable">
                                     <thead>
                                         <tr>
-                                            <th># </th>
+                                            <th>#</th>
                                             <th>NAMA MAKLON </th>
                                             <th>KATEGORI PRODUK</th>
                                             <th>PRODUCT EXISTING</th>
@@ -77,23 +75,26 @@
                                     </thead>
                                     <tbody>
                                         @php $no = 1; @endphp
-                                        @foreach($data_maklon as $maklon)
+                                        @foreach($maklon as $m)
                                         <tr>
                                             <td>{{ $no++}}</td>
-                                            <td>{{$maklon->nama_maklon}}</td>
-                                            <td>{{$maklon->kategori}}</td>
-                                            <td>{{$maklon->product_exist}}</td>
-                                            <td>{{$maklon->keterangan}}</td>
+                                            <td>{{$m->nama_maklon}}</td>
+                                            <td>{{$m->kategori}}</td>
+                                            <td>{{$m->product_exist}}</td>
+                                            <td>{{$m->keterangan}}</td>
 
                                             <td>
-                                                <a class="tooltips" href="/maklon/{{$maklon->id}}/lihat">
+                                                <a class="tooltips" href="/maklon/{{$m->id}}/lihat">
                                                     <button class="btn btn-round btn-primary">
                                                         <i class="lnr lnr-eye"></i></button>
                                                         <span>Detail</span></a>
-                                                <a class="tooltips" href="/maklon/{{$maklon->id}}/edit"><button
-                                                        class="btn btn-warning"><i
-                                                            class="lnr lnr-pencil"></i></button><span>Edit</span></a>
-                                                <a class="tooltips" href="/maklon/{{$maklon->id}}/delete"
+
+                                                    <a class="tooltips" href="/maklon/trash/{{$m->id}}/kembalikan">
+                                                    <button class="btn btn-round btn-success">
+                                                        <i class="lnr lnr-undo"></i></button>
+                                                        <span>Kembalikan Maklon</span></a>
+
+                                                <a class="tooltips" href="/maklon/{{$m->id}}/delete"
                                                     onclick="return confirm('Yakin Mau di Hapus')"><button
                                                         class="btn btn-danger"><i class="lnr lnr-trash"></i></button><span>Hapus </span></a>
                                             </td>
@@ -110,22 +111,4 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Data Project</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-            </div>
-        </div>
-    </div>
-
-
     @stop

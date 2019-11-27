@@ -87,7 +87,7 @@
                                                 $weekday = $datetime1->format('w');
 
                                                 if($weekday !== "0" && $weekday !== "5"){ // 0 for Sunday and 6 for
-                                                Saturday
+
                                                 $woweekends++;
                                                 }
 
@@ -110,7 +110,7 @@
                                                     $weekday = $datetime1->format('w');
 
                                                     if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                    Saturday
+
                                                     $woweekends++;
                                                     }
 
@@ -120,7 +120,17 @@
 
                                                     <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}
                                                     </td>
-                                                    <td></td>
+                                                    <td>
+                                                        @if($pkp->priority_project == "Normal" || $interval->d <= 30 )
+                                                        Under LT
+                                                        @elseif($pkp->priority_project == "Normal" || $interval->d >= 30 )
+                                                        over LT
+                                                        @elseif($pkp->priority_project == "Urgen" || $interval->d <= 15 )
+                                                        Under LT
+                                                        @elseif($pkp->priority_project == "Urgen" || $interval->d >= 30 )
+                                                        Over LT
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <a href="/project/{{ $project }}/{{ $maklon_sementara}}/releted"
                                                             type="button" class="btn btn-info"><i
@@ -155,7 +165,7 @@
                                                 $weekday = $datetime3->format('w');
 
                                                 if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                Saturday
+
                                                 $woweekends++;
                                                 }
 
@@ -176,7 +186,7 @@
                                                     $weekday = $datetime3->format('w');
 
                                                     if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                    Saturday
+
                                                     $woweekends++;
                                                     }
 
@@ -222,7 +232,7 @@
                                                 $weekday = $datetime8->format('w');
 
                                                 if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                Saturday
+
                                                 $woweekends++;
                                                 }
                                                 }
@@ -238,7 +248,7 @@
                                                     $weekday = $datetime8->format('w');
 
                                                     if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                    Saturday
+
                                                     $woweekends++;
                                                     }
                                                     }
@@ -278,7 +288,7 @@
                                                 $weekday = $datetime8->format('w');
 
                                                 if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                Saturday
+
                                                 $woweekends++;
                                                 }
                                                 }
@@ -295,7 +305,7 @@
                                                     $weekday = $datetime10->format('w');
 
                                                     if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                    Saturday
+
                                                     $woweekends++;
                                                     }
                                                     }
@@ -331,7 +341,7 @@
                                                 $weekday = $datetime12->format('w');
 
                                                 if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                Saturday
+
                                                 $woweekends++;
                                                 }
                                                 }
@@ -371,7 +381,7 @@
                                                 $weekday = $datetime14->format('w');
 
                                                 if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                Saturday
+
                                                 $woweekends++;
                                                 }
                                                 }
@@ -413,7 +423,7 @@
                                                 $weekday = $datetime12->format('w');
 
                                                 if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                Saturday
+
                                                 $woweekends++;
                                                 }
                                                 }
@@ -455,13 +465,13 @@
                                                 $weekday = $datetime12->format('w');
 
                                                 if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-                                                Saturday
+
                                                 $woweekends++;
                                                 }
                                                 }
                                                 @endphp
                                                 @else
-                                                hhd
+
                                                 @endif
 
                                                 <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}

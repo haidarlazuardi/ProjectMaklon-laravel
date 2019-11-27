@@ -41,9 +41,10 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::post('/maklon/{id}/update', 'MaklonController@update');
     Route::get('/maklon/{id}/lihat', 'MaklonController@lihat');
     Route::get('/maklon/{id}/profile','MaklonController@profile');
-    Route::get('/brand', 'BrandController@index');
-    Route::post('/brand/create', 'BrandController@create');
-    Route::get('/brand/{id}/delete', 'BrandController@delete');
+    Route::get('/maklon/trash', 'MaklonController@trash');
+    Route::get('maklon/trash/{id}/kembalikan','MaklonController@restore');
+
+
     //pages
 
 });

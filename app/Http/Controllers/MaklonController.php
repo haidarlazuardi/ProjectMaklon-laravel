@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use \App\Maklon ;
 
 class MaklonController extends Controller
 {
@@ -91,5 +92,19 @@ class MaklonController extends Controller
         $project = \App\Project::all();
         return view('Pages.dokumen',['maklon' => $maklon,'project'=>$project]);
     }
+
+    public function trash()
+{
+    	// mengampil data guru yang sudah dihapus
+    	$maklon = Maklon::onlyTrashed()->get();
+    	return view('Maklon.trash', ['maklon' => $maklon]);
+}
+
+public function restore($id)
+{
+    	$maklon = Maklon::onlyTrashed()->where('id',$id);
+    	$maklon->restore();
+    	return redirect('maklon/trash');
+}
 
 }
