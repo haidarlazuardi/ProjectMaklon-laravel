@@ -68,15 +68,9 @@
                                         <tr>
                                             <th># </th>
                                             <th>NAMA MAKLON </th>
-                                            <th>NAMA PIC </th>
-                                            <th>STATUS</th>
-                                            {{-- <th>ALAMAT</th>
-                                  <th>TELEPHONE</th>
-                                  <th>EMAIL</th>
-                                  <th>FASILITAS PRODUK</th> --}}
                                             <th>KATEGORI PRODUK</th>
-                                            <th>SKALA PERUSAHAAN </th>
-                                            <th>BERBADAN HUKUM </th>
+                                            <th>PRODUCT EXISTING</th>
+                                            <th>VARIAN PRODUCT</th>
                                             <th>AKSI</th>
                                         </tr>
 
@@ -87,15 +81,10 @@
                                         <tr>
                                             <td>{{ $no++}}</td>
                                             <td>{{$maklon->nama_maklon}}</td>
-                                            <td>{{$maklon->nama_pic}}</td>
-                                            <td>{{$maklon->status}}</td>
-                                            {{-- <td>{{$maklon->alamat}}</td>
-                                            <td>{{$maklon->kontak}}</td>
-                                            {{-- <td>{{$maklon->email}}</td> --}}
                                             <td>{{$maklon->kategori}}</td>
-                                            <td>{{$maklon->skala_kategori}}</td>
+                                            <td>{{$maklon->product_exist}}</td>
+                                            <td>{{$maklon->keterangan}}</td>
 
-                                            <td>{{$maklon->berbadan_hukum}}</td>
                                             <td>
                                                 <a class="tooltips" href="/maklon/{{$maklon->id}}/lihat"><button
                                                         class="btn btn-round btn-primary"><i

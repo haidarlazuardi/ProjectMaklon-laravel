@@ -129,7 +129,7 @@
                                         <div class="form-group">
                                             <div class="col-md-3 col-sm-4 col-xs-12 col-offset-2"></div>
                                             <div class="col-md-4 col-sm-4 col-xs-12 col-offset-2">
-                                                <input name="file" type="file" id="first-name" required="required" class="form-control">
+                                                <input name="penawaran" type="file" id="first-name" required="required" class="form-control">
                                             </div>
                                             <div class="col-md-5 col-sm-6 col-xs-12">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -155,6 +155,8 @@
                             <thead>
                                 <tr>
                                     <th class="column-title" style="display: table-cell;">Penawaran</th>
+                                    <th class="column-title" style="display: table-cell;">Approve</th>
+
                                     {{-- <th class="column-title" style="display: table-cell;">Not Approve /
                                                             Approve</th> --}}
                                 </tr>
@@ -162,10 +164,26 @@
                             <tbody>
                                 @foreach($maklon_project_id as $fi)
                                 <tr>
+
                                     <td><a class="btn btn-success" href="{{URL::asset('../images/'.@$fi->penawaran)}}"
                                             download="{{$fi->penawaran}}"><i class="fa fa-download"></i>
                                             {{$fi->penawaran}}</a></td>
                                     <td>
+
+                                        @if( in_array(auth()->user()->role,['PV','Admin']))
+                                            <label class="switch">
+                                                    <input type="checkbox" @if ($fi->status_harga == 2) checked="true" @else @endif  onchange="window.location.href='/approvepenawaran/{{ $fi->id }}'">
+                                                    <span class="slider round"></span>
+                                                </label></td>
+                                                @else
+
+                                            <label class="switch">
+                                                    <input type="checkbox" disabled onchange="window.location.href='/approvepenawaran/{{ $fi->id }}'">
+                                                    <span class="slider round"></span>
+                                                </label></td>
+                                                @endif
+
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -209,15 +227,6 @@ method="post" enctype="multipart/form-data">
         <a href="/project/{{$project}}/{{$maklon_sementara}}/legalitas" style="float:right;" class="btn btn-success">
             Next
         </a>
-
-        <a href="/approvepenawaran/{{ $maklon_project->id }}">
-
-            <input type="hidden" name="id" value="{{$maklon_project->id}}">
-
-            <button type="submit" class="btn btn-primary"
-                style="margin-left:auto; margin-right:auto; display:block;">APPROVE Penawaran</button>
-        </a>
-
     </div>
     @endif
 

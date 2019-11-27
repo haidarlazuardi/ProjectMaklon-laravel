@@ -67,6 +67,7 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::get('/undropproject/{id}', 'StatusController@undropProject');
     Route::get('/approveproject/{id}', 'StatusController@approveProject');
     Route::get('/approvepenawaran/{id}', 'StatusController@approvePenawaran');
+    Route::get('/approvelegal/{id}', 'StatusController@approveLegal');
     Route::get('/approvefoodsafe/{id}', 'StatusController@approveFoodsafe');
     Route::get('/projectdone/{id}', 'StatusController@projectDone');
     Route::post('/notapprove/{id}', 'StatusController@notapproveProject');
@@ -80,6 +81,7 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::get('/project/{$id}','ProjectController@idpkp');
     // Route::get('/project/detail/{$id}','ProjectController@detailpkp');
     Route::get('/project/{id}/detail', 'ProjectController@view');
+    Route::post('/createmaklon','ProjectController@create_maklon');
     Route::get('/project/create','ProjectController@create');
     Route::post('/project/store','ProjectController@store');
     Route::get('/project/{id}/info', 'ProjectController@info');
@@ -89,7 +91,7 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::get('/project/{id}/{maklon_id}/releted', 'ProjectController@info_releted');
     Route::get('/project/{id}/{maklon_id}/penawaran', 'ProjectController@info_penawaran');
     Route::get('/project/{id}/{maklon_id}/legalitas', 'LegalitasController@info_legalitas');
-    Route::get('/project/info/{id}/review','ProjectController@review');
+    Route::post('/project/info/review/{id}','LegalitasController@review');
     // Route::get('/project/{id}/{maklon_id}/legalitas', function($id, $maklon_id) {
     //     return "wayoo ";
     // });
@@ -122,6 +124,7 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::get('/project/{id}/delete', 'ProjectController@delete');
     Route::get('/project/{id}/edit', 'ProjectController@edit');
     Route::post ('/project/penjajakan/{id}/update', 'ProjectController@updateReleted');
+    Route::post ('/project/{id}/updatelegal', 'LegalitasController@update_legal');
     Route::post('/project/{id}/update', 'ProjectController@update');
     Route::get('/project/{id}/{id2}/deleteMaklon', 'ProjectController@deleteMaklon');
 
@@ -134,7 +137,7 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
 
     Route::get('/Akta/{id}', 'LegalitasController@StatusAktaPendirian');
     Route::get('/penyesuaian/{id}', 'LegalitasController@StatusPenyesuaian');
-    Route::get('/Susunan/{id}', 'LegalitasController@StatusSusunanDireksi');
+    Route::get('/susunan/{id}', 'LegalitasController@StatusSusunanDireksi');
     Route::get('/wewenang/{id}', 'LegalitasController@StatusWewenangDireksi');
     Route::get('/siup/{id}', 'LegalitasController@StatusSiup');
     Route::get('/nib/{id}', 'LegalitasController@StatusNib');
@@ -149,6 +152,8 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::get('/iumk/{id}', 'LegalitasController@StatusIumk');
     Route::get('/amdal/{id}', 'LegalitasController@StatusAmdal');
     Route::get('/sppk/{id}', 'LegalitasController@StatusSppk');
+    Route::get('/finaltrial/{id}', 'StatusController@finalTrial');
+
 
 
 

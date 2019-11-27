@@ -224,31 +224,140 @@ body label {
             <button type="submit" class="btn btn-primary">Submit</button>
         </div> --}}
 
-
-                <button type="button" class="btn btn-info" data-toggle="modal" style="margin-left:"
+                <button type="button" class="btn btn-info" data-toggle="modal" style="float-left:"
                     data-target="#exampleModalCenter">
                     Lihat review
                 </button>
+                <div style="float:right">
+                    @if (in_array(auth()->user()->role,['LEGAL','Admin']))
+                    <button type="button" class="btn btn-warning " data-toggle="modal" style="margin-left:"
+                        data-target="#exampleModalCenter1">
+                        Review
+                    </button>
+                </div>
+                <div class="modal fade float-right" id="exampleModalCenter1" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-top" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+
+                            </div>
+                            @if ($legalitas->isEmpty())
+
+                            @else
+                            <form class="form-horizontal form-label-left"
+                                action="/project/info/review/{{$legalitasz->id}}" method="post"
+                                enctype="multipart/form-data">
+                                {{csrf_field()}}
+
+                                @endif
+
+                                <div class="modal-body">
+                                    <div class="form-group row">
+                                        <label class="control-label">Review</label>
+                                        <textarea class="form-control" name="review" cols="30" rows="4"></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" @if (in_array(auth()->user()->role,['LEGAL','Admin']))
+                                    @else disabled @endif class="btn btn-primary">submit</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
 
 
-                @if($legalitas->isEmpty())
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModallegal"><i
-                        class="lnr lnr-plus-circle"></i> Input Dokumen</button>
-                    @else
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModaltrue"><i
-                    class="lnr lnr-plus-circle"></i> Update Dokumen</button>
-                    @endif
-                        @if (in_array(auth()->user()->role,['LEGAL']))
-                <button type="button" class="btn btn-warning " style="float:right;" data-toggle="modal"
-                    data-target="#exampleModal"><i class="lnr lnr-pencil"></i> Review</button>
+        </form>
+
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @if ($legalitas->isEmpty())
+
                         @else
-                <button type="button" disabled class="btn btn-warning " style="float:right;" data-toggle="modal"
-                        data-target="#exampleModal"><i class="lnr lnr-pencil"></i> Review</button>
-                    @endif
-                    <div class="container">
-                            <div class="x_panel">
-                                <div class="x_content">
-                                    <div class="panel">
+                        <p>{{$legalitasz->review}}</p>
+
+                        @endif
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @if($legalitas->isEmpty())
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModallegal"><i
+                class="lnr lnr-plus-circle"></i> Input Dokumen</button>
+        <div class="modal fade" id="exampleModallegal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Data Project</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="form-horizontal form-label-left"
+                            action="/project/info/legalitas/{{ $project }}/{{ $maklon_sementara }}" method="post"
+                            enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <div id="step-3">
+                                {{-- @foreach(session()->get('maklon') as $m) --}}
+                                @include('Project.wizard.insertlegal')
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        @else
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModaltrue"><i
+                class="lnr lnr-plus-circle"></i> Update Dokumen</button>
+        @endif
+    </div>
+
+</div>
+
+
+@endif
+
+
+
+<div class="container">
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="panel">
+
                 <table class="table table-striped jambo_table bulk_action">
                     @foreach ($legalitas as $l)
 
@@ -256,642 +365,82 @@ body label {
 
                     <tbody>
                         @if($m->mamaklon->berbadan_hukum == 'PT')
-                        <tr>
-
-                            <th>Akta pendirian</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->akta_pendirian)}}"
-                                    download="{{$l->akta_pendirian}}"><i class="fa fa-download"></i>
-                                    {{$l->akta_pendirian}} </a></td>
-                            <td>APPROVE<br>
-                                @if($legalitasz->status_akta_pendirian == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/Akta/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/Akta/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Akta penyesuaian</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->akta_penyesuaian)}}"
-                                    download="{{$l->akta_penyesuaian}}"><i class="fa fa-download"></i>
-                                    {{$l->akta_penyesuaian}} </a></td>
-                            <td>
-                                APPROVE<br>
-                                @if($legalitasz->status_akta_penyesuaian == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/penyesuaian/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/penyesuaian/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Akta Susunan Direksi</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->akta_susunan_direksi)}}"
-                                    download="{{$l->akta_susunan_direksi}}"><i class="fa fa-download"></i>
-                                    {{$l->akta_susunan_direksi}} </a></td>
-                            <td>
-                                APPROVE<br>
-                                @if($legalitasz->status_susunan_direksi == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/susunan/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/susunan/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>Akta Wewenang Direksi</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->akta_wewenang_direksi)}}"
-                                    download="{{$l->akta_wewenang_direksi}}"><i class="fa fa-download"></i>
-                                    {{$l->akta_wewenang_direksi}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_wewenang_direksi== 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/wewenang/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/wewenang/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>SIUP</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->siup)}}"
-                                    download="{{$l->siup}}"><i class="fa fa-download"></i>
-                                    {{$l->siup}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_siup == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/siup/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/siup/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>NIB</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->nib)}}"
-                                    download="{{$l->nib}}"><i class="fa fa-download"></i>
-                                    {{$l->nib}} </a></td>
-                            <td>
-                                    APPROVE<br>
-                                    @if($legalitasz->status_nib == 2)
-                                    <label class="switch">
-                                        <input type="checkbox" checked = "true" onchange="window.location.href='/nib/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                    @else
-                                    <label class="switch">
-                                            <input type="checkbox" onchange="window.location.href='/nib/{{ $legalitasz->id }}'">
-                                            <span class="slider round"></span>
-                                        </label></td>
-                                    @endif
-                                </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>TDP</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->tdp)}}"
-                                    download="{{$l->tdp}}"><i class="fa fa-download"></i>
-                                    {{$l->tdp}} </a></td>
-                            <td>APPROVE<br>
-                                @if($legalitasz->status_tdp == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/tdp/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/tdp/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th>IUI</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->iui)}}"
-                                    download="{{$l->iui}}"><i class="fa fa-download"></i>
-                                    {{$l->iui}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_iui == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/iui/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/iui/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>NPWP</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->npwp)}}"
-                                    download="{{$l->npwp}}"><i class="fa fa-download"></i>
-                                    {{$l->npwp}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_npwp == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/npwp/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/npwp/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>IZIN DOMISILI</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->izin_domisili)}}"
-                                    download="{{$l->izin_domisili}}"><i class="fa fa-download"></i>
-                                    {{$l->izin_domisili}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_izin_domisili == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/izindomisili/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/izindomisili/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>IZIN LINGKUNGAN</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->izin_lingkungan)}}"
-                                    download="{{$l->izin_lingkungan}}"><i class="fa fa-download"></i>
-                                    {{$l->izin_lingkungan}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_izin_lingkungan == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/izinlingkungan/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/izinlingkungan/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
+                        @include('Project.wizard.formlegalPT')
+                        @if($legalitasz->status_akta_pendirian == 2
+                        && $legalitasz->status_akta_penyesuaian == 2 && $legalitasz->status_susunan_direksi
+                        == 2 && $legalitasz->status_wewenang_direksi == 2
+                        && $legalitasz->status_siup == 2 && $legalitasz->status_nib == 2 &&
+                        $legalitasz->status_tdp== 2
+                        && $legalitasz->status_iui == 2 && $legalitasz->status_npwp == 2 &&
+                        $legalitasz->status_izin_domisili == 2
+                        && $legalitasz->status_izin_lingkungan == 2 && $legalitasz->status_psb == 2 &&
+                        $legalitasz->status_sppl_amdal_ukl_upl == 2
+                        && $legalitasz->status_sppk == 2)
 
 
-                        <tr>
-                            <th>PSB</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->psb)}}"
-                                    download="{{$l->psb}}"><i class="fa fa-download"></i>
-                                    {{$l->psb}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_psb == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/psb/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/psb/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
+                        @if (in_array(auth()->user()->role,['LEGAL','Admin']))
+                        <a onclick="window.location.href='/approvelegal/{{$m->id}}'" class="btn btn-success">
+                            ALL DOCUMENTS ARE VERIFIED</a>
+                        @elseif(in_array(auth()->user()->role,['LEGAL','Admin']))
+                        <a onclick="window.location.href='/approvelegal/{{$m->id}}'" disabled class="btn btn-success">
+                            Not Complete</a>
+                        @else
 
-                        <tr>
-                            <th>SPPl/AMDAL/UKL/UPL</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->sppl_amdal_ukl_upl)}}"
-                                    download="{{$l->sppl_amdal_ukl_upl}}"><i class="fa fa-download"></i>
-                                    {{$l->sppl_amdal_ukl_upl}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_sppl_amdal_ukl_upl == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/amdal/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/amdal/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>SPPKP</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->sppk)}}"
-                                    download="{{$l->sppk}}"><i class="fa fa-download"></i>
-                                    {{$l->sppk}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_sppk == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/sppk/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/sppk/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-
-                        </tr>
-
-
+                        @endif
+                        @endif
                         @elseif($m->mamaklon->berbadan_hukum == 'Perorangan')
+                        @include('Project.wizard.formlegalIndividu')
 
+                        @if($legalitasz->status_npwp == 2 && $legalitasz->status_ktp == 2
+                        && $legalitasz->status_iumk == 2 && $legalitasz->status_sppl_amdal_ukl_upl == 2
+                        && $legalitasz->status_psb == 2)
 
-                        <tr>
-                            <th>KTP</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->ktp)}}"
-                                    download="{{$l->ktp}}"><i class="fa fa-download"></i>
-                                    {{$l->ktp}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_ktp == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/ktp/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/ktp/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
+                        <a onclick="window.location.href='/approvelegal/{{$m->id}}'" class="btn btn-success">
+                            ALL DOCUMENTS ARE VERIFIED</a>
+                        @else
+                        <a onclick="window.location.href='/approvelegal/{{$m->id}}'" disabled class="btn btn-success">
+                            Not Complete</a>
 
-                        </tr>
-                        <tr>
-                            <th>NPWP</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->npwp)}}"
-                                    download="{{$l->npwp}}"><i class="fa fa-download"></i>
-                                    {{$l->npwp}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_npwp == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/npwp/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/npwp/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
+                        @endif
 
-                        </tr>
-
-                        <tr>
-                            <th>IUMK</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->iumk)}}"
-                                    download="{{$l->iumk}}"><i class="fa fa-download"></i>
-                                    {{$l->iumk}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_iumk == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/iumk/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/iumk/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-
-                        </tr>
-
-                        <tr>
-                            <th>SPPL/AMDAL/UKL/UPL</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->sppl_amdal_ukl_upl)}}"
-                                    download="{{$l->sppl_amdal_ukl_upl}}"><i class="fa fa-download"></i>
-                                    {{$l->sppl_amdal_ukl_upl}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_sppl_amdal_ukl_upl == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/amdal/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/amdal/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-
-                        </tr>
-                        <tr>
-                            <th>PSB</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->psb)}}"
-                                    download="{{$l->psb}}"><i class="fa fa-download"></i>
-                                    {{$l->psb}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_psb == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/psb/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                  <input type="checkbox" onchange="window.location.href='/psb/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-
-                        </tr>
                         @elseif($m->mamaklon->berbadan_hukum == 'CV')
 
-                        <tr>
+                        @include('Project.wizard.formlegalCv')
+                        @if($legalitasz->status_akta_pendirian == 2
+                        && $legalitasz->status_susunan_direksi == 2 && $legalitasz->status_siup == 2 &&
+                        $legalitasz->status_nib == 2 && $legalitasz->status_tdp== 2
+                        && $legalitasz->status_iui == 2 && $legalitasz->status_npwp == 2 &&
+                        $legalitasz->status_izin_domisili == 2
+                        && $legalitasz->status_izin_lingkungan == 2 && $legalitasz->status_psb == 2 )
 
-                            <th>Akta pendirian</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->akta_pendirian)}}"
-                                    download="{{$l->akta_pendirian}}"><i class="fa fa-download"></i>
-                                    {{$l->akta_pendirian}} </a></td>
-                            <td>APPROVE<br>
-                                @if($legalitasz->status_akta_pendirian == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/Akta/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/Akta/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            <td>
-                            </td>
-                        </tr>
+                        <a onclick="window.location.href='/approvelegal/{{$m->id}}'" class="btn btn-success">
+                            ALL DOCUMENTS ARE VERIFIED</a>
+                        @else
+                        <a onclick="window.location.href='/approvelegal/{{$m->id}}'" disabled class="btn btn-success">
+                            Not Complete</a>
 
-                        <tr>
-
-                            <th>Akta Pengurus</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->akta_pengurus)}}"
-                                    download="{{$l->akta_pengurus}}"><i class="fa fa-download"></i>
-                                    {{$l->akta_pengurus}} </a></td>
-                            <td>APPROVE<br>
-                                @if($legalitasz->status_akta_pengurus == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/pengurus/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/pengurus/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            <td>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <th>SIUP</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->siup)}}"
-                                    download="{{$l->siup}}"><i class="fa fa-download"></i>
-                                    {{$l->siup}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_siup == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/siup/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/siup/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>NIB</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->nib)}}"
-                                    download="{{$l->nib}}"><i class="fa fa-download"></i>
-                                    {{$l->nib}} </a></td>
-                            <td>
-                                    APPROVE<br>
-                                    @if($legalitasz->status_nib == 2)
-                                    <label class="switch">
-                                        <input type="checkbox" checked = "true" onchange="window.location.href='/nib/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                    @else
-                                    <label class="switch">
-                                            <input type="checkbox" onchange="window.location.href='/nib/{{ $legalitasz->id }}'">
-                                            <span class="slider round"></span>
-                                        </label></td>
-                                    @endif
-                                </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>TDP</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->tdp)}}"
-                                    download="{{$l->tdp}}"><i class="fa fa-download"></i>
-                                    {{$l->tdp}} </a></td>
-                            <td>APPROVE<br>
-                                @if($legalitasz->status_tdp == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/tdp/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/tdp/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th>IUI</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->iui)}}"
-                                    download="{{$l->iui}}"><i class="fa fa-download"></i>
-                                    {{$l->iui}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_iui == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/iui/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/iui/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>NPWP</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->npwp)}}"
-                                    download="{{$l->npwp}}"><i class="fa fa-download"></i>
-                                    {{$l->npwp}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_npwp == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/npwp/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/npwp/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>IZIN DOMISILI</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->izin_domisili)}}"
-                                    download="{{$l->izin_domisili}}"><i class="fa fa-download"></i>
-                                    {{$l->izin_domisili}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_izin_domisili == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/izindomisili/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/izindomisili/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <th>IZIN LINGKUNGAN</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->izin_lingkungan)}}"
-                                    download="{{$l->izin_lingkungan}}"><i class="fa fa-download"></i>
-                                    {{$l->izin_lingkungan}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_izin_lingkungan == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/izinlingkungan/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/izinlingkungan/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
-
-
-                        <tr>
-                            <th>PSB</th>
-                            <td><a class="btn btn-success" href="{{URL::asset('../file/'.@$l->psb)}}"
-                                    download="{{$l->psb}}"><i class="fa fa-download"></i>
-                                    {{$l->psb}} </a></td>
-                            <td> APPROVE<br>
-                                @if($legalitasz->status_psb == 2)
-                                <label class="switch">
-                                    <input type="checkbox" checked = "true" onchange="window.location.href='/psb/{{ $legalitasz->id }}'">
-                                    <span class="slider round"></span>
-                                </label></td>
-                                @else
-                                <label class="switch">
-                                        <input type="checkbox" onchange="window.location.href='/psb/{{ $legalitasz->id }}'">
-                                        <span class="slider round"></span>
-                                    </label></td>
-                                @endif
-                            </td>
-                            <td></td>
-                        </tr>
-
-                @endif
+                        @endif
+                        @endif
                     </tbody>
-                @endforeach
+                    @endforeach
                     @endforeach
                 </table>
 
+
+            </div>
+
+            </table>
         </div>
-        </form>
-              </table>
+
+        <a href="/project/{{$project}}/{{$maklon_sementara}}/penawaran">
+            <button type="button" class="btn btn-primary">Previous</button>
+        </a>
+        <a href="/project/{{$project}}/{{$maklon_sementara}}/mou">
+            <button type="button" class="btn btn-success">Next</button>
+        </a>
+
+
     </div>
-</div>
 </div>
 </div>
 
@@ -901,153 +450,47 @@ body label {
 <br>
 
 <br>
-<div class="ln_solid"></div>
-<div class="form-group">
-    <div class="col-md-3 col-sm-4 col-xs-12 col-md-offset-9">
 
+<div class="modal fade" id="myModaltrue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-        <a href="/project/{{$project}}/{{$maklon_sementara}}/penawaran">
-            <button type="button" class="btn btn-primary">Previous</button>
-        </a>
-        <a href="/project/{{$project}}/{{$maklon_sementara}}/mou">
-            <button type="button" class="btn btn-success">Next</button>
-        </a>
-    </div>
+    <!-- Change class .modal-sm to change the size of the modal -->
+    <div class="modal-dialog " role="document">
 
-</div>
-</div>
-</div>
-
-<!-- Central Modal Small -->
-<div class="modal fade" id="myModaltrue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-
-  <!-- Change class .modal-sm to change the size of the modal -->
-  <div class="modal-dialog " role="document">
-
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title w-100" id="myModalLabel">Modal Update</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        @include('Project.wizard.updatelegal')
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Central Modal Small -->
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-
-    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <h4 class="modal-title w-100" id="myModalLabel">Modal Update</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-
             </div>
             <div class="modal-body">
-                <form class="form-horizontal form-label-left" action="/project/info//review" method="post"
-                    enctype="multipart/form-data">
-                    {{csrf_field()}}
+                @if ($legalitas->isEmpty())
 
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" name="review" id="message-text"></textarea>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Send message</button>
+                @else
+
+                <form class="form-horizontal form-label-left" action="/project/{{$legalitasz->id}}/updatelegal"
+                    method="post" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    @endif
+                    @if($legalitas->isEmpty())
+                    There no data availlable
+                    @else
+                    @include('Project.wizard.updatelegal')
+                    @endif
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-@if(in_array(auth()->user()->role,['Admin','PRO','PV']))
-
-
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-@endif
-{{-- modal INSERT LEGALITAS --}}
-<div class="modal fade" id="exampleModallegal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Data Project</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <form class="form-horizontal form-label-left"
-                    action="/project/info/legalitas/{{ $project }}/{{ $maklon_sementara }}" method="post"
-                    enctype="multipart/form-data">
-                    {{csrf_field()}}
-                    <div id="step-3">
-                        {{-- @foreach(session()->get('maklon') as $m) --}}
-                        @include('Project.wizard.insertlegal')
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-
-                </form>
-
-
-            </div>
-        </div>
-
-    </div>
-    </div>
-
-    {{-- end modal insertlegalt --}}
 
 
 
 
 </div>
-</div>
 
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 
 {{-- End Content --}}
 

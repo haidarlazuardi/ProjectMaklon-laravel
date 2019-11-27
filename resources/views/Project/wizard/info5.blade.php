@@ -41,7 +41,7 @@
                           <div class="row">
                           <div class="col-md-2 col-sm-4 col-xs-12 col-offset-2"></div>
                           <div class="col-md-8 col-sm-6 col-xs-12">
-                              <div class="x_panel
+                              <div class="x_panel">
                                 <div class="x_title">
                                   <h2>MOU</h2>
                                   <ul class="nav navbar-right panel_toolbox">
@@ -77,7 +77,7 @@
                                             <td>{{$m->created_at}}/</td>
                                             <td>    </td>
                                             <td>
-                                                <a href="/project/mou/delete" onclick="return confirm('Apakah anda yakin Delete ?')"><button class="btn btn-danger">Delete</button></a>
+                                            <a href="/project/moudelete/'" onclick="return confirm('Apakah anda yakin Delete ?')"><button class="btn btn-danger">Delete</button></a>
                                             </td>
                                         @endforeach
                                     </tr>

@@ -62,11 +62,13 @@ class StatusController extends Controller
     public function approveProject($id)
     {
         $maklon_project = maklonProject::findOrFail($id);
+
+        $timeStamp = date("Y-m-d H:i:s");
         $maklon_project->update([
             'status_approval' => 2,
+             'project_approve'=>$timeStamp,
         ]);
 
-        Mail::to(auth::user()->email)->send(new ApproveProject());
         return redirect()->back()->with('Success', 'Notifikasi berhasil dikirim');
 
 
@@ -88,8 +90,12 @@ class StatusController extends Controller
     public function approvePenawaran($id)
     {
         $maklon_project = maklonProject::findOrFail($id);
+        $timeStamp = date("Y-m-d H:i:s");
+
         $maklon_project->update([
             'status_harga' => 2,
+            "penawaran_approve"=> $timeStamp,
+
         ]);
 
 
@@ -102,8 +108,13 @@ class StatusController extends Controller
     public function approveFoodsafe($id)
     {
         $maklon_project = maklonProject::findOrFail($id);
+        $timeStamp = date("Y-m-d H:i:s");
+
         $maklon_project->update([
             'status_food' => 2,
+            'food_approve'=>$timeStamp,
+
+
         ]);
 
 
@@ -123,5 +134,32 @@ class StatusController extends Controller
 
 // dd($maklon_project);
         return redirect()->back()->with('sukses', 'Project telah di Approve');
+
     }
+    public function finalTrial($id)
+    {
+        $maklon_project = maklonProject::findOrFail($id);
+        $maklon_project->update([
+            'status_trial' => 2,
+
+        ]);
+        return redirect()->back()->with('sukses', 'Project telah di Approve');
+
+}
+
+
+public function approveLegal($id)
+{
+    $maklon_project = maklonProject::findOrFail($id);
+    $timeStamp = date("Y-m-d H:i:s");
+
+    $maklon_project->update([
+        'status_dokumen' => 2,
+    ]);
+
+
+
+    return redirect()->back()->with('sukses', 'Project telah di Approve');
+
+}
 }

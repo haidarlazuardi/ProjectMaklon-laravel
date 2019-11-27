@@ -32,6 +32,12 @@ class CreateMaklonProjectTable extends Migration
             $table->integer('status_approval')->nullable();
             $table->integer('status_kontrak')->nullable();
             $table->string('keterangan')->nullable();
+            $table->timestamp('penawaran_upload')->nullable();
+            $table->timestamp('project_approve')->nullable();
+            $table->timestamp('trial_approve')->nullable();
+            $table->timestamp('penawaran_approve')->nullable();
+            $table->timestamp('food_approve')->nullable();
+            $table->timestamp('legal_approve')->nullable();
             $table->timestamps();
         });
     }

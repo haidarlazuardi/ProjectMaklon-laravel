@@ -24,7 +24,6 @@ class MaklonController extends Controller
     public function store(Request $request)
     {
         $maklon = \App\Maklon::create([
-            // 'project_id' => $request->project_id,
             'nama_maklon'=> $request->nama_maklon,
             'nama_pic'=> $request->nama_pic,
             'status'=> $request->status,
@@ -47,28 +46,7 @@ class MaklonController extends Controller
         }
         return redirect('/maklon')->with('sukses', 'Data Berhasil di Input');
     }
-    // public function createInPkp(Request $request)
-    // {
-    //     $maklon = \App\Maklon::create([
-    //         // 'project_id' => $request->project_id,
-    //         'nama_maklon'=> $request->nama_maklon,
-    //         'nama_pic'=> $request->nama_pic,
-    //         'alamat'=> $request->alamat,
-    //         'kontak'=>$request->kontak,
-    //         'email'=>$request->email,
-    //         'fasilitas_produksi'=>$request->fasilitas_produksi,
-    //         'skala_kategori'=>$request->skala_kategori,
-    //         'berbadan_hukum' =>$request->berbadan_hukum,
-    //         'keterangan' => $request->keterangan,
 
-    //     ]);
-    //     if($request->hasFile('fasilitas_produksi')){
-    //         $request->file('fasilitas_produksi')->move('images/',$request->file('fasilitas_produksi')->getClientOriginalName());
-    //         $maklon->fasilitas_produksi = $request->file('fasilitas_produksi')->getClientOriginalName();
-    //         $maklon->save();
-    //     }
-    //     return back()->with('sukses', 'Data Berhasil di Input');
-    // }
 
     public function delete($id)
     {
@@ -113,41 +91,5 @@ class MaklonController extends Controller
         $project = \App\Project::all();
         return view('Pages.dokumen',['maklon' => $maklon,'project'=>$project]);
     }
-
-    // public function dokumen()
-    // {
-    //     $project = DB::table('project')
-    //                 ->join('maklon','project.maklon_id','=','maklon.id')
-    //                 ->select('project.nama_project', 'maklon.dokumen_legalitas', 'maklon.contact')
-    //                 ->get();
-    //     $maklon = DB::table('maklon')->get();
-    //     return view('Pages.dokumen',['project' => $project, 'maklon' => $maklon]);
-    // }
-
-    public function harga()
-    {
-        return view ('Pages.harga');
-    }
-
-    public function trial()
-    {
-        return view('Pages.trial');
-    }
-
-    public function review()
-    {
-        return view('Pages.review');
-    }
-
-    public function halal()
-    {
-        return view('Pages.halal');
-    }
-
-    public function kontak()
-    {
-        return view('Pages.kontak');
-    }
-
 
 }

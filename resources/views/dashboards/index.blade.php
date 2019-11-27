@@ -174,17 +174,17 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($data_project as $p)
-                            @if($p->status_project =='')
+                            @foreach ($maklon_project as $p)
+                            {{-- @if($p->status_project =='') --}}
                             <tr>
                                 {{--
                     <td>{{ $loop->iteration }}
                                 </td> --}}
 
-                                <td><a href="/project/{{$p->id}}/detail">{{ $p->nama_project }}</a>
+                                <td><a href="/project/{{$p->project->id}}/detail">{{ $p->project->nama_project }}</a>
                                     <br>
                                 </td>
-                                <td>{{ $p->priority_project}}
+                                <td>{{ $p->project->priority_project}}
                                 </td>
                                 <td>
                                     <a class="tooltips">
@@ -212,7 +212,7 @@
                                     </label>
                                 </td>
                             </tr>
-                            @endif
+                            {{-- @endif --}}
                             @endforeach
                             <br>
                         </tbody>
@@ -245,13 +245,19 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($maklon_project as $m)
+
                                         <tr>
-                                            <td>{{ $m->mamaklon->nama_maklon}}
+                                            @if ($maklon_project)
+
+                                            <td>{{$m->mamaklon->nama_maklon}}
+                                            @else
+                                            <td></td>
+                                            @endif
                                                 <br>
                                             </td>
                                           <td></td>
                                             <td>
-                                                <a href="/dashboard/{{$m->project->id}}/{{$m->id}}/detail">
+                                                <a href="/dashboard/{{$m->project->id}}/{{$m->maklon_id}}/detail">
                                                     <button class="btn btn-primary">
                                                         <i class="lnr lnr-rocket">
                                                         </i>

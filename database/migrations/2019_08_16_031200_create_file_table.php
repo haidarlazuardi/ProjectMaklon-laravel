@@ -18,10 +18,8 @@ class CreateFileTable extends Migration
             $table->integer('maklon_id');
             $table->integer('project_id');
             $table->string('file');
-            $table->string('cpm')->nullable();
-            $table->string('penawaran')->nullable();
-            $table->string('ppt_penjajakan')->nullable();
             $table->string('jenis_file');
+            $table->timestamp('file_upload')->nullable();
             $table->timestamps();
         });
     }

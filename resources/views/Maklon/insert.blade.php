@@ -87,7 +87,7 @@
                                   </div>
 
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Product form</label>
+                                        <label for="exampleInputEmail1">Varian Product</label>
                                         <input name="keterangan" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Keterangan">
                                       </div>
                                   </div>

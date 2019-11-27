@@ -19,14 +19,11 @@ class DashboardController extends Controller
         $count = Project::count();
         $data_project = DB::table('project')->get();
         $data_maklon_pkp = Maklon::all();
-        // $maklons = DB::table('maklon_project')->get();
-        // maklonProject::all();
         $maklon_project = \App\maklonProject::get();
         $file = DB::table('file')
         ->join('project','file.project_id','=','project.id')->get();
-        // dd($maklon_project);
 
-        return view('dashboards.index',compact('data_project','maklon_project','data_maklon_pkp','file','count'));
+        return view('dashboards.index',compact('data_project','maklon_project','maklons','data_maklon_pkp','file','count'));
     }
 
     public function detail($id,$maklon_id)
@@ -44,12 +41,38 @@ class DashboardController extends Controller
     // ]) ->get();;
             $project = $id;
             $maklon_sementara = $maklon_id;
-            $maklons = maklonProject::all();
-    //    dd($maklons);
-            $maklon_project = DB::table('maklon_project')->where([
+            $maklons = \App\maklonProject::get()->take(1);
+            $trial = DB::table('trials')->where([
                 ['project_id', $id],
                 ['maklon_id', $maklon_id]
             ])->first();
-            return view('dashboards.detail',compact('maklon_project','project','maklons','maklon_sementara','departemen'));
+            $foodsafe =DB::table('food_safety')->where([
+                ['project_id', $id],
+                ['maklon_id', $maklon_id]
+            ])->first();
+            $mou =DB::table('file')->where([
+                ['jenis_file','mou'],
+                ['project_id', $id],
+                ['maklon_id', $maklon_id]
+            ])->first();
+            $kontrak_kerjasama =DB::table('file')->where([
+                ['jenis_file','kontrak_kerjasama'],
+                ['project_id', $id],
+                ['maklon_id', $maklon_id]
+            ])->first();
+
+            $maklon_project = DB::table('maklon_project')->where([
+                ['project_id', $id],
+                ['maklon_id', $maklon_id]
+                ])->first();
+
+            $legalitas = DB::table('legalitas')->where([
+                ['project_id', $id],
+                ['maklon_id', $maklon_id]
+                ])->first();
+
+
+
+            return view('dashboards.detail',compact('trial','legalitas','maklon_project','project','kontrak_kerjasama','foodsafe','mou','maklons','maklon_sementara','departemen'));
     }
 }

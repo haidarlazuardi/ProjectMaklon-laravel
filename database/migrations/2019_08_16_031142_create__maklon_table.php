@@ -28,7 +28,7 @@ class CreateMaklonTable extends Migration
             $table->string('website');
             $table->string('product_exist');
             $table->string('keterangan');
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }
