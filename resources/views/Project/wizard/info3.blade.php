@@ -124,7 +124,11 @@
         </div>
 
         @else
+<<<<<<< HEAD
         <button class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">
+=======
+        <button class="btn btn-primary" disabled data-toggle="modal" data-target="#exampleModal">
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
             <i class="lnr lnr-plus-circle"></i></button>
 
         <table class="table table-striped jambo_table bulk_action">

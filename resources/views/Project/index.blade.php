@@ -155,13 +155,17 @@
 
                             @if ($project->category == "Makanan")
                             @foreach($data_maklon_pkp->where('kategori', 'makanan') as $m)
+<<<<<<< HEAD
+=======
+                            @foreach ($maklon_project as $item)
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
 
 
                             <tr>
                                 <td>{{ $m->nama_maklon }} <br></td>
                                 <td>{{$m->status}}</td>
                                 <td>
-                                    <a href="/project/{{ $project->id }}/{{ $m->id }}/releted">
+                                    <a href="/project/{{ $project->id }}/{{ $item->maklon_id }}/releted">
                                         <button class="btn btn-primary">
                                             <i class="lnr lnr-rocket">
                                             </i>
@@ -169,6 +173,10 @@
                                     </a>
                                 </td>
                                 @endforeach
+<<<<<<< HEAD
+=======
+                                @endforeach
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
                             </tr>
                             @elseif ($project->category == "Minuman" )
                             @foreach($data_maklon_pkp->where('kategori', 'minuman') as $m)
@@ -176,7 +184,7 @@
                                 <td>{{ $m->nama_maklon }} <br></td>
                                 <td>{{$m->status}}</td>
                                 <td>
-                                    <a href="/project/{{ $project->id }}/{{ $m->id }}/releted">
+                                    <a href="/project/{{ $data_project->id }}/{{ $m->id }}/releted">
                                         <button class="btn btn-primary">
                                             <i class="lnr lnr-rocket">
                                             </i>

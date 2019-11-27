@@ -264,8 +264,8 @@
                                                     </button>
                                                 </a>
                                             </td>
-                                            @endforeach
                                         </tr>
+                                        @endforeach
                                         <br>
 
                                     </tbody>

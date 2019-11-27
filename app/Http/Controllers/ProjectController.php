@@ -19,7 +19,7 @@ class ProjectController extends Controller
         $maklon_project = \App\maklonProject::all();
         $data_project = DB::table('project')->get();
         $project_id = DB::table('project')->first();
-        $maklon_id =    DB::table('Maklon')->first();
+        $maklon_id =    DB::table('project')->first();
         $file = DB::table('file')
         ->join('project','file.project_id','=','project.id')->get();
         $data_maklon_pkp = maklon::all();
@@ -347,10 +347,11 @@ class ProjectController extends Controller
             ['maklon_id', $maklon_id]
         ])->get();
 
-        $trials = DB::table('maklon_project')->where([
+        $trials = DB::table('trials')->where([
             ['project_id', $id],
             ['maklon_id', $maklon_id]
         ])->first();
+
         // $maklons = \App\maklonProject::findOrFail($id)->get();
         $maklons = \App\maklonProject::all()->take(1);
         $maklon_project = DB::table('maklon_project')->where([
@@ -684,9 +685,7 @@ class ProjectController extends Controller
                     "jenis_file"=>"mou",
                    "file_upload"=> $timeStamp,
 
-
-                ])
-                ;
+                ]);
                 if($request->hasFile('file')){
                     $request->file('file')->move('file/',$request->file('file')->getClientOriginalName());
                     $mou->file = $request->file('file')->getClientOriginalName();

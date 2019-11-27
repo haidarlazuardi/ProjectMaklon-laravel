@@ -112,7 +112,11 @@ class StatusController extends Controller
 
         $maklon_project->update([
             'status_food' => 2,
+<<<<<<< HEAD
             'food_approve'=>$timeStamp,
+=======
+            'trial_approve'=>$timeStamp,
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
 
 
         ]);
@@ -143,6 +147,13 @@ class StatusController extends Controller
             'status_trial' => 2,
 
         ]);
+<<<<<<< HEAD
+=======
+
+
+
+// dd($maklon_project);
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
         return redirect()->back()->with('sukses', 'Project telah di Approve');
 
 }
@@ -151,7 +162,11 @@ class StatusController extends Controller
 public function approveLegal($id)
 {
     $maklon_project = maklonProject::findOrFail($id);
+<<<<<<< HEAD
     $timeStamp = date("Y-m-d H:i:s");
+=======
+    // $timeStamp = date("Y-m-d H:i:s");
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
 
     $maklon_project->update([
         'status_dokumen' => 2,

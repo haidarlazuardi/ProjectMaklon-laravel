@@ -19,8 +19,11 @@ class LegalitasController extends Controller
         $project = DB::table('maklon_project')->latest()->first();
 
 
+<<<<<<< HEAD
         $timeStamp = date("Y-m-d H:i:s");
 
+=======
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
         if($request->hasFile('akta_pendirian')){
             $legal = $request->file('akta_pendirian')->getClientOriginalName();
         }
@@ -47,7 +50,10 @@ class LegalitasController extends Controller
             "iumk"=> $request->iumk,
             "sppl_amdal_ukl_upl"=> $request->sppl_amdal_ukl_upl,
             "sppk"=> $request->sppk,
+<<<<<<< HEAD
             "legalitas_upload"=>$timeStamp,
+=======
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
 
 
         ]);
@@ -61,7 +67,10 @@ class LegalitasController extends Controller
             $request->file('akta_wewenang_direksi')->move('file/',$request->file('akta_wewenang_direksi')->getClientOriginalName());
             $legalitas->akta_wewenang_direksi = $request->file('akta_wewenang_direksi')->getClientOriginalName();
             $legalitas->save();}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
         if($request->hasFile('akta_penyesuaian')){
         $request->file('akta_penyesuaian')->move('file/',$request->file('akta_penyesuaian')->getClientOriginalName());
         $legalitas->akta_penyesuaian = $request->file('akta_penyesuaian')->getClientOriginalName();
@@ -182,6 +191,7 @@ class LegalitasController extends Controller
                     $aktaWewenangDireksi = $request->akta_wewenang_direksi;
                 }
 
+<<<<<<< HEAD
 
                 if($legalitasz->akta_pengurus){
                     $aktaPengurus = $legalitasz->akta_pengurus;
@@ -189,6 +199,8 @@ class LegalitasController extends Controller
                     $aktaPengurus = $request->akta_pengurus;
                 }
 
+=======
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
                 if($legalitasz->siup){
                     $siup = $legalitasz->siup;
                 }else{
@@ -253,12 +265,15 @@ class LegalitasController extends Controller
                     $iumk = $request->iumk;
                 }
 
+<<<<<<< HEAD
                 if($legalitasz->psb){
                     $psb = $legalitasz->psb;
                 }else{
                     $psb = $request->psb;
                 }
 
+=======
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
 
                 if($legalitasz->sppl_amdal_ukl_upl){
                     $sppl = $legalitasz->sppl_amdal_ukl_upl;
@@ -275,6 +290,7 @@ class LegalitasController extends Controller
                 $legalitasz->update([
                     "akta_pendirian"=> $aktePendirian,
                     "akta_penyesuaian"=> $aktaPenyesuaian,
+<<<<<<< HEAD
                     "akta_susunan_direksi"=> $aktaSusunanDireksi,
                     "akta_wewenang_direksi"=> $aktaWewenangDireksi,
                     "siup"=> $siup,
@@ -291,6 +307,23 @@ class LegalitasController extends Controller
                     "sppl_amdal_ukl_upl"=> $sppl,
                     "sppk"=> $sppk,
                     "legalitas_upload"=>$timeStamp,
+=======
+                    "akta_susunan_direksi"=> $request->akta_susunan,
+                    "akta_wewenang_direksi"=> $request->akta_wewenang,
+                    "siup"=> $request->siup,
+                    "nib"=> $request->nib,
+                    "tdp"=> $request->tdp,
+                    "iui"=> $request->iui,
+                    "npwp"=> $request->npwp,
+                    "izin_domisili"=> $request->izin_domisili,
+                    "izin_lingkungan"=> $request->izin_lingkungan,
+                    "akta_pengurus"=> $request->akta_pengurus,
+                    "psb"=>$request->psb,
+                    "ktp"=> $request->ktp,
+                    "iumk"=> $request->iumk,
+                    "sppl_amdal_ukl_upl"=> $request->sppl_amdal_ukl_upl,
+                    "sppk"=> $request->sppk,
+>>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
 
                 ]);
                 return redirect()->back()->with('sukses', 'Data Berhasil di Update');
