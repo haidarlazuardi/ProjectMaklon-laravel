@@ -107,6 +107,10 @@
           <div class="panel">
                 <div class="panel-heading">
                     <h2>PROJECT FREEZE</h2>
+
+                    <div class="card card-body" style="float:left">
+                            (PKP di hold oleh PKP online)
+                        </div>
                 </div>
 
                 <div class="panel-body">

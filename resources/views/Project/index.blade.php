@@ -49,18 +49,29 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="x_panel">
+
                         <div class="x_title">
-                            <h2>ON PROGRESS PROJECT</h2>
+                            <h2>ON PROGRESS PROJECT
+                            </h2>
+
                             <div class="panel_toolbox">
+
                                 @if (auth()->user()->role == "Admin")
                                 <a href="/project/create"><button type="button" class="btn btn-primary">Tambah
-                                        Project</button></a>
+                                    Project</button></a>
 
-                                @endif
+                                    @endif
 
-                            </div>
+                                </div>
 
-                            <div class="clearfix"></div>
+
+                                <div class="clearfix">
+                                </div>
+
+                <div class="card card-body" style="float:left">
+                        (PKP masih dalam proses penjajakan calon maklon)
+                        </div>
+
                         </div>
                         <div class="x_content">
                         </div>
@@ -152,20 +163,15 @@
 
 
                         <tbody>
-
+                            {{-- @foreach ($maklon_project as $item) --}}
                             @if ($project->category == "Makanan")
                             @foreach($data_maklon_pkp->where('kategori', 'makanan') as $m)
-<<<<<<< HEAD
-=======
-                            @foreach ($maklon_project as $item)
->>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
-
 
                             <tr>
                                 <td>{{ $m->nama_maklon }} <br></td>
                                 <td>{{$m->status}}</td>
                                 <td>
-                                    <a href="/project/{{ $project->id }}/{{ $item->maklon_id }}/releted">
+                                    <a href="/project/{{ $project->id }}/{{ $m->id }}/releted">
                                         <button class="btn btn-primary">
                                             <i class="lnr lnr-rocket">
                                             </i>
@@ -173,28 +179,24 @@
                                     </a>
                                 </td>
                                 @endforeach
-<<<<<<< HEAD
-=======
-                                @endforeach
->>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
                             </tr>
-                            @elseif ($project->category == "Minuman" )
+                            @elseif ($project->category == "Minuman")
                             @foreach($data_maklon_pkp->where('kategori', 'minuman') as $m)
                             <tr>
                                 <td>{{ $m->nama_maklon }} <br></td>
                                 <td>{{$m->status}}</td>
                                 <td>
-                                    <a href="/project/{{ $data_project->id }}/{{ $m->id }}/releted">
+                                    <a href="/project/{{ $project->id }}/{{ $m->id }}/releted">
                                         <button class="btn btn-primary">
                                             <i class="lnr lnr-rocket">
                                             </i>
                                         </button>
                                     </a>
                                 </td>
+                                @endforeach
                             </tr>
-                            @endforeach
 
-                            @elseif ($project->category == "Specialty" )
+                     @elseif ($project->category == "Specialty" )
                             @foreach($data_maklon_pkp->where('kategori', 'makan&minuman') as $m)
                             <tr>
                                 <td>{{ $m->nama_maklon  }} <br></td>
@@ -212,8 +214,7 @@
                             @endforeach
 
                             @endif
-
-                            <br>
+   <br>
                         </tbody>
                     </table>
                 </div>

@@ -9,6 +9,10 @@
           <div class="panel">
                 <div class="panel-heading">
                     <h2>PROJECT DONE</h2>
+
+                    <div class="card card-body" style="float:left">
+                            PKP sudah selesai
+                          </div>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped jambo_table bulk_action">

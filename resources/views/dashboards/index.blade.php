@@ -109,11 +109,12 @@
                   <div class="panel">
                       <div class="panel-heading">
                           <a role="button" class="btn btn-info" >
-                              <span class="lnr lnr-hourglass">
-                            </span>
+                              <h2>PROJECT DONE</h2>
+                              {{-- <span class="lnr lnr-hourglass">
+                            </span> --}}
                             <h3>{{$count}}
                 </h3>
-                </a>
+            </a>
             </div>
             <p>
             </p>
@@ -124,8 +125,9 @@
 
             <div class="panel-heading">
                 <a role="button" class="btn btn-warning">
-                    <span class="lnr lnr-hourglass">
-                    </span>
+                        <h2>PROJECT PROGRESS</h2>
+
+                </span>
                     <h3>{{$count}}
                     </h3>
                 </a>
@@ -138,6 +140,8 @@
         <div class="panel">
             <div class="panel-heading">
                 <a role="button" class="btn btn-danger">
+                        <h2>PROJECT REJECT</h2>
+
                     <span class="lnr lnr-hourglass">
                     </span>
                     <h3>

@@ -124,11 +124,7 @@
         </div>
 
         @else
-<<<<<<< HEAD
-        <button class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">
-=======
         <button class="btn btn-primary" disabled data-toggle="modal" data-target="#exampleModal">
->>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
             <i class="lnr lnr-plus-circle"></i></button>
 
         <table class="table table-striped jambo_table bulk_action">
@@ -345,9 +341,9 @@
                                     <div class="form-group row">
                                         <label class="control-label col-md-4">Alur Proses</label>
                                         <div class="col-md-4">
-                                            <textarea class="form-control" name="alur_proses" cols="30" rows="4"
-                                                value="{{ $maklon_project_id->alur_proses }}"></textarea>
-                                        </div>
+                                            <textarea class="form-control" name="alur_proses" cols="30" rows="4">{{$maklon_project_id->alur_proses}}</textarea>
+                                     </div>
+
                                     </div>
 
                                     <div class="form-group row">

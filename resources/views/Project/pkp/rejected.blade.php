@@ -9,6 +9,10 @@
           <div class="panel">
                 <div class="panel-heading">
                     <h2>PROJECT REJECTED</h2>
+
+                                    <div class="card card-body" style="float:left">
+                                            (Maklon yang dijajaki untuk PKP di Reject USER)
+                                          </div>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped jambo_table bulk_action">

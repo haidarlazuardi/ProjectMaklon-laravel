@@ -9,6 +9,9 @@
           <div class="panel">
                 <div class="panel-heading">
                     <h2>PROJECT APPROVED</h2>
+                    <div class="card card-body" style="float:left">
+                            (Maklon yang di jajaki di Approve oleh PV)
+                          </div>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped jambo_table bulk_action">

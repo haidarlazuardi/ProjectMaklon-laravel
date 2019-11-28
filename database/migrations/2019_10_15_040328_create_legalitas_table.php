@@ -52,10 +52,6 @@ class CreateLegalitasTable extends Migration
             $table->string('sppk')->nullable();
             $table->integer('status_sppk')->nullable();
             $table->timestamp('legalitas_upload')->nullable();
-<<<<<<< HEAD
-=======
-            $table->timestamp('legalitas_approve')->nullable();
->>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
             $table->string('review')->nullable();
 
             $table->timestamps();

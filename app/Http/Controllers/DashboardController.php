@@ -53,14 +53,11 @@ class DashboardController extends Controller
             ])->first();
             $mou =DB::table('file')->where([
                 ['jenis_file','mou'],
-<<<<<<< HEAD
                 ['project_id', $id],
                 ['maklon_id', $maklon_id]
             ])->first();
             $kontrak_kerjasama =DB::table('file')->where([
                 ['jenis_file','kontrak_kerjasama'],
-=======
->>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
                 ['project_id', $id],
                 ['maklon_id', $maklon_id]
             ])->first();
@@ -69,7 +66,6 @@ class DashboardController extends Controller
                 ['project_id', $id],
                 ['maklon_id', $maklon_id]
                 ])->first();
-<<<<<<< HEAD
 
             $legalitas = DB::table('legalitas')->where([
                 ['project_id', $id],
@@ -79,11 +75,5 @@ class DashboardController extends Controller
 
 
             return view('dashboards.detail',compact('trial','pkp','legalitas','maklon_project','project','kontrak_kerjasama','foodsafe','mou','maklons','maklon_sementara','departemen'));
-=======
-                // dd($mou);
-
-
-            return view('dashboards.detail',compact('trial','maklon_project','project','foodsafe','mou','maklons','maklon_sementara','departemen'));
->>>>>>> 3910c7ca47bfa2ee809e5dcdeb9f1996e578a1f3
     }
 }

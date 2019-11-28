@@ -160,10 +160,13 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
 
 
 
+
     // Session Maklon
     Route::get('/show-maklon/{id}', 'ProjectController@showMaklon');
     Route::post('/project/maklon/save', 'ProjectController@saveMaklon')->name('maklon-save');
     // Email related routes
 
         Route::get('/notify','MailController@notify_email')->name('notifyPenjajakan');
+
+        Route::get('/api', 'ProdevController@getData');
 });
