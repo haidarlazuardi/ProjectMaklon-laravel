@@ -52,6 +52,11 @@ class LegalitasController extends Controller
 
         ]);
 
+         $maklons = maklonProject::findOrFail($id);
+         $maklons->update([
+                "status_dokumen"=>1
+         ]);
+
         if($request->hasFile('akta_pendirian')){
             $request->file('akta_pendirian')->move('file/',$request->file('akta_pendirian')->getClientOriginalName());
             $legalitas->akta_pendirian = $request->file('akta_pendirian')->getClientOriginalName();

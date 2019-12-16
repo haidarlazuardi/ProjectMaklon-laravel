@@ -61,9 +61,8 @@
                                     Project</button></a>
 
                                     @endif
-
+                                <a href="/api"><button type="submit" class="btn btn-success">Refresh PKP</button></a>
                                 </div>
-
 
                                 <div class="clearfix">
                                 </div>
@@ -81,8 +80,11 @@
                                     <tr>
                                         <th>NAMA PROJECT
                                         </th>
-                                        <th>KATEGORI
+                                        <th>KATEGORI PANGAN
                                         </th>
+                                        {{-- <th>
+                                            FILTER MAKLON
+                                        </th> --}}
                                         <th>NAMA BRAND
                                         </th>
                                         <th>URGENSI
@@ -102,6 +104,7 @@
                                         <td>
                                             {{ $project->nama_project }}
                                         </td>
+                                        {{-- <td></td> --}}
                                         <td>{{ $project->category }}
                                         </td>
                                         {{-- @foreach ($data_brand as $brand)
@@ -144,12 +147,27 @@
 
                 <div class="modal-body">
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#maklon">
+                    <button type="button" class="btn btn-primary float-sm-right" data-toggle="modal" data-target="#maklon">
                     Tambah Maklon
                     </button>
                     <br>
 
-                    <table class="table table-striped jambo_table bulk_action" id="datatable">
+                    <table class="table table-striped jambo_table bulk_action" id="myTable">
+                        <div class="table-filter">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="filter-group">
+                                        <span class="filter-icon"><i class="fa fa-filter"></i></span>
+                                        <label>Filter</label>
+                                            <select id="mylist" onchange="myFunction()" class="form-control">
+                                                <option>Makanan</option>
+                                                <option>Minuman</option>
+                                                <option>Makanan & minuman</option>
+                                            </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {{-- <thead> --}}
                         {{--
                   <th>No
@@ -163,27 +181,11 @@
 
 
                         <tbody>
-                            {{-- @foreach ($maklon_project as $item) --}}
-                            @if ($project->category == "Makanan")
-                            @foreach($data_maklon_pkp->where('kategori', 'makanan') as $m)
+                            @foreach($data_maklon_pkp as $m)
 
                             <tr>
                                 <td>{{ $m->nama_maklon }} <br></td>
-                                <td>{{$m->status}}</td>
-                                <td>
-                                    <a href="/project/{{ $project->id }}/{{ $m->id }}/releted">
-                                        <button class="btn btn-primary">
-                                            <i class="lnr lnr-rocket">
-                                            </i>
-                                        </button>
-                                    </a>
-                                </td>
-                                @endforeach
-                            </tr>
-                            @elseif ($project->category == "Minuman")
-                            @foreach($data_maklon_pkp->where('kategori', 'minuman') as $m)
-                            <tr>
-                                <td>{{ $m->nama_maklon }} <br></td>
+                            <td>{{$m->kategori}}</td>
                                 <td>{{$m->status}}</td>
                                 <td>
                                     <a href="/project/{{ $project->id }}/{{ $m->id }}/releted">
@@ -196,24 +198,6 @@
                                 @endforeach
                             </tr>
 
-                     @elseif ($project->category == "Specialty" )
-                            @foreach($data_maklon_pkp->where('kategori', 'makan&minuman') as $m)
-                            <tr>
-                                <td>{{ $m->nama_maklon  }} <br></td>
-                                <td>{{$m->status}}</td>
-
-                                <td> <a href="/project/{{ $project->id }}/{{ $m->id }}/releted">
-                                        <button class="btn btn-primary">
-                                            <i class="lnr lnr-rocket">
-                                            </i>
-                                </td>
-
-                                </button>
-                                </a>
-                            </tr>
-                            @endforeach
-
-                            @endif
    <br>
                         </tbody>
                     </table>
@@ -286,7 +270,28 @@
   </div>
 </div>
 
+<script>
+        function myFunction() {
+          var input, filter, table, tr, td, i;
+          input = document.getElementById("mylist");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+        </script>
 
+
+{{--
 <script type="text/javascript">
     function showMaklon(id) {
         $.ajax({
@@ -309,5 +314,5 @@
             }
         });
     }
-</script>
+</script> --}}
 @stop

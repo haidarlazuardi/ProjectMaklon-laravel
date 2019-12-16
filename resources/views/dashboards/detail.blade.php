@@ -121,13 +121,13 @@
                                             <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}
                                             </td>
                                             <td>
-                                                @if($pkp->priority_project == "Normal" || $interval->d <= 30 )
+                                                @if($pkp->priority_project == "Normal" || $interval->d <= 60 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Normal" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Normal" || $interval->d > 60 )
                                                 over LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d <= 15 )
+                                                @elseif($pkp->priority_project == "Urgen" || $interval->d <= 30 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Urgen" || $interval->d > 30 )
                                                 Over LT
                                                 @endif
                                             </td>
@@ -198,11 +198,11 @@
                                             <td>
                                                 @if($pkp->priority_project == "Normal" || $interval->d <= 30 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Normal" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Normal" || $interval->d > 30 )
                                                 over LT
                                                 @elseif($pkp->priority_project == "Urgen" || $interval->d <= 15 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 15 )
                                                 Over LT
                                                 @endif
                                             </td>
@@ -275,11 +275,11 @@
                                             <td>
                                                 @if($pkp->priority_project == "Normal" || $interval->d <= 30 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Normal" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Normal" || $interval->d > 30 )
                                                 over LT
                                                 @elseif($pkp->priority_project == "Urgen" || $interval->d <= 15 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 15 )
                                                 Over LT
                                                 @endif
                                             </td>
@@ -300,14 +300,14 @@
                                     <td>Legal</td>
                                     @if ($mou)
 
-                                    @if($maklon_project->status_mou == 2)
+                                    @if($mou->file_upload == true)
                                     <td>done</td>
                                     @else
                                     <td>on progress</td>
                                     @endif
                                     @php
                                     $datetime1 = new DateTime($mou->created_at);
-                                    $datetime2 = new DateTime($m->penawaran_upload);
+                                    $datetime2 = new DateTime($m->created_at);
 
                                     $interval = $datetime1->diff($datetime2);
                                     $woweekends = 0;
@@ -351,11 +351,11 @@
                                             <td>
                                                 @if($pkp->priority_project == "Normal" || $interval->d <= 30 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Normal" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Normal" || $interval->d > 30 )
                                                 over LT
                                                 @elseif($pkp->priority_project == "Urgen" || $interval->d <= 15 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 15 )
                                                 Over LT
                                                 @endif
                                             </td>
@@ -366,6 +366,80 @@
                                             </td>
                                             @endforeach
                                 </tr>
+                                @foreach ($maklons as $m)
+
+                                <tr>
+                                       <th>APPROVAL PROJECT</th>
+                                       <td>PV</td>
+                                       @if ($maklon_project)
+
+                                       @if($maklon_project->status_approval == 2)
+                                       <td>done</td>
+                                       @else
+                                       <td>on progress</td>
+                                       @endif
+                                       @php
+                                       $datetime1 = new DateTime($m->penawaran_upload);
+                                       $datetime2 = new DateTime($m->project_approve);
+
+                                       $interval = $datetime1->diff($datetime2);
+                                       $woweekends = 0;
+                                       for($i=0; $i<=$interval->d; $i++){
+                                           $datetime1->modify('+1 day');
+                                           $weekday = $datetime1->format('w');
+
+                                           if($weekday !== "0" && $weekday !== "5"){ // 0 for Sunday and 6 for
+
+                                           $woweekends++;
+                                           }
+                                           }
+                                           @endphp
+
+                                           @else
+                                           <td>on progress</td>
+
+
+                                           @php
+                                           $datetime1 = new DateTime();
+
+                                           $datetime2 = new DateTime();
+
+                                           $interval = $datetime1->diff($datetime2);
+                                           $woweekends = 0;
+                                           for($i=0; $i<=$interval->d; $i++){
+                                               $datetime1->modify('+1 day');
+                                               $weekday = $datetime1->format('w');
+
+                                               if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
+
+                                               $woweekends++;
+                                               }
+
+                                               }
+                                               @endphp
+                                               @endif
+
+                                               <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}
+                                               </td>
+                                               <td>
+                                                    @if($pkp->priority_project == "Normal" || $interval->d <= 30 )
+                                                    Under LT
+                                                    @elseif($pkp->priority_project == "Normal" || $interval->d > 30 )
+                                                    over LT
+                                                    @elseif($pkp->priority_project == "Urgen" || $interval->d <= 15 )
+                                                    Under LT
+                                                    @elseif($pkp->priority_project == "Urgen" || $interval->d >= 15 )
+                                                    Over LT
+                                                    @endif
+                                               </td>
+                                               <td>
+                                                   <a href="/project/{{ $project }}/{{ $maklon_sementara}}/approval"
+                                                       type="button" class="btn btn-info"><i
+                                                           class="lnr lnr-rocket"></i></a>
+                                               </td>
+                                               @endforeach
+                                               </tr>
+
 
                                 @foreach ($maklons as $m)
 
@@ -423,13 +497,13 @@
                                                <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}
                                                </td>
                                                <td>
-                                                   @if($pkp->priority_project == "Normal" || $interval->d <= 30 )
+                                                   @if($pkp->priority_project == "Normal" || $interval->d <= 120 )
                                                    Under LT
-                                                   @elseif($pkp->priority_project == "Normal" || $interval->d >= 30 )
+                                                   @elseif($pkp->priority_project == "Normal" || $interval->d >= 120 )
                                                    over LT
-                                                   @elseif($pkp->priority_project == "Urgen" || $interval->d <= 15 )
+                                                   @elseif($pkp->priority_project == "Urgen" || $interval->d <= 75 )
                                                    Under LT
-                                                   @elseif($pkp->priority_project == "Urgen" || $interval->d >= 30 )
+                                                   @elseif($pkp->priority_project == "Urgen" || $interval->d >= 75 )
                                                    Over LT
                                                    @endif
                                                </td>
@@ -497,13 +571,13 @@
                                             <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}
                                             </td>
                                             <td>
-                                                @if($pkp->priority_project == "Normal" || $interval->d <= 30 )
+                                                @if($pkp->priority_project == "Normal" || $interval->d <= 120 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Normal" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Normal" || $interval->d >= 120 )
                                                 over LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d <= 15 )
+                                                @elseif($pkp->priority_project == "Urgen" || $interval->d <= 75 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 75 )
                                                 Over LT
                                                 @endif
                                             </td>
@@ -516,79 +590,6 @@
                                             </TR>
 
 
-                             @foreach ($maklons as $m)
-
-                             <tr>
-                                    <th>APPROVAL PROJECT</th>
-                                    <td>PV</td>
-                                    @if ($maklon_project)
-
-                                    @if($maklon_project->status_approval == 2)
-                                    <td>done</td>
-                                    @else
-                                    <td>on progress</td>
-                                    @endif
-                                    @php
-                                    $datetime1 = new DateTime($m->penawaran_upload);
-                                    $datetime2 = new DateTime($m->project_approve);
-
-                                    $interval = $datetime1->diff($datetime2);
-                                    $woweekends = 0;
-                                    for($i=0; $i<=$interval->d; $i++){
-                                        $datetime1->modify('+1 day');
-                                        $weekday = $datetime1->format('w');
-
-                                        if($weekday !== "0" && $weekday !== "5"){ // 0 for Sunday and 6 for
-
-                                        $woweekends++;
-                                        }
-                                        }
-                                        @endphp
-
-                                        @else
-                                        <td>on progress</td>
-
-
-                                        @php
-                                        $datetime1 = new DateTime();
-
-                                        $datetime2 = new DateTime();
-
-                                        $interval = $datetime1->diff($datetime2);
-                                        $woweekends = 0;
-                                        for($i=0; $i<=$interval->d; $i++){
-                                            $datetime1->modify('+1 day');
-                                            $weekday = $datetime1->format('w');
-
-                                            if($weekday !== "0" && $weekday !== "6"){ // 0 for Sunday and 6 for
-
-                                            $woweekends++;
-                                            }
-
-                                            }
-                                            @endphp
-                                            @endif
-
-                                            <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}
-                                            </td>
-                                            <td>
-                                                @if($pkp->priority_project == "Normal" || $interval->d <= 30 )
-                                                Under LT
-                                                @elseif($pkp->priority_project == "Normal" || $interval->d >= 30 )
-                                                over LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d <= 15 )
-                                                Under LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 30 )
-                                                Over LT
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="/project/{{ $project }}/{{ $maklon_sementara}}/approval"
-                                                    type="button" class="btn btn-info"><i
-                                                        class="lnr lnr-rocket"></i></a>
-                                            </td>
-                                            @endforeach
-                                            </tr>
 
                              @foreach ($maklons as $m)
 
@@ -646,13 +647,13 @@
                                             <td>{{$interval->d.' Hari '. $interval->h .' Jam ' . $interval->i. ' Menit'}}
                                             </td>
                                             <td>
-                                                @if($pkp->priority_project == "Normal" || $interval->d <= 30 )
+                                                @if($pkp->priority_project == "Normal" || $interval->d <= 120 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Normal" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Normal" || $interval->d >= 120 )
                                                 over LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d <= 15 )
+                                                @elseif($pkp->priority_project == "Urgen" || $interval->d <= 75 )
                                                 Under LT
-                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 30 )
+                                                @elseif($pkp->priority_project == "Urgen" || $interval->d >= 75 )
                                                 Over LT
                                                 @endif
                                             </td>

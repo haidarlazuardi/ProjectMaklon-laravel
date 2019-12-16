@@ -24,23 +24,23 @@ class UsersTableSeeder extends Seeder
 
         ]);
 
-        Project::create([
+        // Project::create([
 
-            'nama_project'=> 'Origuma soka',
-            'category'=> 'Makanan',
-            'sales_forecast'=> '1000000',
-            'selling_price'=> '10.000',
-            'brand'=> 'lmen',
-            'gramasi'=> '125',
-            'UOM'=> 'gram',
-            'configuration'=> '15X2kg',
-            'umur_simpan'=> '9 bulan',
-            'gambaran_proses'=> 'ehehe',
-            'priority_project'=> 'Normal',
-            'timeline'=> 'index.html',
-            'status_project'=> 0,
+        //     'nama_project'=> 'Origuma soka',
+        //     'category'=> 'Makanan',
+        //     'sales_forecast'=> '1000000',
+        //     'selling_price'=> '10.000',
+        //     'brand'=> 'lmen',
+        //     'gramasi'=> '125',
+        //     'UOM'=> 'gram',
+        //     'configuration'=> '15X2kg',
+        //     'umur_simpan'=> '9 bulan',
+        //     'gambaran_proses'=> 'ehehe',
+        //     'priority_project'=> 'Normal',
+        //     'timeline'=> 'index.html',
+        //     'status_project'=> 0,
 
-        ]);
+        // ]);
 
         Maklon::create([
             'nama_maklon'=> 'Drink oline',

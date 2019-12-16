@@ -38,9 +38,10 @@
                                     <td>{{$mp->project->nama_project}}</td>
                                     {{-- <td>{{ $mp->maklon->nama_maklon }}</td> --}}
                                     <TD></TD>
-                                    <td></td>
+                                <td>{{$mp->nama_maklon}}</td>
                                     <td></td>
                                     <TD></TD>
+                                    <td></td>
                                 </tr>
                                 @endif
                                 @endforeach

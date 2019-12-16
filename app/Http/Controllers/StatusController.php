@@ -136,7 +136,7 @@ class StatusController extends Controller
         return redirect()->back()->with('sukses', 'Project telah di Approve');
 
     }
-    public function finalTrial($id)
+    public function final_Trial($id)
     {
         $maklon_project = maklonProject::findOrFail($id);
         $maklon_project->update([

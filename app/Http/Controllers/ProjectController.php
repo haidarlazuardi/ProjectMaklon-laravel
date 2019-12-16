@@ -224,7 +224,7 @@ class ProjectController extends Controller
     public function updateReleted(Request $request, $id) {
         $maklon_project_id = \App\maklonProject::findOrFail($id)->latest();
 
-        $maklon_project->update([
+        $maklon_project_id->update([
             "konsep_kerjasama"=>$request->konsep_kerjasama,
             "cpm"=>$request->cpm,
             "alur_proses"=>$request->alur_proses,
@@ -243,6 +243,7 @@ class ProjectController extends Controller
         // $timeStamp = date( "m/d/Y", strtotime($timeStamp));
         $maklon_project->update([
             "penawaran"=>$request->file,
+            "status_harga"=>1,
             "penawaran_upload"=> $timeStamp
 
             ]);
@@ -276,36 +277,17 @@ class ProjectController extends Controller
         $project = $id;
         $maklon = $maklon_id;
         $maklon_sementara = $maklon_id;
-        // $maklon_project=[];
+        $maklons = \App\maklonProject::all()->take(1);
         $maklon_project = DB::table('maklon_project')->select('id')->where([
             ['project_id', $id],
             ['maklon_id', $maklon_id]
             ])->first();
 
-            $maklons = \App\maklonProject::all()->take(1);
 
       $maklon_project_id = DB::table('maklon_project')->where([
         ['project_id', $id],
         ['maklon_id', $maklon_id]
         ])->get();
-
-
-        // dd($maklon_project_id);
-            // $maklons = maklonProject::all();
-        // dd($maklon_project);
-        // $filed = DB::table('file')
-        // ->join('maklon_project','file.project_id','=','maklon_project.id')
-        // ->join('maklon','maklon_project.maklon_id','=','maklon.id')->where('maklon.id',$maklon_id)
-        // ->join('project','maklon_project.project_id','=','project.id')->where('project.id',$id)
-        // ->get();
-        // $file = DB::table('file')->where('jenis_file','cpm')
-        // ->get();
-        // $file2 = DB::table('file')->where('project_id',$maklon_id)->where('jenis_file','penawaran')
-        // ->get();
-        // $file3 = DB::table('file')->where('project_id',$maklon_id)->where('jenis_file','ppt_penjajakan')
-        // // ->get();
-        // dd ([$maklon_project]);
-        // return $maklon_project;
     return view('Project.wizard.infopenawaran',compact('project','maklon_sementara', 'maklon','maklons','maklon_project','maklon_project_id'));
 }
     public function info_mou($id, $maklon_id)
@@ -317,9 +299,6 @@ class ProjectController extends Controller
             ['project_id', $id],
             ['maklon_id', $maklon_id]
             ])->get();
-        // $maklons = \App\maklonProject::findOrFail($id)->get();
-        // ->join('maklon_P','maklon_project.project_id','=','project.id')->where('project.id',$id)
-
         $maklon_project = DB::table('maklon_project')->where([
             ['project_id', $id],
             ['maklon_id', $maklon_id]
@@ -329,11 +308,6 @@ class ProjectController extends Controller
                 ['project_id', $id],
                 ['maklon_id', $maklon_id]
                 ])->get();
-
-
-            // $maklons = maklonProject::all();
-
-
 
         return view('Project.wizard.info5', compact('project', 'mou', 'maklon_sementara','maklons','maklon_project','maklon_project_id'));
     }
@@ -347,12 +321,10 @@ class ProjectController extends Controller
             ['maklon_id', $maklon_id]
         ])->get();
 
-        $trials = DB::table('trials')->where([
+        $trials =DB::table('maklon_project')->where([
             ['project_id', $id],
             ['maklon_id', $maklon_id]
         ])->first();
-
-        // $maklons = \App\maklonProject::findOrFail($id)->get();
         $maklons = \App\maklonProject::all()->take(1);
         $maklon_project = DB::table('maklon_project')->where([
             ['project_id', $id],
@@ -586,7 +558,7 @@ class ProjectController extends Controller
     //             return redirect()->back()->with('sukses', 'Data Berhasil di Input');
     // }
 
-    public function trial (Request $request )
+    public function trial (Request $request ,$id)
     {
             if($request->hasFile('file')){
                 $summ = $request->file('file')->getClientOriginalName();
@@ -602,7 +574,10 @@ class ProjectController extends Controller
                 "status"=> $request->status,
 
             ]);
-
+                $maklons = maklonProject::findOrFail($id);
+                $maklons->update([
+                    "status_trial"=>1
+                ]);
             if($request->hasFile('summary')){
                 $request->file('summary')->move('images/',$request->file('summary')->getClientOriginalName());
                 $trial->summary = $request->file('summary')->getClientOriginalName();
@@ -684,8 +659,8 @@ class ProjectController extends Controller
                     "file"=>$request->file,
                     "jenis_file"=>"mou",
                    "file_upload"=> $timeStamp,
-
                 ]);
+
                 if($request->hasFile('file')){
                     $request->file('file')->move('file/',$request->file('file')->getClientOriginalName());
                     $mou->file = $request->file('file')->getClientOriginalName();

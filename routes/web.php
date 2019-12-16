@@ -72,7 +72,7 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::get('/approvefoodsafe/{id}', 'StatusController@approveFoodsafe');
     Route::get('/projectdone/{id}', 'StatusController@projectDone');
     Route::post('/notapprove/{id}', 'StatusController@notapproveProject');
-
+    Route::get('/finaltrial/{id}', 'StatusController@final_Trial');
 });
 
 
@@ -153,7 +153,6 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::get('/iumk/{id}', 'LegalitasController@StatusIumk');
     Route::get('/amdal/{id}', 'LegalitasController@StatusAmdal');
     Route::get('/sppk/{id}', 'LegalitasController@StatusSppk');
-    Route::get('/finaltrial/{id}', 'StatusController@finalTrial');
 
 
 
