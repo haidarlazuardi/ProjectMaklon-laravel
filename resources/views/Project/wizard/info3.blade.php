@@ -79,13 +79,13 @@
                                         {{-- <textarea class="form-control col-md-7 col-xs-12" name="konsep_kerjasama" cols="30" rows="4"></textarea> --}}
                                     </div>
                                     <div class="form-group row">
-                                        <label class="control-label col-md-4">Alur Proses</label>
-                                        <div class="col-md-4">
-                                            <textarea class="form-control" name="alur_proses" cols="30"
-                                                rows="4"></textarea>
-                                        </div>
+                                            <label class="control-label col-md-4">Alur Proses<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6">
+                                                <input name="alur_proses" type="file" id="first-name" required="required"
+                                                    class="form-control col-md-7 col-xs-12">
+                                            </div>
                                     </div>
-
                                     <div class="form-group row">
                                         <label class="control-label col-md-4">CPM<span class="required">*</span>
                                         </label>
@@ -246,14 +246,15 @@
                                         {{-- <input id="middle-name"  type="text" name="middle-name"> --}}
                                         {{-- <textarea class="form-control col-md-7 col-xs-12" name="konsep_kerjasama" cols="30" rows="4"></textarea> --}}
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="control-label col-md-4">Alur Proses</label>
-                                        <div class="col-md-4">
-                                            <textarea class="form-control" name="alur_proses" cols="30"
-                                              rows="4"></textarea>
-                                      </div>
-                                  </div>
 
+                                  <div class="form-group row">
+                                        <label class="control-label col-md-4">Alur Proses<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6">
+                                            <input name="alur_proses" type="file" id="first-name" required="required"
+                                                class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
                                   <div class="form-group row">
                                       <label class="control-label col-md-4">CPM<span class="required">*</span>
                                       </label>

@@ -15,7 +15,7 @@
                           <div class="form-group">
                               <div class="col-md-3 col-sm-4 col-xs-12 col-offset-2"></div>
                               <div class="col-md-4 col-sm-4 col-xs-12 col-offset-2">
-                              <input name="file" type="file" id="first-name" required="required" class="form-control">
+                              <input name="mou" type="file" id="first-name" required="required" class="form-control">
                               </div>
                         @if($maklon_project_id->isEmpty())
 
@@ -68,7 +68,7 @@
                                     <tbody>
                                         @foreach ($mou as $m)
                                             <tr>
-                                                <th><a class="btn btn-success"  href="{{URL::asset('../images/'.@$m->file)}}" download="{{$m->file}}"><i class="fa fa-download"></i> {{$m->file}} </a></th>
+                                                <th><a class="btn btn-success"  href="{{URL::asset('../images/'.@$m->mou)}}" download="{{$m->mou}}"><i class="fa fa-download"></i> {{$m->mou}} </a></th>
                                                 {{-- <td>{{ \Carbon\Carbon::parse($m->ca)->formatLocalized("%D") }}</td> --}}
                                                 <td>
                                                         {{-- <a href="/project/moudelete/{{$m->idfile}}" onclick="return confirm('Apakah anda yakin Delete ?')"><button class="btn btn-danger">Delete</button></a> --}}

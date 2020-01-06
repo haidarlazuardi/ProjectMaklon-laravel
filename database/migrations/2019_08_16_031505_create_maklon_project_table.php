@@ -22,7 +22,6 @@ class CreateMaklonProjectTable extends Migration
             $table->string('konsep_kerjasama');
             $table->text('alur_proses');
             $table->string('ppt_penjajakan');
-            $table->string('penawaran')->nullable();
             $table->integer('status_maklon')->nullable();
             $table->integer('status_harga')->nullable();
             $table->integer('status_dokumen')->nullable();

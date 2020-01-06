@@ -86,13 +86,19 @@
     <script src="{{ asset('js/datatables.min.js') }}"></script>
 
 
+<script >
+    $(document).ready(function () {
+        $('#datatable').DataTable();
+    });
+    </script>
 
-    <script>
-            $(document).ready( function () {
-              $('#datatable').DataTable();
-            });
-        </script>
 
+<script>
+    $(document).ready(function () {
+        $('#datatables').DataTable({
+            "scrollX": true
+        });
+    }); </script>
 
 
 

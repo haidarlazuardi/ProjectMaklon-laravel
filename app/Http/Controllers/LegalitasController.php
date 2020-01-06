@@ -141,7 +141,10 @@ class LegalitasController extends Controller
             ['project_id', $id],
             ['maklon_id', $maklon_id]
             ])->first();
-        $maklons = \App\maklonProject::all()->take(1);
+            $maklons = \App\maklonProject::where([
+                ['project_id',$id],
+                ['maklon_id',$maklon_id],
+            ])->get();
         $maklon_project = DB::table('maklon_project')->where([
             ['project_id', $id],
             ['maklon_id', $maklon_id]

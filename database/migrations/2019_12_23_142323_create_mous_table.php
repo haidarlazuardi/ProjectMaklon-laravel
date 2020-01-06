@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFileTable extends Migration
+class CreateMousTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateFileTable extends Migration
      */
     public function up()
     {
-        Schema::create('file', function (Blueprint $table) {
+        Schema::create('mous', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('maklon_id');
             $table->integer('project_id');
-            $table->string('file');
+            $table->string('mou');
             $table->timestamp('file_upload')->nullable();
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreateFileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file');
+        Schema::dropIfExists('mous');
     }
 }

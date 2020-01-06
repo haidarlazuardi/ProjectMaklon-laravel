@@ -95,14 +95,14 @@
                         </a>
 
                         @if(in_array(auth()->user()->role,['QA','Admin']))
-             <a href="/approvefoodsafe/{{ $maklon_project->id }}">
+             <a href="#">
                 <input type="hidden" name="id" value="{{$maklon_project->id}}">
-                    <button type="button" class="btn btn-primary">Approve foodsafety
+                    <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#approveModal" >Approve foodsafety
                 </button>
                 @else
                  <a href="/approvefoodsafe/{{ $maklon_project->id }}">
                 <input type="hidden" name="id" value="{{$maklon_project->id}}">
-                    <button type="button" disabled class="btn btn-primary">Approve foodsafety
+                    <button type="button" disabled class="btn btn-primary" >Approve foodsafety
                 </button>
             @endif
                     </td>
@@ -126,6 +126,38 @@
                     <button type="button" class="btn btn-success">Next
                     </button>
                 </a>
+
+<div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form class="form-horizontal form-label-left" action="/approvefoodsafe/{{ $maklon_project->id}}"  method="post"
+            enctype="multipart/form-data">
+            {{csrf_field()}}
+
+            <input type="hidden" name="id" value="2">
+
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" name="note" id="message-text"></textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Send message</button>
+    </form>
+
+      </div>
+    </div>
+  </div>
+</div>
             </div>
         </div>
     </div>

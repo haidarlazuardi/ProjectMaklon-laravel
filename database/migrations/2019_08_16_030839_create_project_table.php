@@ -15,7 +15,7 @@ class CreateProjectTable extends Migration
     {
         Schema::create('project', function (Blueprint $table) {
             $table->increments('id')->onDelete('cascade');
-            $table->integer('id_pkp')->unique()->nullable();
+            $table->integer('id_pkp')->nullable();
             $table->integer('revisi')->nullable();
             $table->string('nama_project')->unique()->nullable();
             $table->string('category')->nullable();

@@ -6,6 +6,7 @@ use \App\Project;
 use \App\maklonProject;
 use Auth;
 use \App\Maklon;
+use \App\food_safety;
 use DB;
 use Mail;
 use App\Mail\ApproveProject;
@@ -59,26 +60,25 @@ class StatusController extends Controller
         return redirect('/inactive');
     }
 
-    public function approveProject($id)
+    public function approveProject(Request $request, $id)
     {
+        // dd($request->keterangan);
         $maklon_project = maklonProject::findOrFail($id);
-
         $timeStamp = date("Y-m-d H:i:s");
         $maklon_project->update([
             'status_approval' => 2,
-             'project_approve'=>$timeStamp,
-        ]);
+            'project_approve'=>$timeStamp,
+            'keterangan' => $request->keterangan,
+
+            ]);
 
         return redirect()->back()->with('Success', 'Notifikasi berhasil dikirim');
 
 
-// dd($maklon_project);
-        return redirect()->back()->with('sukses', 'Project telah di Approve');
     }
     public function notapproveProject($id, Request $request)
     {
         $maklon_project = maklonProject::findOrFail($id);
-
         $maklon_project->update([
             'keterangan' => $request->keterangan,
             'status_approval' => 1,
@@ -105,18 +105,20 @@ class StatusController extends Controller
     }
 
 
-    public function approveFoodsafe($id)
+    public function approveFoodsafe(Request $request ,$id)
     {
         $maklon_project = maklonProject::findOrFail($id);
+        $food = food_safety::findOrFail($id);
+
         $timeStamp = date("Y-m-d H:i:s");
 
-        $maklon_project->update([
-            'status_food' => 2,
-            'food_approve'=>$timeStamp,
 
+        $maklon_project->status_food = $request->id;
+        // $maklon_project->food_approve=>$request->$timeStamp;
+        $maklon_project->save();
 
-        ]);
-
+          $food->note = $request->note;
+          $food->save();
 
 
 // dd($maklon_project);

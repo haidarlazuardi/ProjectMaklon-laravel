@@ -113,7 +113,12 @@
                                                 </td>
                                                 {{-- @endif
                                                     @endforeach --}}
-                                                    <td>{{$project->priority_project}}
+                                                    <td>@if ($project->priority_project == 2)
+                                                        Urgen
+                                                    @else
+                                                        Normal
+                                                    @endif
+
                                                         </td>
                                                         <td>
                                                             <?php $i=0 ?>
@@ -160,9 +165,9 @@
                                         <span class="filter-icon"><i class="fa fa-filter"></i></span>
                                         <label>Filter</label>
                                             <select id="mylist" onchange="myFunction()" class="form-control">
-                                                <option>Makanan</option>
-                                                <option>Minuman</option>
-                                                <option>Makanan & minuman</option>
+                                                <option id="Makanan">Makanan</option>
+                                                <option id="Minuman">Minuman</option>
+                                                <option id="Makanan & Minuman">Makanan & minuman</option>
                                             </select>
                                     </div>
                                 </div>
@@ -174,6 +179,7 @@
                   </th> --}}
                         <th>Nama Maklon
                         </th>
+                        <th>Kategori</th>
                         <th>status</th>
                         <th>Action
                         </th>
@@ -181,14 +187,21 @@
 
 
                         <tbody>
-                            @foreach($data_maklon_pkp as $m)
+                            @foreach($maklon_project as $m)
 
                             <tr>
-                                <td>{{ $m->nama_maklon }} <br></td>
-                            <td>{{$m->kategori}}</td>
-                                <td>{{$m->status}}</td>
+                                <td>@if ($m->status_maklon == 1 )
+
+                                           <p style="color:black;"> {{ $m->mamaklon->nama_maklon }} </p>
+                                @elseif($m->status_maklon == 2)
+                                <p style="color:blue;"> {{ $m->mamaklon->nama_maklon }} </p>
+                                @else
+                                {{$m->mamaklon->nama_maklon}}
+                                @endif
+                            <td>{{$m->mamaklon->kategori}}</td>
+                            <td>{{$m->mamaklon->status}}</td>
                                 <td>
-                                    <a href="/project/{{ $project->id }}/{{ $m->id }}/releted">
+                                    <a href="/project/{{ $project->id }}/{{ $m->maklon_id }}/releted">
                                         <button class="btn btn-primary">
                                             <i class="lnr lnr-rocket">
                                             </i>
@@ -277,6 +290,11 @@
           filter = input.value.toUpperCase();
           table = document.getElementById("myTable");
           tr = table.getElementsByTagName("tr");
+          console.log(input);
+          console.log(filter);
+          console.log(table);
+          console.log(tr);
+
           for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[0];
             if (td) {

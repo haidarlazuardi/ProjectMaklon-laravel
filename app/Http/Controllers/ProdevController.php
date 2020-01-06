@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use DB;
+use App\Project;
 
 class ProdevController extends Controller
 {
@@ -16,7 +17,7 @@ class ProdevController extends Controller
      $request = $client->get('https://dbbd4a4d.ngrok.io/api/pkp');
      $datanya = json_decode($request->getBody());
      foreach($datanya as $data){
-        $id = $data->id;
+        $id_pkp =$data ->id;
         $revisi = $data->revisi;
         $projectName =$data->project_name;
         $category =$data->kategori_bpom;
@@ -76,7 +77,7 @@ class ProdevController extends Controller
 
 
         $projek = ([
-            "id_pkp" => $id,
+            "id_pkp" => $id_pkp,
             "revisi" =>$revisi,
             "nama_project"=>$projectName,
             "category"=>$category,
@@ -134,18 +135,22 @@ class ProdevController extends Controller
             "note_freeze"=>$noteFreeze,
             ]);
 
+            // Project::insert($projek);
+        // return redirect('/project');
 
-    $count = DB::table('project')->where('nama_project', $projectName)->count();
 
-    if($count > 0){
+    // $count = DB::table('project')->where('id_pkp', $id_pkp);
+
+    // if($count == null ){
+
+        Project::insert($projek);
+
+    // }
+    // else{
+
         return redirect('/project');
-    }
-    else{
 
-        DB::table('project')->insert($projek);
-
-        return redirect('/project');
-    }
+    // }
 
      }
 

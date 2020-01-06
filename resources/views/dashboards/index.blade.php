@@ -165,22 +165,15 @@
                                     </th>
                                     <th>Urgensi
                                     </th>
-                                    <th>Maklon
+                                    <th>Detail Lead Time
                                     </th>
-                                    {{-- <th>
-                                Freeze
-                            </th> --}}
-                                    <th>Drop</th>
-                                </thead>
+                                    <th>Tabular Project</th>
+                                    <th>Drop Project</th>
+                                    </thead>
                                 <tbody>
 
                                     @foreach ($maklon_project as $p)
-                                    {{-- @if($p->status_project =='') --}}
                                     <tr>
-                                        {{--
-                    <td>{{ $loop->iteration }}
-                                        </td> --}}
-
                                         <td><a
                                                 href="/project/{{$p->project->id}}/detail">{{ $p->project->nama_project }}</a>
                                             <br>
@@ -195,24 +188,20 @@
                                                     </i>
                                                 </a>
                                             </a>
+
+
                                         </td>
-                                        {{-- <td>
-
-                                    <label class="switch">
-                                        <input type="checkbox"
-                                            onchange="window.location.href='/holdproject/{{ $p->id }}'">
-                                        <span class="slider round"></span>
-                                        </label>
-                                        </td> --}}
                                         <td>
-
-                                            <label class="switch">
-                                                <input type="checkbox"
+                                            <a class="tooltips btn btn-info" href="/dashboard/{{$p->project->id}}/tabular">
+                                                    <i class="lnr lnr-book"> </i>
+                                            </a>
+                                        </td>
+                                        <td> <label for="checkbox" class="switch">
+                                                <input name="checkbox" type="checkbox"
                                                     onchange="window.location.href='/dropproject/{{ $p->id }}'">
                                                 <span class="slider round"></span>
-                                            </label>
-                                        </td>
-                                    </tr>
+                                            </label></td>
+                                        </tr>
                                     {{-- @endif --}}
                                     @endforeach
                                     <br>
@@ -245,10 +234,10 @@
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                @foreach ($maklon_project as $m)
+                                                @foreach ($maklons as $m)
 
                                                 <tr>
-                                                    @if ($maklon_project)
+                                                    @if ($maklons)
 
                                                     <td>{{$m->mamaklon->nama_maklon}}
                                                         @else
@@ -258,13 +247,13 @@
                                                     </td>
                                                     <td></td>
                                                     <td>
-                                                        <a
-                                                            href="/dashboard/{{$m->project->id}}/{{$m->maklon_id}}/detail">
+                                                        <a href="/dashboard/{{$m->project->id}}/{{$m->maklon_id}}/detail">
                                                             <button class="btn btn-primary">
                                                                 <i class="lnr lnr-rocket">
                                                                 </i>
                                                             </button>
                                                         </a>
+
                                                     </td>
                                                 </tr>
                                                 @endforeach

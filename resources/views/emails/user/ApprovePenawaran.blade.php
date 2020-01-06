@@ -7,6 +7,7 @@ Please check the  **link**
 view sourching Maklon
 @endcomponent
 
+
 Thanks,<br>
 {{ config('app.name') }}
 @endcomponent

@@ -52,12 +52,8 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
 Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP,PRO']],function(){
     Route::get('/dashboard','DashboardController@index');
     Route::get('/dashboard/{id}/{maklon_id}/detail','DashboardController@detail');
-    Route::get('/dokumen','MaklonController@dokumen');
-    Route::get('/harga','MaklonController@harga');
-    Route::get('/trial','MaklonController@trial');
-    Route::get('/review','MaklonController@review');
-    Route::get('/halal','MaklonController@halal');
-    Route::get('/kontak','MaklonController@kontak');
+    Route::get('/dashboard/{id}/tabular','DashboardController@tabular');
+    Route::get('/reset/{id}','DashboardController@resetpkp');
 
 });
 
@@ -66,10 +62,10 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::get('/unholdproject/{id}', 'StatusController@unholdProject');
     Route::get('/dropproject/{id}', 'StatusController@dropProject');
     Route::get('/undropproject/{id}', 'StatusController@undropProject');
-    Route::get('/approveproject/{id}', 'StatusController@approveProject');
+    Route::post('/approveProject/{id}', 'StatusController@approveProject');
     Route::get('/approvepenawaran/{id}', 'StatusController@approvePenawaran');
     Route::get('/approvelegal/{id}', 'StatusController@approveLegal');
-    Route::get('/approvefoodsafe/{id}', 'StatusController@approveFoodsafe');
+    Route::post('/approvefoodsafe/{id}', 'StatusController@approveFoodsafe');
     Route::get('/projectdone/{id}', 'StatusController@projectDone');
     Route::post('/notapprove/{id}', 'StatusController@notapproveProject');
     Route::get('/finaltrial/{id}', 'StatusController@final_Trial');
@@ -109,7 +105,7 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::put('/project/{maklon_id}/updatereleted', 'ProjectController@updateReleted');
 
     Route::post('/project/info/maklon','ProjectController@createMaklon');
-    Route::post('/project/info/{id}/penawaran','ProjectController@penawaran');
+    Route::post('/project/penawaran','ProjectController@penawaran');
     Route::post('/project/info/legalitas/{id}/{maklon_id}','LegalitasController@legalitas');
     Route::post('/project/info/mou','ProjectController@mou');
     // Route::post('/project/info/pendukung','ProjectController@pendukung');
@@ -122,6 +118,8 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::get('/project/moudelete/{id}', 'ProjectController@delete_mou');
     Route::get('/project/{id}', 'ProjectController@index');
     Route::get('/project/{id}/releted/delete', 'ProjectController@deletereleted');
+    Route::get('/{id}/tabular/delete', 'DashboardController@deletemaklonproject');
+
     Route::get('/project/{id}/delete', 'ProjectController@delete');
     Route::get('/project/{id}/edit', 'ProjectController@edit');
     Route::post ('/project/penjajakan/{id}/update', 'ProjectController@updateReleted');

@@ -88,13 +88,20 @@
                                         <ul class="wizard_steps">
 
                                             <li>
-                                                <a href="/project/{{ $project }}/{{ $maklon_sementara}}/releted">
+                                             <a href="/project/{{ $project }}/{{ $maklon_sementara}}/releted">
+                                                @if($maklons)
+                                                <span class="step_no" style="background: {{ Request::is('project/*/*/releted') ? 'green' : '' }}">1</span>
+                                                <span class="step_descr">Data penjajakan<br />
+                                                    <small>Step 1 description</small>
+                                                </span>
+                                            </a>
+                                                @else
                                                     @foreach ($maklons as $mp)
                                             @if ($mp->status_maklon  == 1)
                                                 <span class="step_no" style="background: yellow;">1</span>
                                             @elseif($mp->status_maklon == 2)
-                                                <span class="step_no" style="background: green;">1</span>
-                                            @elseif($mp->status_maklon == 0 || $mp->status_maklon == null)
+                                                <span class="step_no" style="background: green;-">1</span>
+                                            @elseif($mp->status_maklon == 0)
                                             <span class="step_no" style="background: {{ Request::is('project/*/*/releted') ? 'green' : '' }}">1</span>
                                             @endif
                                             @endforeach
@@ -102,11 +109,22 @@
                                                         <small>Step 1 description</small>
                                                     </span>
                                                 </a>
+                                        @endif
                                             </li>
 
 
                                             <li>
+
                                                 <a href="/project/{{$project}}/{{$maklon_sementara}}/penawaran">
+                                                    @if($maklons )
+                                                    <span class="step_no" style="background: {{ Request::is('project/*/*/penawaran') ? 'green' : '' }}">2</span>
+                                                    <span class="step_descr">Data Penawaran<br />
+                                                        <small>Step 2 description</small>
+                                                    </span>
+                                                </a>
+
+                                                </a>
+                                                    @else
                                                     @foreach ($maklons as $mp)
                                             @if ($mp->status_harga  == 1)
                                                 <span class="step_no" style="background: yellow;">2</span>
@@ -120,13 +138,19 @@
                                                         <small>Step 2 description</small>
                                                     </span>
                                                 </a>
+                                                @endif
                                             </li>
 
                                             <li>
                                                 <a href="/project/{{$project}}/{{$maklon_sementara}}/legalitas ">
+                                            @if($maklons)
+                                            <span class="step_no" style="background: {{ Request::is('project/*/*/legalitas') ? 'green' : '' }}">3</span>
+                                            <span class="step_descr">Dokumen Legalitas<br />
+                                                <small>Step 3 description</small>
+                                            </span>
+                                        </a>
+                                            @else
                                                     @foreach ($maklons as $mp)
-
-
                                             @if ($mp->status_dokumen == 1)
                                                 <span class="step_no" style="background: yellow;">3</span>
                                             @elseif($mp->status_dokumen == 2)
@@ -139,12 +163,19 @@
                                                         <small>Step 3 description</small>
                                                     </span>
                                                 </a>
+                                                @endif
                                             </li>
 
                                             <li>
                                                 <a href="/project/{{$project}}/{{$maklon_sementara}}/mou">
-                                                    @foreach ($maklons as $mp)
-
+                                           @if($maklons)
+                                           <span class="step_no" style="background: {{ Request::is('project/*/*/mou') ? 'green' : '' }}">4</span>
+                                           <span class="step_descr">MOU<br />
+                                            <small>Step 4 description</small>
+                                                </span>
+                                           </a>
+                                           @else
+                                           @foreach ($maklons as $mp)
 
                                             @if ($mp->status_mou == 1)
                                                 <span class="step_no" style="background: yellow;">4</span>
@@ -158,12 +189,21 @@
                                                         <small>Step 4 description</small>
                                                     </span>
                                                 </a>
+                                                @endif
                                             </li>
 
 
 
                                             <li>
                                                 <a href="/project/{{$project}}/{{$maklon_sementara}}/approval">
+                                            @if($maklons)
+                                            <span class="step_no" style="background: {{ Request::is('project/*/*/approval') ? 'green' : '' }}">5</span>
+                                            <span class="step_descr">approval project<br />
+                                                <small>Step 5 description</small>
+                                            </span>
+                                        </a>
+                                            @else
+
                                         @foreach ($maklons as $mp)
                                             @if ($mp->status_approval == 1)
                                                 <span class="step_no" style="background: yellow;">5</span>
@@ -177,6 +217,7 @@
                                                         <small>Step 5 description</small>
                                                     </span>
                                                 </a>
+                                                @endif
                                             </li>
 
 
@@ -185,6 +226,13 @@
                                             <li>
 
                                                 <a href="/project/{{$project}}/{{$maklon_sementara}}/trial">
+                                        @if($maklons)
+                                        <span class="step_no" style="background: {{ Request::is('project/*/*/trial') ? 'green' : '' }}">6</span>
+                                        <span class="step_descr">Trial<br />
+                                            <small>Step 6 description</small>
+                                        </span>
+                                    </a>
+                                        @else
                                                     @foreach ($maklons as $mp)
                                         @if ($mp->status_trial == 1)
                                         <span class="step_no" style="background: yellow;">5</span>
@@ -198,31 +246,47 @@
                                                         <small>Step 6 description</small>
                                                     </span>
                                                 </a>
+                                                @endif
                                             </li>
 
                                             <li>
                                                 <a href="/project/{{$project}}/{{$maklon_sementara}}/pendukung">
-
+                                            @if($maklons)
+                                            <span class="step_no" style="background: {{ Request::is('project/*/*/pendukung') ? 'green' : '' }}">7</span>
+                                            <span class=" step_descr">Audit Food Safety<br />
+                                                <small>Step 7 description</small>
+                                            </span>
+                                        </a>
+                                            @else
                                                 @foreach ($maklons as $mp)
 
                                             @if ($mp->status_food == 1)
-                                                <span class="step_no" style="background: yellow;">6</span>
+                                                <span class="step_no" style="background: yellow;">7</span>
                                             @elseif($mp->status_food == 2)
-                                                <span class="step_no" style="background: green;">6</span>
+                                                <span class="step_no" style="background: green;">7</span>
                                             @elseif($mp->status_food == null | $mp->status_food == null)
+                                            <span class="step_no" style="background: {{ Request::is('project/*/*/pendukung') ? 'green' : '' }}">7</span>
                                             @endif
                                             @endforeach
-                                                    <span class="step_no" style="background: {{ Request::is('project/*/*/pendukung') ? 'green' : '' }}">7</span>
-                                            <span class=" step_descr">Audit Food Safety<br />
+                                                   <span class=" step_descr">Audit Food Safety<br />
                                                         <small>Step 7 description</small>
                                                     </span>
                                                 </a>
+                                                @endif
                                             </li>
 
 
                                             <li>
 
                                                 <a href="/project/{{$project}}/{{$maklon_sementara}}/kontrak">
+                                              @if ($maklons)
+                                              <span class="step_no"style="background: {{ Request::is('project/*/*/kontrak') ? 'green' : '' }}">8</span>
+                                              <span class="step_descr">Kontrak Kerjasama<br />
+                                                <small>Step 8 description</small>
+                                            </span>
+                                        </a>
+                                    </li>
+                                              @else
                                                         @foreach ($maklons as $mp)
                                                     @if ($mp->status_kontrak == 1)
                                                         <span class="step_no" style="background: yellow;">6</span>
@@ -236,6 +300,7 @@
                                                         <small>Step 8 description</small>
                                                     </span>
                                                 </a>
+                                                @endif
                                             </li>
 
                                         </ul>
@@ -248,14 +313,9 @@
                         </div>
                     </div>
 
-
-
                     {{-- End Content --}}
 
                     <div class="clearfix"></div>
-
-
-
                     <script type="text/javascript">
                         // $('#Table').DataTable({
                         //     "language": {

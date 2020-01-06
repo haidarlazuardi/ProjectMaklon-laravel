@@ -45,7 +45,7 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>File</th>
+                <th>file</th>
                 <th>Created</th>
                 <th>Action</th>
               </tr>

@@ -70,18 +70,18 @@
 <div style="height: 281px;">
     <div id="step-1" class="content" style="display: block;">
         <form class="form-horizontal form-label-left" method="post"
-            action="/project/info/{{ $maklon_project_id}}/penawaran" enctype="multipart/form-data">
+            action="/project/penawaran" enctype="multipart/form-data">
             {{csrf_field()}}
             <br>
             <div class="form-group">
                 <div class="col-md-3 col-sm-4 col-xs-12 col-offset-2"></div>
                 <div class="col-md-4 col-sm-4 col-xs-12 col-offset-2">
-                    <input name="file" type="file" id="first-name" required="required" class="form-control">
+                    <input name="penawaran" type="file" id="first-name" required="required" class="form-control">
                 </div>
 
                 @if($maklon_project_id-> isEmpty())
                 <div class="col-md-5 col-sm-6 col-xs-12">
-                    <button type="submit" class="btn btn-primary" disabled>Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 @else
                 <div class="col-md-5 col-sm-6 col-xs-12">
@@ -123,7 +123,7 @@
                         <div style="height: 281px;">
                                 <div id="step-1" class="content" style="display: block;">
                                     <form class="form-horizontal form-label-left" method="post"
-                                        action="/project/info/{{ $maklon_project->id}}/penawaran" enctype="multipart/form-data">
+                                action="/project/penawaran" enctype="multipart/form-data">
                                         {{csrf_field()}}
                                         <br>
                                         <div class="form-group">
@@ -169,19 +169,22 @@
                                             download="{{$fi->penawaran}}"><i class="fa fa-download"></i>
                                             {{$fi->penawaran}}</a></td>
                                     <td>
+@foreach ($maklons as $ml)
 
                                         @if( in_array(auth()->user()->role,['PV','Admin']))
                                             <label class="switch">
-                                                    <input type="checkbox" @if ($fi->status_harga == 2) checked="true" @else @endif  onchange="window.location.href='/approvepenawaran/{{ $fi->id }}'">
+                                                    <input type="checkbox" @if ($ml->status_harga == 2) checked="true" @else @endif  onchange="window.location.href='/approvepenawaran/{{ $fi->id }}'">
                                                     <span class="slider round"></span>
                                                 </label></td>
                                                 @else
 
                                             <label class="switch">
-                                                    <input type="checkbox" disabled onchange="window.location.href='/approvepenawaran/{{ $fi->id }}'">
+                                                    <input type="checkbox" disabled onchange="window.location.href='/approvepenawaran/{{ $ml->id }}'">
                                                     <span class="slider round"></span>
                                                 </label></td>
                                                 @endif
+@endforeach
+
 
 
                                     </td>
@@ -191,10 +194,16 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
+
+            <a href="/project/{{$project}}/{{$maklon_sementara}}/legalitas" style="float:right;" class="btn btn-success">
+                Next
+            </a>
         </div>
     </div>
+
 </div>
 
 {{-- <div id="step-4">
@@ -224,9 +233,6 @@ method="post" enctype="multipart/form-data">
         <button type="button" class="btn btn-primary">Previous</button>
         </a> --}}
 
-        <a href="/project/{{$project}}/{{$maklon_sementara}}/legalitas" style="float:right;" class="btn btn-success">
-            Next
-        </a>
     </div>
     @endif
 
