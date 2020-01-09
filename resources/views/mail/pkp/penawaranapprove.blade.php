@@ -1,13 +1,10 @@
 @component('mail::message')
-# Sourching Maklon 
+# Introduction
 
-Dear all user
-
-Ada pkp Mulai berjalan silahkan tekan tombol move page
-untuk melihat detail pkp
+The body of your message.
 
 @component('mail::button', ['url' => ''])
-Move Page
+Button Text
 @endcomponent
 
 Thanks,<br>

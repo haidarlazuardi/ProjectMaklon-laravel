@@ -50,6 +50,13 @@
                 <div class="col-md-12">
                     <div class="x_panel">
 
+                        @if ($message = Session::get('info'))
+                        <div class="alert alert-info alert-block">
+                          <button type="button" class="close" data-dismiss="alert">×</button>
+                          <strong>{{ $message }}</strong>
+                        </div>
+                      @endif
+
                         <div class="x_title">
                             <h2>ON PROGRESS PROJECT
                             </h2>
@@ -152,9 +159,9 @@
 
                 <div class="modal-body">
 
-                    <button type="button" class="btn btn-primary float-sm-right" data-toggle="modal" data-target="#maklon">
-                    Tambah Maklon
-                    </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#maklon">
+            Tambah Maklon
+        </button>
                     <br>
 
                     <table class="table table-striped jambo_table bulk_action" id="myTable">

@@ -11,6 +11,12 @@ use DB;
 use Mail;
 use App\Mail\ApproveProject;
 use App\User;
+use App\Notifications\NotifyPkpApprove;
+use App\Notifications\NotifyPkpReject;
+use App\Notifications\NotifyPenawaranApproved;
+
+
+
 
 
 class StatusController extends Controller
@@ -72,6 +78,10 @@ class StatusController extends Controller
 
             ]);
 
+            $maklon_project->email = auth::user()->email;
+            $maklon_project->notify(new NotifyPkpApprove($maklon_project));
+
+
         return redirect()->back()->with('Success', 'Notifikasi berhasil dikirim');
 
 
@@ -83,6 +93,9 @@ class StatusController extends Controller
             'keterangan' => $request->keterangan,
             'status_approval' => 1,
         ]);
+
+        $maklon_project->email = auth::user()->email;
+        $maklon_project->notify(new NotifyPkpReject($maklon_project));
 
         return redirect()->back();
     }
@@ -97,6 +110,9 @@ class StatusController extends Controller
             "penawaran_approve"=> $timeStamp,
 
         ]);
+        $maklon_project->email = auth::user()->email;
+        $maklon_project->notify(new NotifyPenawaranApproved($maklon_project));
+
 
 
 

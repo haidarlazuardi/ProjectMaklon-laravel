@@ -173,7 +173,7 @@
 
                                         @if( in_array(auth()->user()->role,['PV','Admin']))
                                             <label class="switch">
-                                                    <input type="checkbox" @if ($ml->status_harga == 2) checked="true" @else @endif  onchange="window.location.href='/approvepenawaran/{{ $fi->id }}'">
+                                                    <input type="checkbox" @if ($ml->status_harga == 2) checked="true" @else @endif  onchange="window.location.href='/approvepenawaran/{{ $ml->id }}'">
                                                     <span class="slider round"></span>
                                                 </label></td>
                                                 @else

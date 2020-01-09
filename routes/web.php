@@ -53,7 +53,7 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP,PRO']
     Route::get('/dashboard','DashboardController@index');
     Route::get('/dashboard/{id}/{maklon_id}/detail','DashboardController@detail');
     Route::get('/dashboard/{id}/tabular','DashboardController@tabular');
-    Route::get('/reset/{id}','DashboardController@resetpkp');
+    Route::post('/reset/{id}','DashboardController@resetpkp');
 
 });
 
@@ -88,7 +88,7 @@ Route::group(['middleware'=>['auth','CheckRole:Admin,PV,Legal,RND,QA,NR,GP']],fu
     Route::get('/project/{id}/{maklon_id}/releted', 'ProjectController@info_releted');
     Route::get('/project/{id}/{maklon_id}/penawaran', 'ProjectController@info_penawaran');
     Route::get('/project/{id}/{maklon_id}/legalitas', 'LegalitasController@info_legalitas');
-    Route::post('/project/info/review/{id}','LegalitasController@review');
+    Route::get('/project/info/review/{id}','LegalitasController@review');
     // Route::get('/project/{id}/{maklon_id}/legalitas', function($id, $maklon_id) {
     //     return "wayoo ";
     // });

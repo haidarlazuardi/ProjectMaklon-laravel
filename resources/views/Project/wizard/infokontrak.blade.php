@@ -53,7 +53,7 @@
             @foreach ($kontrak as $m)
             <tbody>
               <tr>
-              <td><a class="btn btn-success"  href="{{URL::asset('../images/'.@$m->file)}}" download="{{$m->file}}"><i class="fa fa-download"></i> {{$m->file}} </a></td>
+              <td><a class="btn btn-success"  href="{{URL::asset('../images/'.@$m->kontrak_kerjasama)}}" download="{{$m->kontrak_kerjasama}}"><i class="fa fa-download"></i> {{$m->kontrak_kerjasama}} </a></td>
                   <td>{{ \Carbon\Carbon::parse($m->created_at)->formatLocalized("%D") }}</td>
                   <td>
                     <a href="" onclick="return confirm('Apakah anda yakin Delete ?')"><button class="btn btn-danger">Delete</button></a>

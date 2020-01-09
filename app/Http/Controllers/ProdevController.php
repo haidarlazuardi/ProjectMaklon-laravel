@@ -17,7 +17,7 @@ class ProdevController extends Controller
      $request = $client->get('https://dbbd4a4d.ngrok.io/api/pkp');
      $datanya = json_decode($request->getBody());
      foreach($datanya as $data){
-        $id_pkp =$data ->id;
+        $id_pkp =$data ->id_pkp;
         $revisi = $data->revisi;
         $projectName =$data->project_name;
         $category =$data->kategori_bpom;
@@ -73,7 +73,6 @@ class ProdevController extends Controller
         $jangka =$data->jangka;
         $freezeDiaktifkan =$data->freeze_diaktifkan;
         $noteFreeze =$data->note_freeze;
-
 
 
         $projek = ([
@@ -134,27 +133,37 @@ class ProdevController extends Controller
             "freeze_diaktifkan"=>$freezeDiaktifkan,
             "note_freeze"=>$noteFreeze,
             ]);
+            Project::insert($projek);
 
+            // $count = DB::table('project')->where('id_pkp',$id_pkp)->get();
+        }
             // Project::insert($projek);
+    //         // Project::firstOrCreate($projek);
+    //     // return redirect('/project');
+    //         dd($projek['id_pkp']);
+    // $count = DB::table('project')->where('id_pkp', $id_pkp)->get();
+    // if($count == NULL){
+    //     if($projek->id){
+    //         Project::where('id_pkp',$id_pkp)
+    //         ->where('nama_project',$projectName)
+    //         ->update($projek);
+    //     }else{
+    //         Project::insert($projek);
+    //     }
+    //     return redirect('/project')->with(['info' => 'Terdapat update pkp,silahkan cek']);
+    // }
+    // // else if($count == null){
+    // //     Project::insert($projek);
+    // //     return redirect('/project');
+    // // }
+    // else {
+
+        // Project::insert($projek);
+
+        return redirect('/project')->with(['info' => 'tidak ada pkp terbaru']);;
         // return redirect('/project');
 
 
-    // $count = DB::table('project')->where('id_pkp', $id_pkp);
-
-    // if($count == null ){
-
-        Project::insert($projek);
-
-    // }
-    // else{
-
-        return redirect('/project');
-
-    // }
-
-     }
-
     //  return response()->json([$pkp]);
     }
-
-}
+    }

@@ -90,11 +90,11 @@ class DashboardController extends Controller
         // )->get();
         // dd($maklins);
         $maklins = DB::table('maklon_project')
-        ->join('project','project.id' ,'maklon_project.project_id')
-        ->join('food_safety','food_safety.project_id', 'maklon_project.project_id')
-        ->join('mous','mous.project_id','maklon_project.project_id')
-        ->join('Maklon','Maklon.id','maklon_project.project_id')
-        ->join('penawarans','penawarans.project_id','maklon_project.project_id')
+        ->leftJoin('project','project.id' ,'maklon_project.project_id')
+        ->leftJoin('food_safety','food_safety.project_id', 'maklon_project.project_id')
+        ->leftJoin('mous','mous.project_id','maklon_project.project_id')
+        ->leftJoin('Maklon','Maklon.id','maklon_project.project_id')
+        ->leftJoin('penawarans','penawarans.project_id','maklon_project.project_id')
         ->get();
         // dd($maklins);
             // dd($makls);
@@ -126,9 +126,13 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
-    public function resetpkp($id)
+    public function resetpkp( Request $request ,$project_id)
     {
-        $maklon_project = maklonProject::findOrFail($id);
+
+            $message = array(
+                'message'=>$request->message
+            );
+        $maklon_project = maklonProject::findOrFail($project_id);
         $maklon_project->update([
         'status_approval' => 1,
         'status_harga' => 1,
@@ -137,10 +141,8 @@ class DashboardController extends Controller
         'status_trial'=>1,
         'status_food'=>1,
         ]);
-
         $maklon_project->email = auth::user()->email;
-        $maklon_project->notify(new NotifyReset($maklon_project));
-
+        $maklon_project->notify(new NotifyReset($message));
 
 return redirect()->back();
 

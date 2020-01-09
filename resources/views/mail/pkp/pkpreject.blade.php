@@ -1,13 +1,14 @@
 @component('mail::message')
-# Sourching Maklon 
+# Sourcing Maklon
 
 Dear all user
 
-Ada pkp Mulai berjalan silahkan tekan tombol move page
-untuk melihat detail pkp
+PKP telah di reject dengan alasan sebagai berikut
+-
+kunjungi link berikut untuk detail
 
 @component('mail::button', ['url' => ''])
-Move Page
+Visit Link
 @endcomponent
 
 Thanks,<br>

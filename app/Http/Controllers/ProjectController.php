@@ -13,6 +13,14 @@ use Carbon;
 use Session;
 use Auth;
 use App\Notifications\NotifyMaklon;
+use App\Notifications\NotifyFoodSafety;
+use App\Notifications\NotifyKontrakKerjasama;
+use App\Notifications\NotifyMouSubmit;
+use App\Notifications\NotifyPenawaranSubmit;
+use App\Notifications\NotifyPenawaranApproved;
+use App\Notifications\NotifyTrialFinal;
+
+
 class ProjectController extends Controller
 {
     public function index(Request $request)
@@ -254,6 +262,8 @@ class ProjectController extends Controller
             $penawaran->file = $request->file('file')->getClientOriginalName();
             $penawaran->save();
         }
+        $penawaran->email = auth::user()->email;
+        $penawaran->notify(new NotifyPenawaranSubmit($penawaran));
 
 
             // } if($request->hasFile('cpm')){
@@ -599,6 +609,8 @@ class ProjectController extends Controller
                 $trial->summary = $request->file('summary')->getClientOriginalName();
                 $trial->save();
 
+                $trial->email = auth::user()->email;
+                $trial->notify(new NotifyTrialFinal($trial));
 
             return redirect()->back()->with('sukses', 'Data Berhasil di Input');
         }
@@ -620,6 +632,8 @@ class ProjectController extends Controller
                         $foodsafety->file = $request->file('file')->getClientOriginalName();
                         $foodsafety->save();
             }
+            $foodsafety->email = auth::user()->email;
+            $foodsafety->notify(new NotifyFoodsafety($foodsafety));
 
             return redirect()->back();
 
@@ -655,9 +669,13 @@ class ProjectController extends Controller
 
                 if($request->hasFile('kontrak_kerjasama')){
                     $request->file('kontrak_kerjasama')->move('images/',$request->file('kontrak_kerjasama')->getClientOriginalName());
-                    $kontrak->file = $request->file('kontrak_kerjasama')->getClientOriginalName();
+                    $kontrak->kontrak_kerjasama = $request->file('kontrak_kerjasama')->getClientOriginalName();
                     $kontrak->save();
+
                 }
+                $kontrak->email = auth::user()->email;
+                $kontrak->notify(new NotifyKontrakKerjasama($kontrak));
+
                 return redirect()->back()->with('sukses', 'Data Berhasil di Input');
 
             }
@@ -674,6 +692,9 @@ class ProjectController extends Controller
                     "mou"=>$request->mou,
                    "file_upload"=> $timeStamp,
                 ]);
+
+                $mou->email = auth::user()->email;
+                $mou->notify(new NotifyMouSubmit($mou));
 
                 // if($request->hasFile('mou')){
                 //     $request->file('mou')->move('mou/',$request->file('mou')->getClientOriginalName());

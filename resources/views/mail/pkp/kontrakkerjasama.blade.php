@@ -1,15 +1,14 @@
 @component('mail::message')
-# Sourching Maklon 
+ # Sourcing Maklon
 
 Dear all user
 
-Ada pkp Mulai berjalan silahkan tekan tombol move page
-untuk melihat detail pkp
+Kontrak kerjasama telah di submit ,silahkan Kunjungi link berikut untuk detail
 
 @component('mail::button', ['url' => ''])
-Move Page
+Visit Link
 @endcomponent
 
-Thanks,<br>
+Thanks,Admin<br>
 {{ config('app.name') }}
 @endcomponent

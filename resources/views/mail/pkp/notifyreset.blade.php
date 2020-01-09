@@ -1,6 +1,6 @@
 @component('mail::message')
 
-# Sourching Maklon Online
+# Sourching Maklon
 
 Dear all user
 

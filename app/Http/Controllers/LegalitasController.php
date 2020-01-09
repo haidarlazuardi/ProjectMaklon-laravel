@@ -12,6 +12,7 @@ use DB;
 use Carbon;
 use Session;
 use Auth;
+use App\Notifications\NotifyLegalitasSubmit;
 class LegalitasController extends Controller
 {
     public function legalitas(Request $request, $id, $maklon_id)
@@ -126,6 +127,9 @@ class LegalitasController extends Controller
         $request->file('sppk')->move('file/',$request->file('sppk')->getClientOriginalName());
         $legalitas->sppk = $request->file('sppk')->getClientOriginalName();
         $legalitas->save();
+
+        $legalitas->email = auth::user()->email;
+        $legalitas->notify(new NotifyLegalitasSubmit($legalitas));
 
 
     }
@@ -301,6 +305,10 @@ class LegalitasController extends Controller
                     "legalitas_upload"=>$timeStamp,
 
                 ]);
+
+                $legalitasz->email = auth::user()->email;
+                $legalitasz->notify(new NotifyLegalitasUpdate($legalitasz));
+
                 return redirect()->back()->with('sukses', 'Data Berhasil di Update');
 
             }
@@ -311,6 +319,10 @@ class LegalitasController extends Controller
                 $legalitasz->update([
                     "review"=>$request->review,
                 ]);
+
+
+                $legalitasz->email = auth::user()->email;
+                $legalitasz->notify(new NotifyLegalitasReview($legalitasz));
                 return redirect()->back()->with('sukses', 'Data Berhasil di Update');
 
             }

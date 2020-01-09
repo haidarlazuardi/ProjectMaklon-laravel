@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NotifyReset extends Notification
+class NotifyLegalitasSubmit extends Notification
 {
     use Queueable;
 
@@ -40,11 +40,9 @@ class NotifyReset extends Notification
      */
     public function toMail($notifiable)
     {
-
         return (new MailMessage)
-                    ->subject('Pkp Reset')
-                    ->line('hello'.$notifiable->message.',')
-                    ->markdown('mail.pkp.notifyreset');
+        ->subject('Dokumen Legalitas Submitted')
+        ->markdown('mail.pkp.legalitassubmit');
     }
 
     /**
