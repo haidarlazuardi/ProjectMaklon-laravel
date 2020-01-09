@@ -128,10 +128,7 @@ class DashboardController extends Controller
 
     public function resetpkp( Request $request ,$project_id)
     {
-
-            $message = array(
-                'message'=>$request->message
-            );
+        // $message = $request->message;
         $maklon_project = maklonProject::findOrFail($project_id);
         $maklon_project->update([
         'status_approval' => 1,
@@ -141,10 +138,13 @@ class DashboardController extends Controller
         'status_trial'=>1,
         'status_food'=>1,
         ]);
+        $maklon_project->message = $request->message;
         $maklon_project->email = auth::user()->email;
-        $maklon_project->notify(new NotifyReset($message));
+        $maklon_project->notify(new NotifyReset($maklon_project));
 
-return redirect()->back();
+        // dd($message);
+
+ return redirect()->back();
 
 }
 }

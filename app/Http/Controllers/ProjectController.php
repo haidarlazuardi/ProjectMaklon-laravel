@@ -463,16 +463,21 @@ class ProjectController extends Controller
             "cpm" => $request->cpm,
             "status_maklon"=> "2",
             ]);
-            // if($request->hasFile('ppt_penjajakan')){
-            //     $request->file('ppt_penjajakan')->move('file/',$request->file('ppt_penjajakan')->getClientOriginalName());
-            //     $maklon_project->ppt_penjajakan = $request->file('ppt_penjajakan')->getClientOriginalName();
-            //     $maklon_project->save();
-            // }
-            // if($request->hasFile('cpm')){
-            //     $request->file('cpm')->move('file/',$request->file('cpm')->getClientOriginalName());
-            //     $maklon_project->cpm = $request->file('cpm')->getClientOriginalName();
-            //     $maklon_project->save();
-            // }
+            if($request->hasFile('alur_proses')){
+                $request->file('alur_proses')->move('file/',$request->file('alur_proses')->getClientOriginalName());
+                $maklon_project->alur_proses = $request->file('alur_proses')->getClientOriginalName();
+                $maklon_project->save();
+            }
+            if($request->hasFile('ppt_penjajakan')){
+                $request->file('ppt_penjajakan')->move('file/',$request->file('ppt_penjajakan')->getClientOriginalName());
+                $maklon_project->ppt_penjajakan = $request->file('ppt_penjajakan')->getClientOriginalName();
+                $maklon_project->save();
+            }
+            if($request->hasFile('cpm')){
+                $request->file('cpm')->move('file/',$request->file('cpm')->getClientOriginalName());
+                $maklon_project->cpm = $request->file('cpm')->getClientOriginalName();
+                $maklon_project->save();
+            }
 
             $maklon_project->email = auth::user()->email;
             $maklon_project->notify(new NotifyMaklon($maklon_project));

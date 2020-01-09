@@ -3,7 +3,11 @@
 
 Dear all user
 
-PKP xxxx telah di approve ,kunjungi link berikut untuk melihat detail
+PKP xxxx telah di approve, Dengan keterangan sebagai berikut :
+@foreach ($introLines as $line)
+<p>{{$line}}</p>
+@endforeach
+
 @component('mail::button', ['url' => ''])
 Button Text
 @endcomponent

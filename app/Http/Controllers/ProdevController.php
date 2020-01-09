@@ -161,9 +161,6 @@ class ProdevController extends Controller
         // Project::insert($projek);
 
         return redirect('/project')->with(['info' => 'tidak ada pkp terbaru']);;
-        // return redirect('/project');
 
-
-    //  return response()->json([$pkp]);
     }
     }

@@ -43,6 +43,7 @@ class NotifyPkpApprove extends Notification
 
         return (new MailMessage)
         ->subject('PKP Approved')
+        ->line(''.$notifiable->keterangan.'')
         ->markdown('mail.pkp.pkpapprove');
     }
 

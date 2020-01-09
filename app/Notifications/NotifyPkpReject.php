@@ -42,6 +42,7 @@ class NotifyPkpReject extends Notification
     {
         return (new MailMessage)
         ->subject('PKP Rejected')
+        ->line(''.$notifiable->keterangan.'')
         ->markdown('mail.pkp.pkpreject');
     }
 

@@ -87,8 +87,8 @@
                                     <tr>
                                         <th>NAMA PROJECT
                                         </th>
-                                        <th>KATEGORI PANGAN
-                                        </th>
+                                        {{-- <th>KATEGORI PANGAN
+                                        </th> --}}
                                         {{-- <th>
                                             FILTER MAKLON
                                         </th> --}}
@@ -112,7 +112,7 @@
                                             {{ $project->nama_project }}
                                         </td>
                                         {{-- <td></td> --}}
-                                        <td>{{ $project->category }}
+                                        {{-- <td>{{ $project->category }} --}}
                                         </td>
                                         {{-- @foreach ($data_brand as $brand)
                                             @if ($project->brand_id == $brand->id) --}}
